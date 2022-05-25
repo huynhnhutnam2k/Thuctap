@@ -6,10 +6,6 @@ const questionSchema = new Schema({
         type: String, 
         required: true
     },
-    id:{
-        type:Number,
-        required: true
-    },
     image: {
         type: [String], 
     },
