@@ -10,10 +10,10 @@ const questionSchema = new Schema({
         type: [String], 
     },
     answer: {
-        type: String, 
+        type: [String], 
         required: true
     },
-    catgories: {
+    categories: {
         type: mongoose.Schema.Types.ObjectId,
         ref:"Categories"
     },
@@ -24,12 +24,17 @@ const questionSchema = new Schema({
     video:{
         type: String, 
     },
-    diagnose: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Diagnose"
-        }
-    ]
+    diagnose: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Diagnose"
+    }],
+    department: {
+
+        type: mongoose.ObjectId,
+        ref: "Department"
+    }
+        
+    
 },{
     timestamps: true
 })

@@ -45,7 +45,7 @@ const departmentController = {
     get: async(req,res) =>{
         try {
             const id = req.params.id
-            const department = await Department.findById(id)
+            const department = await Department.findById(id).populate("categories")
             res.status(200).json(department)
         } catch (error) {
             res.status(500).json(`Error: ${error.message}`)
@@ -54,7 +54,7 @@ const departmentController = {
     //get all department
     getAll: async(req,res) =>{
         try{
-            const department = await Department.find()
+            const department = await Department.find().populate("categories")
 
             res.status(200).json(department)
         }
