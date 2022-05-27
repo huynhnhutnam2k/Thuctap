@@ -10,7 +10,11 @@ const questionSchema = new Schema({
         type: [String], 
     },
     answer: {
-        type: [String], 
+        type: String, 
+        required: true
+    },
+    name: {
+        type: String,
         required: true
     },
     categories: {

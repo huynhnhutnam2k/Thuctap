@@ -29,7 +29,16 @@ const categoriesController = {
     {
         try {
             const { id } = req.params
-            await Categories.deleteOne({_id: id}, {$pull: {question: null , department: null}})
+            await Categories.deleteOne({_id: id})
+            await Question.updateMany(
+                {categories: id},
+                {$pull: {categories: null}}
+            )
+            await Department.updateMany(
+                {categoriesId: id},
+                {$pull: {categoriesId: null}}
+            )
+            res.status(200).json(`Error: ${error.message}`)
         } catch (error) {
             res.status(500).json(`Eror: ${error}`)
         }
@@ -39,7 +48,7 @@ const categoriesController = {
     get: async(req,res) => {
         try {
             const { id } = req.params
-            const categories = await Categories.findById(id)
+            const categories = await Categories.findById(id).populate("department").populate("question")
             
             res.status(200).json(categories)
         } catch (error) {

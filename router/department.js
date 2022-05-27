@@ -1,10 +1,10 @@
 const router = require("express").Router()
 const departmentController = require("../controllers/departmentController")
+const { verifyRoleAndAdmin} = require("../middlewares/verifyToken")
 
-
-router.get("/", departmentController.getAll)
+router.post("/add", verifyRoleAndAdmin, departmentController.add)
+router.put("/update/:id" , verifyRoleAndAdmin, departmentController.update)
+router.delete("/delete/:id" , verifyRoleAndAdmin, departmentController.delete)
 router.get("/:id", departmentController.get)
-router.post("/add", departmentController.add)
-router.put("/update/:id" , departmentController.update)
-router.delete("/delete/:id" , departmentController.delete)
+router.get("/", departmentController.getAll)
 module.exports = router

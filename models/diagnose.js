@@ -13,12 +13,23 @@ const diagnoseSchema = new mongoose.Schema({
     //     type:Number,
     //     required: true
     // },
+    
+    name: {
+        type: String, 
+        required: true
+    },
     image: {
         type: [String], 
     },
     video: {
         type: [String],
-    }
+    },
+    subDiagnose: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "subDiagnose"
+        }
+    ]
 },{
     timestamps: true
 })

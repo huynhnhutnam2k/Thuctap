@@ -8,7 +8,7 @@ const diagnoseController = {
             const diagnose = await new Diagnose(req.body)
             const newDiagnose = await diagnose.save()
             if(req.body.questionId){
-                const question = await Question.findById(req.body.questionId, {$push: {diagnose: diagnose._id}})
+                const question = await Question.findByIdAndUpdate(req.body.questionId, {$push: {diagnose: diagnose._id}})
             }
             res.status(200).json(newDiagnose)
         } catch (error) {
@@ -30,7 +30,7 @@ const diagnoseController = {
         try {
             const id = req.params.id
             await Diagnose.deleteOne({_id: id})
-            await Question.updateMany({_id:id}, {$pull: {diagnose: id}})
+            await Question.updateMany({diagnose:id}, {$pull: {diagnose: id}})
             res.status(200).json("Delete successfully")
         } catch (error) {
             res.status(500).json(`Error: ${error.message}`)
