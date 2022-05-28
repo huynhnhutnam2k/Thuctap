@@ -45,7 +45,10 @@ const departmentController = {
     get: async(req,res) =>{
         try {
             const id = req.params.id
-            const department = await Department.findById(id).populate("categories")
+            const department = await Department.findById(id).populate({
+                path: "categories",
+                select: '_id name question department'
+            })
             res.status(200).json(department)
         } catch (error) {
             res.status(500).json(`Error: ${error.message}`)
