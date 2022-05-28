@@ -46,7 +46,7 @@ const departmentController = {
         try {
             const id = req.params.id
             const department = await Department.findById(id).populate({
-                path: "copies.categories",
+                path: "categories",
                 strictPopulate: false
             })
             res.status(200).json(department)
@@ -58,7 +58,7 @@ const departmentController = {
     getAll: async(req,res) =>{
         try{
             const department = await Department.find().populate({
-                path: "copies.categories",
+                path: "categories",
                 strictPopulate: false
             })
 
