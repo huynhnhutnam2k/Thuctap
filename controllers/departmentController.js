@@ -46,8 +46,8 @@ const departmentController = {
         try {
             const id = req.params.id
             const department = await Department.findById(id).populate({
-                path: "categories",
-                select: '_id name question department'
+                path: "copies.categories",
+                select: '_id name question department createAt updatedAt'
             })
             res.status(200).json(department)
         } catch (error) {
