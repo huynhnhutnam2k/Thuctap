@@ -62,8 +62,6 @@ const questionController = {
             res.status(200).json({
                 question,
             })
-            // localStorage.setItem("markTemp", 100)
-            // markTemp: 100
         } catch (error) {
             res.status(500).json(`Error: ${error.message}`)
         }
@@ -124,13 +122,16 @@ const questionController = {
     //get categories and department
     getCd: async(req,res) => {
         try {
-            const userRole = req.user.user.role
+            const userRole = res.user?.role
+            // const role = userRole.split(" ")[0].map((item, index) =>{
+            //     let first = item[0]
+            // })
             const categories = await Categories.findOne({name: userRole})
-            const department = await Department.find({categoriesId: categories._id})
+            const department = await Department.find({categoriesId: categories?._id})
 
             res.status(200).json({
-                categories,
-                department
+                categories: categories,
+                department: department
             })
         } catch (error) {
             res.status(500).json(`Error: ${error.message}`)

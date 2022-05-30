@@ -46,7 +46,7 @@ const departmentController = {
         try {
             const id = req.params.id
             const department = await Department.findById(id).populate({
-                path: "categories",
+                path: "git dcategories",
                 strictPopulate: false
             })
             res.status(200).json(department)
