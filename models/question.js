@@ -9,6 +9,9 @@ const questionSchema = new Schema({
     image: {
         type: [String], 
     },
+    cloudinaryId:{
+        type: String
+    },
     answer: {
         type: String, 
         required: true

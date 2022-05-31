@@ -18,7 +18,8 @@ const questionController = {
                 console.log(result)
                 const question = await new Question({
                     ...req.body,
-                    image: result.secure_url
+                    image: result.secure_url,
+                    cloudinaryId: result.public_id
                 })
                 if(req.body.categories ){
                     const categories = await Categories.findByIdAndUpdate(req.body.categories, {$push: {question: question._id}})
@@ -58,7 +59,12 @@ const questionController = {
     delete: async(req,res) =>{
         try {
             const id = req.params.id
-            await Question.deleteOne({_id: id})
+            const question = await Question.findById(id)
+            await Question.findByIdAndDelete(id)
+            // await Question.deleteOne({_id: id})
+            if(question.cloudinaryId){
+                await cloudinary.uploader.destroy(question.cloudinaryId)
+            }
             await Categories.updateOne(
                 {question: id},
                 {$pull: {question: id}}
