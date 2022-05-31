@@ -2,20 +2,44 @@ const Question = require("../models/question")
 const Diagnose = require("../models/diagnose")
 const Categories = require("../models/categories")
 const Department = require("../models/department")
+const cloudinary = require("../utils/cloudinary")
+// const cloudinary = require('cloudinary').v2
 const SubMark = require("../models/subMark")
 const questionController = {
     //add
     add: async(req, res) =>{
         try {
-            const question = await new Question(req.body)
-            if(req.body.categories ){
-                const categories = await Categories.findByIdAndUpdate(req.body.categories, {$push: {question: question._id}})
+            console.log(req.file)
+            // console.log(req.body.image)
+            if (req.body.image) {
+                // console.log(req.body.image)
+                const result = await cloudinary.uploader.upload(req.body.image)
+                // function(error, result) {console.log(result, error); });
+                console.log(result)
+                const question = await new Question({
+                    ...req.body,
+                    image: result.secure_url
+                })
+                if(req.body.categories ){
+                    const categories = await Categories.findByIdAndUpdate(req.body.categories, {$push: {question: question._id}})
+                }
+                if(req.body.department){
+                    const department = await Department.findByIdAndUpdate(req.body.department, {$push : {question: question._id}})
+                }
+                const newQuestion = await question.save()
+                res.status(200).json(newQuestion)
+            
+            }else{
+                const question = await new Question(req.body)
+                if(req.body.categories ){
+                    const categories = await Categories.findByIdAndUpdate(req.body.categories, {$push: {question: question._id}})
+                }
+                if(req.body.department){
+                    const department = await Department.findByIdAndUpdate(req.body.department, {$push : {question: question._id}})
+                }
+                const newQuestion = await question.save()
+                res.status(200).json(newQuestion)
             }
-            if(req.body.department){
-                const department = await Department.findByIdAndUpdate(req.body.department, {$push : {question: question._id}})
-            }
-            const newQuestion = await question.save()
-            res.status(200).json(newQuestion)
         } catch (error) {
             res.status(500).json(`Error: ${error}`)
         }

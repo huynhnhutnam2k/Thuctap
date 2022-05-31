@@ -23,7 +23,6 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.json())
-
 router(app)
 
 const port = process.env.PORT || 8000

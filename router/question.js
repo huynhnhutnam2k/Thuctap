@@ -1,7 +1,9 @@
 const router = require("express").Router()
 const questionController = require("../controllers/questionController")
 const { verifyRoleAndAdmin, verifyToken } = require("../middlewares/verifyToken")
-router.post("/add",verifyRoleAndAdmin, questionController.add)
+const upload = require("../utils/multer")
+
+router.post("/add", upload.single("image") , verifyRoleAndAdmin ,  questionController.add)
 router.post("/:id" ,verifyRoleAndAdmin, questionController.submit)
 router.put("/update/:id",verifyToken, questionController.update)
 router.delete("/delete/:id",verifyRoleAndAdmin, questionController.delete)
