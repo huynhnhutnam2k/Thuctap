@@ -158,15 +158,27 @@ const questionController = {
     getCd: async(req,res) => {
         try {
             const userRole = res.user?.role
+            const isAdmin = res.user?.isAdmin
             // const role = userRole.split(" ")[0].map((item, index) =>{
             //     let first = item[0]
             // })
+            let cate 
+            let depart
+            const categoriesAdmin =  await Categories.find()
             const categories = await Categories.findOne({name: userRole})
             const department = await Department.find({categoriesId: categories?._id})
+            const departmentAdmin =await Department.find()
+            if(isAdmin){
+                cate = categoriesAdmin
+                depart = departmentAdmin
+            }else{
+                cate = categories
+                depart = department
+            }
 
             res.status(200).json({
-                categories: categories,
-                department: department
+                categories: cate,
+                department: depart
             })
         } catch (error) {
             res.status(500).json(`Error: ${error.message}`)
