@@ -9,12 +9,11 @@ const questionController = {
     //add
     add: async(req, res) =>{
         try {
-            console.log(req.file)
+            // console.log(req.body)
             // console.log(req.body.image)
             if (req.body.image) {
                 // console.log(req.body.image)
                 const result = await cloudinary.uploader.upload(req.body.image)
-                // function(error, result) {console.log(result, error); });
                 console.log(result)
                 const question = await new Question({
                     ...req.body,
@@ -99,7 +98,13 @@ const questionController = {
     //get all question
     getAll: async(req,res) =>{
         try {
-            const questions = await Question.find()
+            const questions = await Question.find().populate({
+                path: "git dcategories",
+                strictPopulate: false
+            }).populate({
+                path: "git department",
+                strictPopulate: false
+            })
             res.status(200).json(questions)
         } catch (error) {
             res.status(500).json(`Error : ${error.message}`)
