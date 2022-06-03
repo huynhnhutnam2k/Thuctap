@@ -67,6 +67,18 @@ const departmentController = {
         catch(error){
             res.status(500).json(`Error: ${error.message}`)
         }
+    },
+    getByCate: async(req,res) => {
+        try {
+            const idCate = req.params.idcate 
+            const department = await Department.find({categoriesId: idCate}).populate({
+                path: "categories",
+                strictPopulate: false
+            })
+            res.status(200).json(department)
+        } catch (error) {
+            res.status(500).json(`Error: ${error.message}`)
+        }
     }
 }
 
