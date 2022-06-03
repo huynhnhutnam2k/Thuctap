@@ -9,6 +9,6 @@ router.put("/update/:id",verifyToken, questionController.update)
 router.delete("/delete/:id",verifyRoleAndAdmin, questionController.delete)
 router.get("/getcd",verifyRoleAndAdmin, questionController.getCd)
 router.get("/:id", questionController.get)
-// router.get("/:idCate", questionController.getByCate)
+router.get("/cate/:idcate", questionController.getByCate)
 router.get("/", questionController.getAll)
 module.exports = router

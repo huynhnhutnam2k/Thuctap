@@ -183,6 +183,17 @@ const questionController = {
         } catch (error) {
             res.status(500).json(`Error: ${error.message}`)
         }
+    },
+    // get by cate 
+    getByCate: async(req,res) => {
+        try {
+            const idCate = req.params.idcate
+
+            const question = await Question.find({categories : idCate})
+            res.status(200).json(question)
+        } catch (error) {
+            res.status(500).json(`Error: ${error.message}`)
+        }
     }
 }
 
