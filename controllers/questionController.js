@@ -88,9 +88,9 @@ const questionController = {
             const question = await Question.findById(id)
             res.cookie("markTemp" , 100 , { maxAge: 900000, httpOnly: true })
             // res.cookie('cookiename', 'cookievalue');
-            res.status(200).json({
-                question,
-            })
+            res.status(200).json(
+                question
+            )
         } catch (error) {
             res.status(500).json(`Error: ${error.message}`)
         }
