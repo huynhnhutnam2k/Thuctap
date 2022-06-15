@@ -23,21 +23,19 @@ const Sidebar = () => {
 
         <nav>
           <ul className="menu-aside">
-            <li className="menu-item">
+            <li className="menu-item" key="1">
               <NavLink
-                activeClassName="active"
-                className="menu-link"
+                className={(navData) => (navData.isActive ? "menu-link active" : 'menu-link')}
                 to="/"
-                exact={true}
               >
                 <i className="icon fas fa-home"></i>
                 <span className="text">Trang chủ</span>
               </NavLink>
             </li>
-            <li className="menu-item">
+
+            <li className="menu-item" key="2">
               <NavLink
-                activeClassName="active"
-                className="menu-link"
+                className={(navData) => (navData.isActive ? "menu-link active" : 'menu-link')}
                 to="/qnas"
               >
                 <i className="icon fas fa-shopping-bag"></i>
@@ -46,8 +44,7 @@ const Sidebar = () => {
             </li>
             {/* <li className="menu-item">
               <NavLink
-                activeClassName="active"
-                className="menu-link"
+                className={(navData) => (navData.isActive ? "menu-link active" : 'menu-link')}
                 to="/add-qna"
               >
                 <i class="icon fas fa-plus "></i>
@@ -55,40 +52,36 @@ const Sidebar = () => {
               </NavLink>
             </li> */}
 
-            <li className="menu-item">
+            <li className="menu-item" key="3">
               <NavLink
-                activeClassName="active"
-                className="menu-link"
+                className={(navData) => (navData.isActive ? "menu-link active" : 'menu-link')}
                 to="/users"
               >
                 <i className="icon fas fa-user"></i>
                 <span className="text">Nhân viên</span>
               </NavLink>
             </li>
-            <li className="menu-item">
+            <li className="menu-item" key="4">
               <NavLink
-                activeClassName="active"
-                className="menu-link"
+                className={(navData) => (navData.isActive ? "menu-link active" : 'menu-link')}
                 to="/department"
               >
                 <i className="icon fas fa-user"></i>
                 <span className="text">Chuyên khoa</span>
               </NavLink>
             </li>
-            <li className="menu-item">
+            <li className="menu-item" key="5">
               <NavLink
-                activeClassName="active"
-                className="menu-link"
+                className={(navData) => (navData.isActive ? "menu-link active" : 'menu-link')}
                 to="/diagnose"
               >
                 <i className="icon fas fa-user"></i>
                 <span className="text">Chẩn đoán</span>
               </NavLink>
             </li>
-            <li className="menu-item">
+            <li className="menu-item" key="6">
               <NavLink
-                activeClassName="active"
-                className="menu-link"
+                className={(navData) => (navData.isActive ? "menu-link active" : 'menu-link')}
                 to="/treatment"
               >
                 <i className="icon fas fa-user"></i>
@@ -97,8 +90,7 @@ const Sidebar = () => {
             </li>
             {/* <li className="menu-item">
               <NavLink
-                activeClassName="active"
-                className="menu-link"
+                className={(navData) => (navData.isActive ? "menu-link active" : 'menu-link')}
                 to="/add-user"
               >
                 <i class="icon fas fa-plus "></i>
