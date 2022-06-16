@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./popup.css";
 import { getDiagnose, getQuestion, getTreatment, makeRequest } from "./getdata";
+import "suneditor/dist/css/suneditor.min.css";
 
 export default function Popup({ open, id, onClose }) {
   const [questiondisplay, setQuestiondiaplay] = useState({
@@ -61,6 +62,8 @@ export default function Popup({ open, id, onClose }) {
     console.log(answer);
     setShownote(false);
     setHidenotebtn(false);
+
+    console.log(diagnosedisplay);
   };
 
   const redo = (
@@ -106,7 +109,12 @@ export default function Popup({ open, id, onClose }) {
                 <span className="namechoice">{diagnosedisplay.name}</span>
               </div>
               <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
-              {diagnosedisplay.description}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: diagnosedisplay.description,
+                }}
+              />
+
               <img src={diagnosedisplay.image} />
               {diagnosedisplay.treatment.length > 0 ? null : redo}
             </div>
