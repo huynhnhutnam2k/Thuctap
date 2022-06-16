@@ -2,7 +2,7 @@ import React from 'react';
 import Input from '../../components/input';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import './login.scss';
+// import './login.scss';
 import { logIn } from '../../redux/authSlice';
 import Message from "../../components/LoadingError/Error";
 import Loading from "../../components/LoadingError/Loading";
@@ -23,8 +23,8 @@ const Login = () => {
           password: ""
       },
       validationSchema: Yup.object({
-          email: Yup.string().email().required("required"),
-          password: Yup.string().min(8, "").required("required")
+          email: Yup.string().email().required(""),
+          password: Yup.string().min(8, "").required("")
       }),
 
       onSubmit: (values) => {
@@ -49,7 +49,7 @@ const Login = () => {
                 name="email"
                 id=""
                 type="text"
-                placeHolder=""
+                placeHolder="Email"
                 value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
                   {formik.errors.email  ? <p >{formik.errors.email}</p> : ""}
               <Input
@@ -57,7 +57,7 @@ const Login = () => {
                 name="password"
                 id=""
                 type="password"
-                placeHolder=""
+                placeHolder="Mật khẩu"
                 value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
                 {formik.errors.password ? <p >{formik.errors.password}</p> : ""}
               <button name="dangnhap" type="submit" className="btn1 login-submit">

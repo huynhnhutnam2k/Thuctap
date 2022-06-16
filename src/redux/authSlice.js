@@ -1,8 +1,9 @@
 import {createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import {URL} from './URL'
 // import {URL} from './url'
-const URL = "https://serverdhyd.herokuapp.com/api/v1"
+// const URL = "https://serverdhyd.herokuapp.com/api/v1"
 export const userLocalStorage = JSON.parse(
     localStorage.getItem("user")
   )

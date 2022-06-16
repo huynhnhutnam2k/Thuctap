@@ -26,7 +26,7 @@
 .choice-btn {
     font-size: 18px;
     padding: 0.7rem 1.5rem;
-    background-color: aliceblue;
+    background-color: rgb(153, 201, 244);
     border-radius: 30px;
     margin: 10px;
     transition: transform 0.3s;
