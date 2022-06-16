@@ -21,8 +21,8 @@ function User() {
         <div className="user col-sm-5">
             <div className="user-info">
                 <div className="user-header"> <h5> <b>Thông tin tài khoản</b></h5></div>
-                <p><b>Họ và Tên: </b><span>{userInfo.username}</span></p>
-                <p><b>Email: </b><span>{userInfo.id}</span></p>
+                <p><b>Họ và Tên: </b><span></span></p>
+                <p><b>Email: </b><span></span></p>
                 <p><b>Số câu đã làm: </b></p>
                 <p><b>Điểm trung bình: </b></p>
                 <Link className="user-item d-flex" to="/#" onClick={handleLogout}>
