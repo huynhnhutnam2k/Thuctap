@@ -23,6 +23,32 @@
     box-shadow: 0 1 4px black;
 }
 
+
+figure{
+    padding-bottom: 10px !important;
+    width: 100% !important;
+    display: flex !important;
+    align-content: center !important;
+    justify-content: center !important;
+    margin: auto !important;
+  }
+
+.se-component{
+    width: 90% !important;
+    margin: auto !important;
+
+}
+
+iframe{
+    width: 90% !important;
+    height: 330px !important;
+
+}
+
+figure img{
+    width: 90% !important;
+}
+
 .choice-btn {
     font-size: 18px;
     padding: 0.7rem 1.5rem;
@@ -188,6 +214,13 @@
         font-size: 16px;
         margin-bottom: 0.3rem;
     }
+
+    iframe{
+        width: 90% !important;
+        height: 180px !important;
+        display: block !important;
+    }
+    
 
     .center {
         width: 95%;
