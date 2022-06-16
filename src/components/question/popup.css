@@ -40,12 +40,13 @@ figure{
 }
 
 iframe{
+    margin: 15px 0px !important;
     width: 90% !important;
-    height: 330px !important;
-
+    height: 500px !important;
 }
 
 figure img{
+    margin: 15px 0px !important;
     width: 90% !important;
 }
 
@@ -174,6 +175,11 @@ figure img{
     background: var(--color-bg);
     color:rgb(179, 214, 244);
 }
+@media screen and (max-width: 1200px) {
+    iframe{
+        height: 400px !important;
+    }
+}
 
 @media screen and (max-width: 992px) {
     .choice-diagnose {
@@ -192,6 +198,9 @@ figure img{
         margin: 5px;
     }
 
+    iframe{
+        height: 330px !important;
+    }
 }
 
 @media screen and (max-width: 576px) {
