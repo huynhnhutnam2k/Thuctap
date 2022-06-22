@@ -351,8 +351,19 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: break-word;
 }
+
+.desc{
+  font-size: 13px !important;
+  -webkit-line-clamp: 2;
+  line-height: 15px;
+  height: 32px;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 
 /* hết tình huống */
 
@@ -729,17 +740,17 @@ form a {
 .document p{
   font-size: 2.5em;
   font-weight: bold;
-  color:#03688c;
+  color: black;
   text-transform: uppercase;
   text-decoration: none;
 
 }
 
 .document:hover{
-  box-shadow: none;
   background: white;
   text-decoration: none;
-  color: black;
+  color:#03688c;
+
 }
 
 .document a:hover{
@@ -748,7 +759,7 @@ form a {
 }
 
 .document p:hover{
-  color: black;
+  color:#03688c;
 }
 /* hết tài liệu */
 

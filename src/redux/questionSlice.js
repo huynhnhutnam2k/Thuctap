@@ -4,8 +4,7 @@ export const questionSlice = createSlice({
     name: "question",
     initialState:{
         questions: {
-            allQuestion: [
-            ],
+            allQuestion: [],
             pending: false,
             error: null
         },

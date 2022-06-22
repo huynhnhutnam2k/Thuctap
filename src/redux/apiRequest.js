@@ -1,5 +1,10 @@
 import axios from "axios";
 import apiConfig from "../api/apiConfig";
+import queryString from 'query-string';
+import { useState } from 'react';
+import Pagination from '../../src/components/pagination';
+
+
 import { 
 //   getAllUserAccess, 
 //   getAllUserFail, 
@@ -167,9 +172,25 @@ export const getAnCate = async (dispatch, id) => {
   }
 };
 
+
+
 export const getAllQuestion = async (dispatch) => {
+
+  // const [filters, setFilters] = useState({
+  //   _limit: 10,
+  //   _page: 1,
+  // });
+
+  // const [pagination, setPagination] = useState({
+  //   _page: 1,
+  //   _limit: 1,
+  //   _totalRows: 1,
+  // });
+
   dispatch(getAllQuestionStart());
+  
   try {
+    // const paramsString  = queryString.stringify(filters);
     const res = await axios.get(`${apiConfig.baseUrl}/question/`);
     dispatch(getAllQuestionAccess(res.data));
   } catch (error) {
