@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./popup.css";
 import { getDiagnose, getQuestion, getTreatment, makeRequest } from "./getdata";
 import "suneditor/dist/css/suneditor.min.css";
-
+import axios, { AxiosError } from "axios";
+const url_point = "";
 export default function Popup({ open, id, onClose }) {
   const [questiondisplay, setQuestiondiaplay] = useState({
     _id: "",
@@ -15,6 +16,7 @@ export default function Popup({ open, id, onClose }) {
     getQuestion(id).then((res) => setQuestiondiaplay(res));
     setAnswer((answer) => [...answer, id]);
   }, [id]);
+  const [score, setScore] = useState(10);
   const [diagnosedisplay, setDiagnosedisplay] = useState({});
   const [treatmentdisplay, setTreatmentdisplay] = useState({});
   const [hidediagnosebtn, setHidediagnosebtn] = useState(true);
@@ -37,33 +39,36 @@ export default function Popup({ open, id, onClose }) {
     setTreatmentdisplay({});
     setShownote(false);
     setHidenotebtn(true);
+    setScore(10);
   };
 
   const handleTreatment = (id) => {
-    setAnswer((answer) => [...answer, id]);
     setHidetreatmentbtn(false);
     getTreatment(id).then((res) => setTreatmentdisplay(res));
-    console.log(answer);
   };
-
-  const handleResult = () => {};
 
   const handleNote = () => {
     setShownote(true);
     setHidenotebtn(true);
   };
-
+  const handleComplete = () => {
+    axios.post(url_point, {
+      user: "test",
+      questionId: id,
+      score: score,
+    });
+    window.location.reload();
+  };
   const reDo = () => {
     setDiagnosedisplay({});
     setHidediagnosebtn(true);
     setTreatmentdisplay({});
     setHidetreatmentbtn(true);
-    setAnswer([]);
-    console.log(answer);
     setShownote(false);
     setHidenotebtn(false);
-
-    console.log(diagnosedisplay);
+    setScore(score - 2.5);
+    ///post result
+    console.log(score);
   };
 
   const redo = (
@@ -72,20 +77,29 @@ export default function Popup({ open, id, onClose }) {
       <button onClick={reDo}>Chọn lại</button>
     </div>
   );
-
+  const testRef = useRef(null);
+  useEffect(() => {
+    // document.addEventListener("load", () => {
+    //   console.log(testRef.current);
+    // });
+  }, [open]);
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
       <div key="POPUP" className="POPUP_STYLE">
         <button className="close-btn" onClick={handleClose}>
           X
         </button>
+        <div>score:{score}</div>
         {/*display question*/}
         <>
           <div key="tinhuong" className="QUESTION">
-            <div className="HIGHLIGHT">Tình huống</div>{" "}
-            {questiondisplay?.description} <br></br>
-            <br></br>
-            <img src={questiondisplay?.image} className="center" />
+            <div className="HIGHLIGHT">{questiondisplay.name}</div>
+
+            <div
+              dangerouslySetInnerHTML={{
+                __html: questiondisplay?.description,
+              }}
+            />
           </div>
           {/** choice diagnose button */}
           <div className="choice-diagnose">
@@ -109,13 +123,13 @@ export default function Popup({ open, id, onClose }) {
                 <span className="namechoice">{diagnosedisplay.name}</span>
               </div>
               <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: diagnosedisplay.description,
-                }}
-              />
-
-              <img src={diagnosedisplay.image} />
+              {
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: diagnosedisplay.description,
+                  }}
+                />
+              }
               {diagnosedisplay.treatment.length > 0 ? null : redo}
             </div>
           ) : null}
@@ -140,12 +154,14 @@ export default function Popup({ open, id, onClose }) {
                 Lựa chọn của bạn:{" "}
                 <span className="namechoice">{treatmentdisplay.name}</span>
               </div>
-              <div className="HIGHLIGHT">Điều trị </div>
-              {treatmentdisplay.desc}
-              <img src={treatmentdisplay.image} />
-              <div className="HIGHLIGHT">Kết quả điều trị</div>
-              {treatmentdisplay.result}
-              {/* {treatmentdisplay.result?.length > 0 ? null : redo} */}
+              <div className="HIGHLIGHT">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: treatmentdisplay.desc,
+                  }}
+                />{" "}
+              </div>
+              {treatmentdisplay.note?.length > 0 ? null : redo}
             </div>
           ) : null}
           {treatmentdisplay.note?.length > 0 ? (
@@ -161,9 +177,9 @@ export default function Popup({ open, id, onClose }) {
                 <div className="HIGHLIGHT">Lưu ý</div>
                 {treatmentdisplay.note}
               </div>
-              <div className="error">
+              <div className="success">
                 <div>Điều trị thành công </div>
-                <button onClick={handleClose}>Quay lại trang chủ</button>
+                <button onClick={handleComplete}>Quay lại trang chủ</button>
               </div>
             </>
           ) : null}
