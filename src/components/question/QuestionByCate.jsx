@@ -9,8 +9,6 @@ import Popup from "./Popup";
 function QuestionByCate() {
   
   var name="";    
-  
-  
     const questionByCate = useParams();
     const question = useSelector(state => state.question.questions?.allQuestion)
     const dispatch = useDispatch()
