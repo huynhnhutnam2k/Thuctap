@@ -351,8 +351,19 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: break-word;
 }
+
+.desc{
+  font-size: 13px !important;
+  -webkit-line-clamp: 2;
+  line-height: 15px;
+  height: 45px;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 
 /* hết tình huống */
 

@@ -5,6 +5,7 @@ import { getAllQuestion} from '../../redux/apiRequest';
 import Question from "../../components/question";
 import React, { useEffect,useState } from 'react';
 import Popup from "./Popup";
+import parse from 'html-react-parser';
 
 function QuestionByCate() {
   
@@ -35,7 +36,7 @@ function QuestionByCate() {
                 <div className="situation col-6 col-md-4 col-lg-2" key={item._id} onClick={()=>handleClick(item._id)}>
                 <img src={item.image} />
                 <p><b>Tình huống:</b> {item.name}</p>
-                <p><b>Mô tả:</b> {item.description}</p>
+                <div className="desc"><p><b>Mô tả:</b> {parse(item.description)}</p></div>
                 <p><b>Điểm TB:</b> {item.averageMark}</p>
             </div>
             ):"")

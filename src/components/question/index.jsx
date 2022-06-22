@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllQuestion} from '../../redux/apiRequest';
 import Pagination from '../../components/pagination';
 import Popup from './Popup';
+import parse from 'html-react-parser';
 // import queryString from 'query-string';
 
 function Question() {
@@ -50,7 +51,7 @@ function Question() {
               <div className="situation col-6 col-md-4 col-lg-2" value={item._id} key={item._id} onClick={()=>handleClick(item._id)}>
                   <img src={item.image} alt="img" />
                   <p><b>Tình huống:</b> {item.name}</p>
-                  <p><b>Mô tả:</b> {item.description}</p>
+                  <p><b>Mô tả:</b> <span className="desc">{parse(item.description)}</span></p>
                   <p><b>Điểm TB:</b> {item.averageMark}</p>
               </div>  
             ))}
