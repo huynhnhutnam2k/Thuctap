@@ -10,11 +10,9 @@ export default function Popup({ open, id, onClose }) {
     diagnose: [],
     image: "",
   });
-  const [answer, setAnswer] = useState([]);
 
   useEffect(() => {
     getQuestion(id).then((res) => setQuestiondiaplay(res));
-    setAnswer((answer) => [...answer, id]);
   }, [id]);
   const [score, setScore] = useState(10);
   const [diagnosedisplay, setDiagnosedisplay] = useState({});
@@ -25,7 +23,6 @@ export default function Popup({ open, id, onClose }) {
   const [hidenotebtn, setHidenotebtn] = useState(false);
 
   const handleDiagnose = (id) => {
-    setAnswer((answer) => [...answer, id]);
     getDiagnose(id).then((res) => setDiagnosedisplay(res));
     setHidediagnosebtn(false);
   };
@@ -35,7 +32,6 @@ export default function Popup({ open, id, onClose }) {
     setHidediagnosebtn(true);
     onClose();
     setHidetreatmentbtn(true);
-    setAnswer([id]);
     setTreatmentdisplay({});
     setShownote(false);
     setHidenotebtn(true);
