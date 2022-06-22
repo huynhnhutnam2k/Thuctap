@@ -36,7 +36,7 @@ function QuestionByCate() {
                 <div className="situation col-6 col-md-4 col-lg-2" key={item._id} onClick={()=>handleClick(item._id)}>
                 <img src={item.image} />
                 <p><b>Tình huống:</b> {item.name}</p>
-                <div className="desc"><p><b>Mô tả:</b> {parse(item.description)}</p></div>
+                <p><b>Mô tả:</b> <span className="desc">{parse(item.description)}</span></p>
                 <p><b>Điểm TB:</b> {item.averageMark}</p>
             </div>
             ):"")
