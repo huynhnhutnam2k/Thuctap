@@ -19,6 +19,15 @@ return (
   </NavLink>
   </li>
 
+  <li className="menu-item" key="2">
+  <a
+    className='menuitem'
+    href="http://lib.ctump.edu.vn/trang-chu" target="_blank"
+    data-toggle="popover-hover3" data-content="Tài liệu">
+    <i  className="fas fa-book"></i>
+  </a>
+  </li>
+
   <li className="menu-item" key="3">
   <NavLink
     className={(navData) => (navData.isActive ? "menuitem active" : 'menuitem')}
@@ -36,15 +45,7 @@ return (
       <i className="fas fa-question"></i>
   </NavLink>
   </li> */}
-
-  <li className="menu-item" key="2">
-  <NavLink
-    className={(navData) => (navData.isActive ? "menuitem active" : 'menuitem')}
-    to="/Document"
-    data-toggle="popover-hover3" data-content="Tài liệu">
-    <i  className="fas fa-book"></i>
-  </NavLink>
-  </li>
+  
 
   <li className="menu-item" key="5">
   <NavLink

@@ -229,6 +229,10 @@ figure img{
         height: 180px !important;
         display: block !important;
     }
+    img{
+        width: 50% !important;
+        height: auto !important;
+    }
     
 
     .center {

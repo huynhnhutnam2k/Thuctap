@@ -20,12 +20,12 @@ return (
   </li>
 
   <li className="menu-item2" key="2">
-  <NavLink
-    className={(navData) => (navData.isActive ? "menuitem2 active" : 'menuitem2')}
-    to="/Document"
-    data-toggle="popover-hover3">
+  <a
+    className='menuitem2'
+    href="http://lib.ctump.edu.vn/trang-chu" target="_blank"
+    data-toggle="popover-hover3" data-content="Tài liệu">
     <i  className="fas fa-book"></i>
-  </NavLink>
+  </a>
   </li>
 
   <li className="menu-item2" key="3">

@@ -27,15 +27,7 @@ export default function Popup({ open, id, onClose }) {
     setHidediagnosebtn(false);
   };
   const handleClose = () => {
-    setQuestiondiaplay({});
-    setDiagnosedisplay({});
-    setHidediagnosebtn(true);
-    onClose();
-    setHidetreatmentbtn(true);
-    setTreatmentdisplay({});
-    setShownote(false);
-    setHidenotebtn(true);
-    setScore(10);
+    window.location.reload();
   };
 
   const handleTreatment = (id) => {
@@ -163,7 +155,7 @@ export default function Popup({ open, id, onClose }) {
           {treatmentdisplay.note?.length > 0 ? (
             hidenotebtn ? null : (
               <button className="choice-btn" onClick={handleNote}>
-                lưu ý
+                LƯU Ý
               </button>
             )
           ) : null}
