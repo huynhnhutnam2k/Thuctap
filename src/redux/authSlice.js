@@ -138,6 +138,7 @@ export const logIn = createAsyncThunk(
             }
         } catch (error) {
             console.log(error.response.data)
+            alert("Bạn đã nhập sai tài khoản hoặc mật khẩu")
         }
     }
 )

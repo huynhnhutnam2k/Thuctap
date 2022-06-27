@@ -23,8 +23,8 @@ const Login = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email().required(""),
-      password: Yup.string().min(8, "").required(""),
+      email: Yup.string().email().required("Nhập Email"),
+      password: Yup.string().min(8, "").required("Nhập mật khẩu"),
     }),
 
     onSubmit: (values) => {

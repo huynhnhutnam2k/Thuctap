@@ -12,8 +12,12 @@ import Register from './pages/Register';
 import Introduce from './pages/Introduce';
 import User from './pages/User';
 import Document from './pages/Document';
+import NotFound from './pages/Notfound';
 import QuestionByCate from './components/question/QuestionByCate';
+
+
 function App() {
+  
   return (
     <>
 <div className="App">
@@ -25,7 +29,7 @@ function App() {
       <Banner/>
       <div className="body">
         <Routes>
-            <Route path='/' element={<Home/>} />
+            <Route path='/' exact element={<Home/>} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Introduce' element={<Introduce />} />
             <Route path='/Register' element={<Register />} />
@@ -33,6 +37,7 @@ function App() {
             <Route path='/Question' element={<ListQuestion />} />
             <Route path='/User' element={<User />} />
             <Route path='/Document' element={<Document />} />
+            <Route path='*' element={<NotFound />} />
         </Routes>
         </div>
       </div>

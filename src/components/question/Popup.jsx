@@ -180,10 +180,6 @@ export default function Popup({ open, id, onClose }) {
             >
               top
             </button> */}
-
-            <div title="Về đầu trang" id="top-up">
-              <i className="fa fa-chevron-circle-up"></i>
-            </div>
           </>
         </div>
       </div>
