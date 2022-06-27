@@ -329,16 +329,16 @@ body {
 .situation:hover {
   transform: scale(0.985);
   box-shadow: none;
-  background: white;
+  /* background: white; */
   font-weight: 500;
   /* border: 1px solid rgb(0, 0, 0); */
 }
 
 .situation img {
-  margin: 0px;
+  margin: auto;
   border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 60%;
+  height: 50%;
   margin-bottom: 10px;
 }
 
@@ -357,13 +357,11 @@ body {
   font-size: 13px !important;
   -webkit-line-clamp: 2;
   line-height: 15px;
-  height: 32px;
+  height: 47px;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-
 
 /* hết tình huống */
 
