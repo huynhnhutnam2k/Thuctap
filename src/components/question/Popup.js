@@ -73,105 +73,115 @@ export default function Popup({ open, id, onClose }) {
   }, [open]);
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
-      <div key="POPUP" className="POPUP_STYLE">
-        <button className="close-btn" onClick={handleClose}>
-          X
-        </button>
-        <div>score:{score}</div>
-        {/*display question*/}
-        <>
-          <div key="tinhuong" className="QUESTION">
-            <div className="HIGHLIGHT">{questiondisplay.name}</div>
+      <div className="d-flex">
+        <div className="score">hello</div>
+        <div key="POPUP" className="POPUP_STYLE">
+          <button className="close-btn" onClick={handleClose}>
+            X
+          </button>
+          <div>score:{score}</div>
+          {/*display question*/}
+          <>
+            <div key="tinhuong" className="QUESTION">
+              <div className="HIGHLIGHT">{questiondisplay.name}</div>
 
-            <div
-              dangerouslySetInnerHTML={{
-                __html: questiondisplay?.description,
-              }}
-            />
-          </div>
-          {/** choice diagnose button */}
-          <div className="choice-diagnose">
-            {questiondisplay.diagnose?.map((id, index) =>
-              hidediagnosebtn ? (
-                <button
-                  className="choice-btn"
-                  key={index}
-                  onClick={() => handleDiagnose(id._id)}
-                >
-                  {id.name}
-                </button>
-              ) : null
-            )}
-          </div>
-          {/*display diagnose */}
-          {JSON.stringify(diagnosedisplay) !== "{}" ? (
-            <div className="QUESTION">
-              <div className="HIGHLIGHT-CHOICED">
-                <div>Lựa chọn của bạn: </div>
-                <span className="namechoice">{diagnosedisplay.name}</span>
-              </div>
-              <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
-              {
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: diagnosedisplay.description,
-                  }}
-                />
-              }
-              {diagnosedisplay.treatment.length > 0 ? null : redo}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: questiondisplay?.description,
+                }}
+              />
             </div>
-          ) : null}
-          {/** choice treatment button */}
-          <div className="choice-diagnose">
-            {diagnosedisplay.treatment?.map((id, index) =>
-              hidetreatmentbtn ? (
-                <button
-                  className="choice-btn"
-                  key={index}
-                  onClick={() => handleTreatment(id._id)}
-                >
-                  {id.name}
-                </button>
-              ) : null
-            )}
-          </div>
-          {/*display treatment */}
-          {JSON.stringify(treatmentdisplay) !== "{}" ? (
-            <div className="QUESTION">
-              <div className="HIGHLIGHT-CHOICED">
-                Lựa chọn của bạn:{" "}
-                <span className="namechoice">{treatmentdisplay.name}</span>
-              </div>
-              <div className="HIGHLIGHT">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: treatmentdisplay.desc,
-                  }}
-                />{" "}
-              </div>
-              {treatmentdisplay.note?.length > 0 ? null : redo}
+            {/** choice diagnose button */}
+            <div className="choice-diagnose">
+              {questiondisplay.diagnose?.map((id, index) =>
+                hidediagnosebtn ? (
+                  <button
+                    className="choice-btn"
+                    key={index}
+                    onClick={() => handleDiagnose(id._id)}
+                  >
+                    {id.name}
+                  </button>
+                ) : null
+              )}
             </div>
-          ) : null}
-          {treatmentdisplay.note?.length > 0 ? (
-            hidenotebtn ? null : (
-              <button className="choice-btn" onClick={handleNote}>
-                LƯU Ý
-              </button>
-            )
-          ) : null}
-          {shownote ? (
-            <>
+            {/*display diagnose */}
+            {JSON.stringify(diagnosedisplay) !== "{}" ? (
               <div className="QUESTION">
-                <div className="HIGHLIGHT">Lưu ý</div>
-                {treatmentdisplay.note}
+                <div className="HIGHLIGHT-CHOICED">
+                  <div>Lựa chọn của bạn: </div>
+                  <span className="namechoice">{diagnosedisplay.name}</span>
+                </div>
+                <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
+                {
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: diagnosedisplay.description,
+                    }}
+                  />
+                }
+                {diagnosedisplay.treatment.length > 0 ? null : redo}
               </div>
-              <div className="success">
-                <div>Điều trị thành công </div>
-                <button onClick={handleComplete}>Quay lại trang chủ</button>
+            ) : null}
+            {/** choice treatment button */}
+            <div className="choice-diagnose">
+              {diagnosedisplay.treatment?.map((id, index) =>
+                hidetreatmentbtn ? (
+                  <button
+                    className="choice-btn"
+                    key={index}
+                    onClick={() => handleTreatment(id._id)}
+                  >
+                    {id.name}
+                  </button>
+                ) : null
+              )}
+            </div>
+            {/*display treatment */}
+            {JSON.stringify(treatmentdisplay) !== "{}" ? (
+              <div className="QUESTION">
+                <div className="HIGHLIGHT-CHOICED">
+                  Lựa chọn của bạn:{" "}
+                  <span className="namechoice">{treatmentdisplay.name}</span>
+                </div>
+                <div className="HIGHLIGHT">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: treatmentdisplay.desc,
+                    }}
+                  />{" "}
+                </div>
+                {treatmentdisplay.note?.length > 0 ? null : redo}
               </div>
-            </>
-          ) : null}
-        </>
+            ) : null}
+            {treatmentdisplay.note?.length > 0 ? (
+              hidenotebtn ? null : (
+                <button className="choice-btn" onClick={handleNote}>
+                  LƯU Ý
+                </button>
+              )
+            ) : null}
+            {shownote ? (
+              <>
+                <div className="QUESTION">
+                  <div className="HIGHLIGHT">Lưu ý</div>
+                  {treatmentdisplay.note}
+                </div>
+                <div className="success">
+                  <div>Điều trị thành công </div>
+                  <button onClick={handleComplete}>Quay lại trang chủ</button>
+                </div>
+              </>
+            ) : null}
+            <button
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+              }
+            >
+              top
+            </button>
+          </>
+        </div>
       </div>
     </div>
   ) : null;
