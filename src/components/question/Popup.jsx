@@ -173,13 +173,17 @@ export default function Popup({ open, id, onClose }) {
                 </div>
               </>
             ) : null}
-            <button
+            {/* <button
               onClick={() =>
                 window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
               }
             >
               top
-            </button>
+            </button> */}
+
+            <div title="Về đầu trang" id="top-up">
+              <i className="fa fa-chevron-circle-up"></i>
+            </div>
           </>
         </div>
       </div>
