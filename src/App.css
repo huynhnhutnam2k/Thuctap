@@ -353,11 +353,11 @@ body {
   text-overflow: ellipsis;
 }
 
-.desc{
+.desc span{
   font-size: 13px !important;
   -webkit-line-clamp: 2;
   line-height: 15px;
-  height: 47px;
+  height: 45px;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;

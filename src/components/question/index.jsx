@@ -4,7 +4,6 @@ import { getAllQuestion } from "../../redux/apiRequest";
 import Pagination from "../../components/pagination";
 import Popup from "./Popup";
 import parse from "html-react-parser";
-// import queryString from 'query-string';
 
 function Question() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,29 +12,10 @@ function Question() {
     (state) => state.question.questions?.allQuestion
   );
 
-  // const [pagination, setPagination] = useState({
-  //   _page: 1,
-  //   _limit: 1,
-  //   _totalRows: 1,
-  // });
-
-  // const [filters, setFilters] = useState({
-  //   _limit: 1,
-  //   _page: 1,
-  // });
-
   const handleClick = (id) => {
     setIsOpen(true);
     setQuestionId(id);
   };
-
-  // function handlePageChange(newPage){
-  //   console.log('New page: ', newPage );
-  //   setFilters({
-  //     ... filters,
-  //     _page: newPage,
-  //   })
-  // }
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -61,23 +41,15 @@ function Question() {
               <b>{item.name}</b>
             </p>
             <p>
-              <b>Mô tả:</b>{" "}
-              <span className="desc">{parse(item.description)}</span>
+              <b>Mô tả: 2</b> {item.description}
             </p>
-            <p>
-              <b>Điểm TB:</b> {item.averageMark}
-            </p>
+            <p>{/* <b>Điểm TB:</b> {item.averageMark} */}</p>
           </div>
         ))}
         {/* POPUP_QUESTION */}
         <Popup open={isOpen} id={questionId} onClose={close}></Popup>
       </div>
-      <div className="pagination">
-        {/* <Pagination
-              pagination={pagination}
-              onPageChange= {handlePageChange}
-            /> */}
-      </div>
+      <div className="pagination"></div>
     </>
   );
 }

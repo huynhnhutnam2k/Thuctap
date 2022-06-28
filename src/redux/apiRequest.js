@@ -1,9 +1,5 @@
 import axios from "axios";
 import apiConfig from "../api/apiConfig";
-import queryString from 'query-string';
-import { useState } from 'react';
-import Pagination from '../../src/components/pagination';
-
 
 import { 
 //   getAllUserAccess, 
@@ -156,7 +152,7 @@ import {
 export const getAllCate = async (dispatch) => {
   dispatch(getAllCateStart());
   try {
-    const res = await axios.get(`${apiConfig.baseUrl}/categories/`);
+    const res = await axios.get(`${apiConfig.baseUrl}/department/`);
     dispatch(getAllCateAccess(res.data));
   } catch (error) {
     dispatch(getAllCateFail(error.response.data));
@@ -165,7 +161,7 @@ export const getAllCate = async (dispatch) => {
 export const getAnCate = async (dispatch, id) => {
   dispatch(getAnCateStart());
   try {
-    const res = await axios.get(`${apiConfig.baseUrl}/categories/${id}`);
+    const res = await axios.get(`${apiConfig.baseUrl}/department/${id}`);
     dispatch(getAnCateAccess(res.data));
   } catch (error) {
     dispatch(getAnCateFail());
@@ -176,22 +172,10 @@ export const getAnCate = async (dispatch, id) => {
 
 export const getAllQuestion = async (dispatch) => {
 
-  // const [filters, setFilters] = useState({
-  //   _limit: 10,
-  //   _page: 1,
-  // });
-
-  // const [pagination, setPagination] = useState({
-  //   _page: 1,
-  //   _limit: 1,
-  //   _totalRows: 1,
-  // });
-
   dispatch(getAllQuestionStart());
   
   try {
-    // const paramsString  = queryString.stringify(filters);
-    const res = await axios.get(`${apiConfig.baseUrl}/question/`);
+    const res = await axios.get(`${apiConfig.baseUrl}/situation/`);
     dispatch(getAllQuestionAccess(res.data));
   } catch (error) {
     dispatch(getAllQuestionFail(error.response.data));
@@ -201,7 +185,7 @@ export const getAllQuestion = async (dispatch) => {
 export const getAQuestion = async (dispatch, id) => {
   dispatch(getAQuestionStart());
   try {
-    const res = await axios.get(`${apiConfig.baseUrl}/question/${id}`);
+    const res = await axios.get(`${apiConfig.baseUrl}/situation/${id}`);
     dispatch(getAQuestionAccess(res.data));
   } catch (error) {
     dispatch(getAQuestionFail());

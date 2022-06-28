@@ -33,8 +33,8 @@ function App() {
             <Route path='/Login' element={<Login />} />
             <Route path='/Introduce' element={<Introduce />} />
             <Route path='/Register' element={<Register />} />
-            <Route path='/cate/:id' element={<QuestionByCate />} />
-            <Route path='/Question' element={<ListQuestion />} />
+            <Route path='/department/:id' element={<QuestionByCate />} />
+            <Route path='/Situation' element={<ListQuestion />} />
             <Route path='/User' element={<User />} />
             <Route path='/Document' element={<Document />} />
             <Route path='*' element={<NotFound />} />

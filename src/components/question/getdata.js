@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const Url = "https://serverdhyd.herokuapp.com/api/v1";
+const Url = "https://sv-dhyd.herokuapp.com/api";
 const MyContext = React.createContext();
 
 const getQuestion = async (id) => {
   try {
-    const { data: res } = await axios.get(`${Url}/question/${id}`); //use data destructuring to get data from the promise object
+    const { data: res } = await axios.get(`${Url}/situation/${id}`); //use data destructuring to get data from the promise object
     return res;
   } catch (error) {
     console.log(error);
