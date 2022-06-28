@@ -1,15 +1,23 @@
 import React, { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllQuestion} from '../../redux/apiRequest';
-import Pagination from '../../components/pagination';
+import Pagination from '../pagination';
 import Popup from './Popup';
 import parse from 'html-react-parser';
+import { getAllSituation } from '../../redux/situationSlice';
+import { getAllDepartment } from '../../redux/departmentSlice';
+import { getAllTreatment } from '../../redux/treatmentSlice';
 // import queryString from 'query-string';
 
-function Question() {
+function Situation() {
     const [isOpen, setIsOpen] = useState(false)
-    const [questionId, setQuestionId] = useState("")
-    const question = useSelector(state => state.question.questions?.allQuestion)
+    const [situationId, setSituationId] = useState("")
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getAllSituation())
+    dispatch(getAllDepartment())
+    dispatch(getAllTreatment())
+    },[dispatch])   
+    const {listSituation:situation} = useSelector((state) => state.situation)
 
     // const [pagination, setPagination] = useState({
     //   _page: 1,
@@ -24,7 +32,7 @@ function Question() {
     
     const handleClick= (id) =>{
       setIsOpen(true)
-      setQuestionId(id)
+      setSituationId(id)
     }
 
     // function handlePageChange(newPage){
@@ -35,28 +43,25 @@ function Question() {
     //   })
     // }
 
-    const dispatch = useDispatch()
-      useEffect(() => {
-        getAllQuestion(dispatch)
-      },[dispatch])
+   
 
     const close = () =>{
       setIsOpen(false);
-      setQuestionId("");
+      setSituationId("");
       }
     return (
         <>
         <div className="question col-12">
-            {question?.map((item) => (            
+            {situation?.map((item) => (            
               <div className="situation col-6 col-md-4 col-lg-2" value={item._id} key={item._id} onClick={()=>handleClick(item._id)}>
-                  <img src={item.image} alt="img" />
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8uRX4rai3Bv0Lb_B6XL0WCUbQ4i-QajaX8sgavBvkI7hSCC-5lBTAJBFKm7tX0AGzzlo&usqp=CAU" alt="img" />
                   <p><b>Tình huống:</b> {item.name}</p>
-                  <p><b>Mô tả:</b> <span className="desc">{parse(item.description)}</span></p>
+                  <p><b>Mô tả:</b> <span className="desc">{parse(item.desc)}</span></p>
                   <p><b>Điểm TB:</b> {item.averageMark}</p>
               </div>  
             ))}
             {/* POPUP_QUESTION */}
-            <Popup open={isOpen} id={questionId} onClose={close}></Popup>
+            <Popup open={isOpen} id={situationId} onClose={close}></Popup>
             
         </div>
         <div className="pagination">
@@ -68,4 +73,4 @@ function Question() {
         </>
     );
 }
-export default Question;
+export default Situation;

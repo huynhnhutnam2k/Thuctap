@@ -1,5 +1,5 @@
 import Nav from "../../components/layout/Nav";
-import Question from "../../components/question";
+import Situation from "../../components/situation";
 import Auth from "../../pages/Login/Login";
 
 function Home() {
@@ -8,7 +8,7 @@ function Home() {
         <div className="home">
               <Auth/>
               <Nav />
-              <Question/>
+              <Situation/>
         </div>
      );
 }

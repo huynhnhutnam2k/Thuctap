@@ -1,30 +1,68 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./popup.css";
-import { getDiagnose, getQuestion, getTreatment, makeRequest } from "./getdata";
 import "suneditor/dist/css/suneditor.min.css";
-import axios, { AxiosError } from "axios";
-const url_point = "";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllSituation } from "../../redux/situationSlice";
+import { getAllDepartment } from "../../redux/departmentSlice";
+import { getAllTreatment } from "../../redux/treatmentSlice"
+const url_point = "http://sv-dhyd.herokuapp.com/api/situation/submit";
 export default function Popup({ open, id, onClose }) {
-  const [questiondisplay, setQuestiondiaplay] = useState({
+
+  const initSituation = {
+    desc: "",
     _id: "",
     diagnose: [],
-    image: "",
-  });
+    name: ""
+  }
+  const initDiagnose = {
+    desc: "",
+    _id: "",
+    treatment: [],
+    name: "",
+    isTrue: false,
+  }
+  const initTreatment = {
+    _id: "",
+    desc: "",
+    note: "",
+    name: "",
+    isTrue: false
+  }
 
-  useEffect(() => {
-    getQuestion(id).then((res) => setQuestiondiaplay(res));
-  }, [id]);
-  const [score, setScore] = useState(10);
-  const [diagnosedisplay, setDiagnosedisplay] = useState({});
-  const [treatmentdisplay, setTreatmentdisplay] = useState({});
+  const { listSituation: situation } = useSelector((state) => state.situation);
+  const { listDiagnose: diagnose } = useSelector((state) => state.diagnose);
+  const { listTreatment: treatment } = useSelector((state) => state.treatment);
+  const { userInfo } = useSelector((state) => state.auth);
+  const [situationdisplay, setSituationdiaplay] = useState(initSituation);
+  const [mark, setMark] = useState(10);
+  const [diagnosedisplay, setDiagnosedisplay] = useState(initDiagnose);
+  const [treatmentdisplay, setTreatmentdisplay] = useState(initTreatment);
   const [hidediagnosebtn, setHidediagnosebtn] = useState(true);
   const [hidetreatmentbtn, setHidetreatmentbtn] = useState(true);
   const [shownote, setShownote] = useState(false);
   const [hidenotebtn, setHidenotebtn] = useState(false);
+  const [returnFlag, setReturnFlag] = useState(1);
+
+  const setSituation = (id) => {
+    setSituationdiaplay(situation.find(obj => { return obj._id === id }))
+  }
+  const setDiagnose = (id) => {
+    setDiagnosedisplay(diagnose.find(obj => { return obj._id === id }))
+  }
+  const setTreatment = (id) => {
+    setTreatmentdisplay(treatment.find(obj => { return obj._id === id }))
+  }
+
+  useEffect(() => {
+    setSituation(id)
+  }, [id])
+
+
 
   const handleDiagnose = (id) => {
-    getDiagnose(id).then((res) => setDiagnosedisplay(res));
     setHidediagnosebtn(false);
+    setDiagnose(id);
   };
   const handleClose = () => {
     window.location.reload();
@@ -32,7 +70,7 @@ export default function Popup({ open, id, onClose }) {
 
   const handleTreatment = (id) => {
     setHidetreatmentbtn(false);
-    getTreatment(id).then((res) => setTreatmentdisplay(res));
+    setTreatment(id);
   };
 
   const handleNote = () => {
@@ -41,9 +79,9 @@ export default function Popup({ open, id, onClose }) {
   };
   const handleComplete = () => {
     axios.post(url_point, {
-      user: "test",
-      questionId: id,
-      score: score,
+      userId: userInfo.id,
+      situation: id,
+      mark: mark,
     });
     window.location.reload();
   };
@@ -54,46 +92,42 @@ export default function Popup({ open, id, onClose }) {
     setHidetreatmentbtn(true);
     setShownote(false);
     setHidenotebtn(false);
-    setScore(score - 2.5);
+    setMark(mark - 2.5);
     ///post result
-    console.log(score);
+    console.log(mark);
   };
 
   const redo = (
     <div className="error">
       <div>Không chính xác !!! </div>
-      <button onClick={reDo}>Chọn lại</button>
+      <button onClick={() => reDo()}>Chọn lại</button>
     </div>
   );
-  const testRef = useRef(null);
-  useEffect(() => {
-    // document.addEventListener("load", () => {
-    //   console.log(testRef.current);
-    // });
-  }, [open]);
+  const previousmark = (id, user) => { };
+
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
-      <div className="d-flex">
-        <div className="score">hello</div>
+      <div className="d-flex ">
+        <div className="mark">{previousmark()}</div>
         <div key="POPUP" className="POPUP_STYLE">
-          <button className="close-btn" onClick={handleClose}>
+          <button className="close-btn" onClick={() => handleClose()}>
             X
           </button>
-          <div>score:{score}</div>
-          {/*display question*/}
+          <div>mark:{mark}</div>
+          {/*display situation*/}
           <>
             <div key="tinhuong" className="QUESTION">
-              <div className="HIGHLIGHT">{questiondisplay.name}</div>
+              <div className="HIGHLIGHT">{situationdisplay?.name}</div>
 
               <div
                 dangerouslySetInnerHTML={{
-                  __html: questiondisplay?.description,
+                  __html: situationdisplay?.desc,
                 }}
               />
             </div>
             {/** choice diagnose button */}
             <div className="choice-diagnose">
-              {questiondisplay.diagnose?.map((id, index) =>
+              {situationdisplay?.diagnose?.map((id, index) =>
                 hidediagnosebtn ? (
                   <button
                     className="choice-btn"
@@ -116,7 +150,7 @@ export default function Popup({ open, id, onClose }) {
                 {
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: diagnosedisplay.description,
+                      __html: diagnosedisplay.desc,
                     }}
                   />
                 }
@@ -156,7 +190,7 @@ export default function Popup({ open, id, onClose }) {
             ) : null}
             {treatmentdisplay.note?.length > 0 ? (
               hidenotebtn ? null : (
-                <button className="choice-btn" onClick={handleNote}>
+                <button className="choice-btn" onClick={() => handleNote()}>
                   LƯU Ý
                 </button>
               )
@@ -169,7 +203,7 @@ export default function Popup({ open, id, onClose }) {
                 </div>
                 <div className="success">
                   <div>Điều trị thành công </div>
-                  <button onClick={handleComplete}>Quay lại trang chủ</button>
+                  <button onClick={() => handleComplete()}>Quay lại trang chủ</button>
                 </div>
               </>
             ) : null}
