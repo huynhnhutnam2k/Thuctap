@@ -11,26 +11,29 @@
 }
 .score {
     background: #fff;
-    display:inline;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin: 1rem auto;
+    margin-left: 15%;
+    padding: 1rem;
     background: #fff;
     border-radius: 15px;
-    width: 10%;
-    height: 50%;
-    position: fixed;
-    top: 0;
-    left: 2rem;
-    
+    width: fit-content;
+    text-align: center;
+    overflow-x: auto;
+    max-width: 70%;
+
 }
 
+.scoretable, th, td, tr{
+    border: 1px solid rgb(14, 139, 167);
+    padding: 5px;
+    color: var(--color-bg);
+}
 .POPUP_STYLE {
-    margin: 2rem auto;
+    margin: 1rem auto;
     padding: 2.5rem;
     background: #fff;
     border-radius: 15px;
     width: 70%;
-    /* height: 95%; */
     position: relative;
     transition: translate(-50%, -50%);
     z-index: 1000;
