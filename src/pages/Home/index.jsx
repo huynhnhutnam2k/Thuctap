@@ -1,16 +1,16 @@
 import Nav from "../../components/layout/Nav";
-import Question from "../../components/question";
+import Situation from "../../components/situation";
 import Auth from "../../pages/Login/Login";
 
 function Home() {
-  
-    return ( 
+
+    return (
         <div className="home">
-              <Auth/>
-              <Nav />
-              <Question/>
+            <Auth />
+            <Nav />
+            <Situation />
         </div>
-     );
+    );
 }
 
 export default Home;

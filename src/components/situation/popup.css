@@ -9,25 +9,21 @@
     overflow-y: auto;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .score {
     background: #fff;
-    margin: 1rem auto;
-    margin-left: 15%;
-    padding: 1rem;
-    background: #fff;
-    border-radius: 15px;
-    width: fit-content;
-    text-align: center;
-    overflow-x: auto;
-    max-width: 70%;
 
 }
 
-.scoretable, th, td, tr{
+.scoretable,
+th,
+td,
+tr {
     border: 1px solid rgb(14, 139, 167);
     padding: 5px;
     color: var(--color-bg);
 }
+
 .POPUP_STYLE {
     margin: 1rem auto;
     padding: 2.5rem;
@@ -41,30 +37,30 @@
 }
 
 
-figure{
+figure {
     padding-bottom: 10px !important;
     width: 100% !important;
     display: flex !important;
     align-content: center !important;
     justify-content: center !important;
     margin: auto !important;
-  }
+}
 
-.se-component{
+.se-component {
     width: 90% !important;
     margin: auto !important;
 
 }
 
-iframe{
+iframe {
     margin: 15px 0px !important;
     width: 90% !important;
     height: 500px !important;
 }
 
-figure img{
+figure img {
     margin: 15px 0px !important;
-    width: 90% !important;
+    width: auto !important;
 }
 
 .choice-btn {
@@ -130,20 +126,20 @@ figure img{
     font-weight: bold;
 }
 
-.HIGHLIGHT-CHOICED{
+.HIGHLIGHT-CHOICED {
     display: flex;
     flex-wrap: wrap;
     font-size: 22px;
     font-weight: bold;
-    margin-bottom: 0.7rem; 
+    margin-bottom: 0.7rem;
 }
 
-.namechoice{
+.namechoice {
     width: 100%;
     margin: auto;
     text-align: center;
-    color:rgb(251, 251, 251);
-    background:rgb(22, 106, 180);
+    color: rgb(251, 251, 251);
+    background: rgb(22, 106, 180);
     border-radius: 5px;
 }
 
@@ -161,7 +157,7 @@ figure img{
     font-weight: bold;
 }
 
-.success{
+.success {
     background-color: rgb(29, 225, 98);
     margin-top: 20px;
     padding: 1rem;
@@ -190,10 +186,11 @@ figure img{
 
 .error button:hover {
     background: var(--color-bg);
-    color:rgb(179, 214, 244);
+    color: rgb(179, 214, 244);
 }
+
 @media screen and (max-width: 1200px) {
-    iframe{
+    iframe {
         height: 400px !important;
     }
 }
@@ -215,7 +212,7 @@ figure img{
         margin: 5px;
     }
 
-    iframe{
+    iframe {
         height: 330px !important;
     }
 }
@@ -236,12 +233,12 @@ figure img{
         text-align: justify;
     }
 
-    .HIGHLIGHT-CHOICED{
+    .HIGHLIGHT-CHOICED {
         font-size: 16px;
         margin-bottom: 0.3rem;
     }
 
-    iframe{
+    iframe {
         width: 90% !important;
         height: 180px !important;
         display: block !important;

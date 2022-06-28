@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 const Url = "https://sv-dhyd.herokuapp.com/api";
 const MyContext = React.createContext();
@@ -30,13 +30,4 @@ const getTreatment = async (id) => {
   }
 };
 
-const makeRequest = async (data) => {
-  try {
-    const res = await axios.post({ Url }, { data: data });
-    return res;
-  } catch (e) {
-    // Handle your error here
-  }
-};
-
-export { getTreatment, getDiagnose, getQuestion, makeRequest };
+export { getTreatment, getDiagnose, getQuestion };
