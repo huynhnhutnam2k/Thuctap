@@ -12,7 +12,9 @@
 
 .score {
     background: #fff;
-
+    color: darkblue;
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .scoretable,
@@ -55,12 +57,12 @@ figure {
 iframe {
     margin: 15px 0px !important;
     width: 90% !important;
-    height: 500px !important;
+    /* height: 500px !important; */
 }
 
 figure img {
     margin: 15px 0px !important;
-    width: auto !important;
+    width: 90% !important;
 }
 
 .choice-btn {
