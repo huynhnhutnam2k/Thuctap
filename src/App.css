@@ -320,7 +320,7 @@ body {
   justify-content: center;
   height: 280px;
   margin: 15px 10px;
-  padding: 0px;
+  padding: 10px 0px;
   background: var(--color-quest);
   border-radius: 10px;
   transition: transform 0.2s;
@@ -350,17 +350,21 @@ body {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.desc span{
+.desc p {
   font-size: 13px !important;
-  -webkit-line-clamp: 2;
+  background-color: none !important;
+  color: #000000 !important;
+  -webkit-line-clamp: 3;
   line-height: 15px;
   height: 45px;
   display: -webkit-box;
   overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+figure img{
+  height: 150px !important;
 }
 
 /* hết tình huống */
