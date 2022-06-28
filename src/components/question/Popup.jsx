@@ -97,7 +97,7 @@ export default function Popup({ open, id, onClose }) {
 
             <div
               dangerouslySetInnerHTML={{
-                __html: questiondisplay?.description,
+                __html: questiondisplay?.desc,
               }}
             />
           </div>
@@ -126,7 +126,7 @@ export default function Popup({ open, id, onClose }) {
               {
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: diagnosedisplay.description,
+                    __html: diagnosedisplay.desc,
                   }}
                 />
               }

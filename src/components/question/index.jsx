@@ -36,16 +36,16 @@ function Question() {
             key={item._id}
             onClick={() => handleClick(item._id)}
           >
-            {/* <img
+            <img
               src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y-te.jpg"
               alt="img"
-            /> */}
+            />
             <p>
               <b>{item.name}</b>
             </p>
-            <p>
-              <b>Mô tả:</b> <div className="desc">{parse(item.desc)}</div>
-            </p>
+            <div className="desc">
+              <b>Mô tả:</b> {parse(item.desc)}
+            </div>
             <p>{/* <b>Điểm TB:</b> {item.averageMark} */}</p>
           </div>
         ))}

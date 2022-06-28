@@ -320,7 +320,7 @@ body {
   justify-content: center;
   height: 280px;
   margin: 15px 10px;
-  padding: 10px 0px;
+  padding: 0px;
   background: var(--color-quest);
   border-radius: 10px;
   transition: transform 0.2s;
@@ -329,16 +329,14 @@ body {
 .situation:hover {
   transform: scale(0.985);
   box-shadow: none;
-  /* background: white; */
   font-weight: 500;
-  /* border: 1px solid rgb(0, 0, 0); */
 }
 
 .situation img {
   margin: auto;
   border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 50%;
+  height: 55%;
   margin-bottom: 10px;
 }
 
@@ -352,19 +350,16 @@ body {
   overflow: hidden;
 }
 
-.desc p {
+
+.desc p, .desc b {
+  margin: 0px 10px;
   font-size: 13px !important;
   background-color: none !important;
   color: #000000 !important;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 5;
   line-height: 15px;
-  height: 45px;
   display: -webkit-box;
   overflow: hidden;
-}
-
-figure img{
-  height: 150px !important;
 }
 
 /* hết tình huống */
@@ -861,7 +856,7 @@ form a {
   }
 
   .all {
-    margin-left: 50%;
+    margin-left: 30%;
   }
 
   .header-user {
