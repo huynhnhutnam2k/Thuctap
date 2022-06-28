@@ -5,7 +5,7 @@
   --color-primary: #ffff00;
   --color-bg2: #ffffff;
   --color-form: #3f96d5;
-  --color-quest: #a0e2ffe1;
+  --color-quest: #a0c1ffe1;
   --wrapper-height: 87vh;
   --image-max-width: 300px;
   --image-margin: 3rem;
@@ -311,14 +311,14 @@ body {
   flex-wrap: wrap;
   display: flex;
   margin: 50px 10px;
-  padding: 10px;
+  padding: 10px 70px;
 }
 
 .situation {
   overflow: hidden;
   box-shadow: 0px 2px 6px black;
   justify-content: center;
-  height: 280px;
+  height: 285px;
   margin: 15px 10px;
   padding: 0px;
   background: var(--color-quest);
@@ -371,7 +371,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   padding-top: 15px;
-  background: var(--color-bg2);
+  background: var(--color-quest);
   border-top: 2px solid rgb(15, 51, 56);
 }
 

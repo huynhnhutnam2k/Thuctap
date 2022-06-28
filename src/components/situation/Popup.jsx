@@ -223,7 +223,7 @@ export default function Popup({ open, id, onClose }) {
                 {treatmentdisplay.note}
               </div>
               <div className="success">
-                <div>Điều trị thành công </div>
+                <div>Điều trị thành công !!!</div>
                 <button onClick={() => handleComplete()}>
                   Quay lại trang chủ
                 </button>

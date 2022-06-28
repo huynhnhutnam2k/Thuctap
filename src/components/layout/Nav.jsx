@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAllDepartment } from "../../redux/departmentSlice";
 function Nav() {
   const dispatch = useDispatch();
   const { listDepartment: department } = useSelector(
     (state) => state.department
   );
-  const { pathname } = useLocation();
   let navigate = useNavigate();
   const routeChange = (e) => {
     let path = e.target.value;
@@ -21,7 +20,15 @@ function Nav() {
   return (
     <div>
       <nav className="navbar navbar-expand-sm navbar-light bg">
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="collapsibleNavbar">
           <ul className="navbar-nav">
             {department?.map((item) => (
               <div className="submenu nav-item" key={item._id} id={item._id}>
@@ -37,24 +44,23 @@ function Nav() {
                 </li>
               </div>
             ))}
-
-            <div className="all">
-              <select
-                name="sort"
-                id="sort"
-                onClick={routeChange}
-                defaultValue={""}
-              >
-                <option value="">-Chọn Khoa-</option>
-                {department?.map((item) => (
-                  <option value={`/department/${item._id}`} key={item._id}>
-                    {item.name}
-                  </option>
-                ))}
-                <option value={`/#`}>Tất cả</option>
-              </select>
-            </div>
           </ul>
+          <div className="all">
+            <select
+              name="sort"
+              id="sort"
+              onClick={routeChange}
+              defaultValue={""}
+            >
+              <option value="">-Chọn Khoa-</option>
+              {department?.map((item) => (
+                <option value={`/department/${item._id}`} key={item._id}>
+                  {item.name}
+                </option>
+              ))}
+              <option value={`/#`}>Tất cả</option>
+            </select>
+          </div>
         </div>
       </nav>
     </div>

@@ -41,7 +41,7 @@ function Situation() {
             alt="img"
           />
           <p>
-            <b>Tình huống:</b> {item.name}
+            <b>{item.name}</b>
           </p>
           <div className="desc">
             <b>Mô tả:</b> {parse(item.desc)}

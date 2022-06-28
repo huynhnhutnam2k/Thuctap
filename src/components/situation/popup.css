@@ -62,7 +62,7 @@ iframe {
 
 figure img {
     margin: 15px 0px !important;
-    width: 90% !important;
+    
 }
 
 .choice-btn {
@@ -191,11 +191,11 @@ figure img {
     color: rgb(179, 214, 244);
 }
 
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
     iframe {
         height: 400px !important;
     }
-}
+} */
 
 @media screen and (max-width: 992px) {
     .choice-diagnose {
@@ -214,9 +214,9 @@ figure img {
         margin: 5px;
     }
 
-    iframe {
+    /* iframe {
         height: 330px !important;
-    }
+    } */
 }
 
 @media screen and (max-width: 576px) {
@@ -241,11 +241,12 @@ figure img {
     }
 
     iframe {
-        width: 90% !important;
-        height: 180px !important;
+        /* width: 90% !important; */
         display: block !important;
     }
-
+    figure img{
+        width: 90% !important;
+    }
     .center {
         width: 95%;
     }
