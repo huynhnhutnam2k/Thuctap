@@ -123,19 +123,21 @@ export const authSlice = createSlice({
 });
 
 export const logIn = createAsyncThunk(
-  "auth/login",
-  async ({ user, navigate }) => {
-    try {
-      const res = await axios.post(`${URL}/auth/login`, user);
-      if (res) {
-        localStorage.setItem("user", JSON.stringify(res.data));
-        document.location.href = "/";
-        return res.data;
-      }
-    } catch (error) {
-      console.log(error.response.data);
+    "auth/login",
+    async({user, navigate}) => {
+        try {
+            const res = await axios.post(`${URL}/auth/login`, user)
+            if(res){
+                localStorage.setItem("user", JSON.stringify(res.data));
+                document.location.href = "/";
+                return res.data
+            }
+        } catch (error) {
+            console.log(error.response.data)
+            alert("Bạn đã nhập sai tài khoản hoặc mật khẩu")
+        }
     }
-  }
+  ,
 );
 export const addUser = createAsyncThunk(
   "auth/register",
