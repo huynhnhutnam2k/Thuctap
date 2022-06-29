@@ -5,27 +5,26 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 const url_point = "http://sv-dhyd.herokuapp.com/api/situation/submit";
 export default function Popup({ open, id, onClose }) {
-
   const initSituation = {
     desc: "",
     _id: "",
     diagnose: [],
-    name: ""
-  }
+    name: "",
+  };
   const initDiagnose = {
     desc: "",
     _id: "",
     treatment: [],
     name: "",
     isTrue: false,
-  }
+  };
   const initTreatment = {
     _id: "",
     desc: "",
     note: "",
     name: "",
-    isTrue: false
-  }
+    isTrue: false,
+  };
 
   const { listSituation: situation } = useSelector((state) => state.situation);
   const { listDiagnose: diagnose } = useSelector((state) => state.diagnose);
@@ -40,26 +39,37 @@ export default function Popup({ open, id, onClose }) {
   const [shownote, setShownote] = useState(false);
   const [hidenotebtn, setHidenotebtn] = useState(false);
   const [returnStep, setReturnStep] = useState(1);
-  const [diagnoseIsDisplay, setDiagnoseIsDisplay] = useState(false)
-  const [treatmentIsDisplay, setTreatmentIsDisplay] = useState(false)
+  const [diagnoseIsDisplay, setDiagnoseIsDisplay] = useState(false);
+  const [treatmentIsDisplay, setTreatmentIsDisplay] = useState(false);
 
   const setSituation = (id) => {
-    setSituationdiaplay(situation.find(obj => { return obj._id === id }))
-  }
+    setSituationdiaplay(
+      situation.find((obj) => {
+        return obj._id === id;
+      })
+    );
+  };
   const setDiagnose = (id) => {
-    setDiagnosedisplay(diagnose.find(obj => { return obj._id === id }))
-  }
+    setDiagnosedisplay(
+      diagnose.find((obj) => {
+        return obj._id === id;
+      })
+    );
+  };
   const setTreatment = (id) => {
-    setTreatmentdisplay(treatment.find(obj => { return obj._id === id }))
-  }
+    setTreatmentdisplay(
+      treatment.find((obj) => {
+        return obj._id === id;
+      })
+    );
+  };
 
   useEffect(() => {
-    setSituation(id)
-  }, [id])
-
+    setSituation(id);
+  }, [id]);
 
   const handleDiagnose = (id) => {
-    setDiagnoseIsDisplay(true)
+    setDiagnoseIsDisplay(true);
     setHidediagnosebtn(false);
     setDiagnose(id);
     // eslint-disable-next-line no-unused-expressions
@@ -88,22 +98,22 @@ export default function Popup({ open, id, onClose }) {
     window.location.reload();
   };
   const reDoStep1 = () => {
-    setDiagnosedisplay({})
-    setHidediagnosebtn(true)
+    setDiagnosedisplay({});
+    setHidediagnosebtn(true);
     setTreatmentdisplay({});
-    setHidetreatmentbtn(true)
-    setShownote(false)
-    setHidenotebtn(false)
-    setMark(mark - 2.5)
-  }
+    setHidetreatmentbtn(true);
+    setShownote(false);
+    setHidenotebtn(false);
+    setMark(mark - 2.5);
+  };
   const reDoStep2 = () => {
-    setHidediagnosebtn(false)
+    setHidediagnosebtn(false);
     setTreatmentdisplay({});
-    setHidetreatmentbtn(true)
-    setShownote(false)
-    setHidenotebtn(false)
-    setMark(mark - 2.5)
-  }
+    setHidetreatmentbtn(true);
+    setShownote(false);
+    setHidenotebtn(false);
+    setMark(mark - 2.5);
+  };
 
   const reDo = () => {
     returnStep === 1 ? reDoStep1() : reDoStep2();
@@ -115,7 +125,7 @@ export default function Popup({ open, id, onClose }) {
       <button onClick={() => reDo()}>Chọn lại</button>
     </div>
   );
-  const previousmark = (id, user) => { };
+  const previousmark = (id, user) => {};
 
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
@@ -123,7 +133,7 @@ export default function Popup({ open, id, onClose }) {
         <button className="close-btn" onClick={() => handleClose()}>
           X
         </button>
-        <div>mark:{mark}</div>
+        <div className="score">Điểm: {mark}</div>
         {/*display situation*/}
         <>
           <div key="tinhuong" className="QUESTION">
@@ -150,21 +160,22 @@ export default function Popup({ open, id, onClose }) {
           </div>
           {/*display diagnose */}
           {diagnoseIsDisplay && (
-            <><div className="QUESTION">
-              <div className="HIGHLIGHT-CHOICED">
-                <div>Lựa chọn của bạn: </div>
-                <span className="namechoice">{diagnosedisplay.name}</span>
+            <>
+              <div className="QUESTION">
+                <div className="HIGHLIGHT-CHOICED">
+                  <div>Lựa chọn của bạn: </div>
+                  <span className="namechoice">{diagnosedisplay.name}</span>
+                </div>
+                <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
+                {
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: diagnosedisplay.desc,
+                    }}
+                  />
+                }
+                {diagnosedisplay.treatment.length > 0 ? null : redo}
               </div>
-              <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
-              {
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: diagnosedisplay.desc,
-                  }}
-                />
-              }
-              {diagnosedisplay.treatment.length > 0 ? null : redo}
-            </div>
               {/** choice treatment button */}
               <div className="choice-diagnose">
                 {diagnosedisplay.treatment?.map((id, index) =>
@@ -178,7 +189,8 @@ export default function Popup({ open, id, onClose }) {
                     </button>
                   ) : null
                 )}
-              </div></>
+              </div>
+            </>
           )}
           {/*display treatment */}
           {treatmentIsDisplay && (
@@ -211,18 +223,20 @@ export default function Popup({ open, id, onClose }) {
                 {treatmentdisplay.note}
               </div>
               <div className="success">
-                <div>Điều trị thành công </div>
-                <button onClick={() => handleComplete()}>Quay lại trang chủ</button>
+                <div>Điều trị thành công !!!</div>
+                <button onClick={() => handleComplete()}>
+                  Quay lại trang chủ
+                </button>
               </div>
             </>
           ) : null}
-          <button
+          {/* <button
             onClick={() =>
               window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
             }
           >
             top
-          </button>
+          </button> */}
         </>
       </div>
     </div>

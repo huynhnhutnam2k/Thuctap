@@ -5,7 +5,7 @@
   --color-primary: #ffff00;
   --color-bg2: #ffffff;
   --color-form: #3f96d5;
-  --color-quest: #a0e2ffe1;
+  --color-quest: #a0c1ffe1;
   --wrapper-height: 87vh;
   --image-max-width: 300px;
   --image-margin: 3rem;
@@ -311,16 +311,16 @@ body {
   flex-wrap: wrap;
   display: flex;
   margin: 50px 10px;
-  padding: 10px;
+  padding: 10px 70px;
 }
 
 .situation {
   overflow: hidden;
   box-shadow: 0px 2px 6px black;
   justify-content: center;
-  height: 280px;
+  height: 285px;
   margin: 15px 10px;
-  padding: 10px 0px;
+  padding: 0px;
   background: var(--color-quest);
   border-radius: 10px;
   transition: transform 0.2s;
@@ -329,16 +329,14 @@ body {
 .situation:hover {
   transform: scale(0.985);
   box-shadow: none;
-  /* background: white; */
   font-weight: 500;
-  /* border: 1px solid rgb(0, 0, 0); */
 }
 
 .situation img {
   margin: auto;
   border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 50%;
+  height: 55%;
   margin-bottom: 10px;
 }
 
@@ -352,19 +350,16 @@ body {
   overflow: hidden;
 }
 
-.desc p {
+
+.desc p, .desc b {
+  margin: 0px 10px;
   font-size: 13px !important;
   background-color: none !important;
   color: #000000 !important;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 5;
   line-height: 15px;
-  height: 45px;
   display: -webkit-box;
   overflow: hidden;
-}
-
-figure img{
-  height: 150px !important;
 }
 
 /* hết tình huống */
@@ -376,7 +371,7 @@ figure img{
   justify-content: center;
   flex-wrap: wrap;
   padding-top: 15px;
-  background: var(--color-bg2);
+  background: var(--color-quest);
   border-top: 2px solid rgb(15, 51, 56);
 }
 
@@ -861,7 +856,7 @@ form a {
   }
 
   .all {
-    margin-left: 50%;
+    margin-left: 30%;
   }
 
   .header-user {
@@ -1020,9 +1015,6 @@ form a {
 
   .situation {
     height: 220px;
-  }
-
-  .situation img {
   }
 
   .situation p {
