@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const url = "https://sv-dhyd.herokuapp.com/api/diagnose";
-export const getAllDiag = createAsyncThunk("diagnose/fetchAll", async () => {
+export const getAllDiagnose = createAsyncThunk("diagnose/fetchAll", async () => {
   try {
     const res = await axios.get(`${url}`);
     return res?.data;
@@ -10,7 +10,7 @@ export const getAllDiag = createAsyncThunk("diagnose/fetchAll", async () => {
     console.log(error.response.data);
   }
 });
-export const getADiag = createAsyncThunk("diagnose/fetchOne", async (id) => {
+export const getADiagnose = createAsyncThunk("diagnose/fetchOne", async (id) => {
   try {
     const res = await axios.get(`${url}/${id}`);
     return res?.data;
@@ -30,25 +30,25 @@ export const diagnoseSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getAllDiag.pending, (state) => {
+      .addCase(getAllDiagnose.pending, (state) => {
         state.pending = true;
       })
-      .addCase(getAllDiag.fulfilled, (state, action) => {
+      .addCase(getAllDiagnose.fulfilled, (state, action) => {
         state.listDiagnose = action.payload;
         state.pending = false;
       })
-      .addCase(getAllDiag.rejected, (state) => {
+      .addCase(getAllDiagnose.rejected, (state) => {
         state.pending = false;
         state.error = true;
       })
-      .addCase(getADiag.pending, (state) => {
+      .addCase(getADiagnose.pending, (state) => {
         state.pending = true;
       })
-      .addCase(getADiag.fulfilled, (state, action) => {
+      .addCase(getADiagnose.fulfilled, (state, action) => {
         state.diagnose = action.payload;
         state.pending = false;
       })
-      .addCase(getADiag.rejected, (state) => {
+      .addCase(getADiagnose.rejected, (state) => {
         state.pending = false;
         state.error = true;
       });

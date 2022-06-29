@@ -62,7 +62,11 @@ iframe {
 
 figure img {
     margin: 15px 0px !important;
-    
+
+}
+
+.POPUP_STYLE br {
+    display: block !important;
 }
 
 .choice-btn {
@@ -244,9 +248,11 @@ figure img {
         /* width: 90% !important; */
         display: block !important;
     }
-    figure img{
+
+    figure img {
         width: 90% !important;
     }
+
     .center {
         width: 95%;
     }

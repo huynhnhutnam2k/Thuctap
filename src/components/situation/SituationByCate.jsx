@@ -5,12 +5,16 @@ import React, { useEffect, useState } from "react";
 import Popup from "./Popup";
 import parse from "html-react-parser";
 import { getAllSituation } from "../../redux/situationSlice";
+import { getAllDiagnose } from "../../redux/diagnoseSlice";
+import { getAllTreatment } from "../../redux/treatmentSlice";
 
 function SituationByCate() {
   const situationByCate = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSituation());
+    dispatch(getAllDiagnose());
+    dispatch(getAllTreatment());
   }, [dispatch]);
   const { listSituation: situation } = useSelector((state) => state.situation);
   const close = () => {

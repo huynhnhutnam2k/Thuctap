@@ -11,6 +11,7 @@ const Header = () => {
       dispatch(logOut({ token, id }));
     }
   };
+  console.log(userInfo)
   return (
     <div className="header" id="visible">
       <div className="info">
@@ -21,7 +22,7 @@ const Header = () => {
           <div className="d-flex hi">
             <p className="header-user">
               <b>
-                Hi, <span>{userInfo.username}</span>
+                Chào ngươi dùng, <span>{userInfo.email}</span>
               </b>
             </p>
             <Link className="logout-btn" to="/#" onClick={handleLogout}>

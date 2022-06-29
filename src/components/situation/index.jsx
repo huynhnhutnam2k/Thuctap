@@ -5,6 +5,7 @@ import parse from "html-react-parser";
 import { getAllSituation } from "../../redux/situationSlice";
 import { getAllDepartment } from "../../redux/departmentSlice";
 import { getAllTreatment } from "../../redux/treatmentSlice";
+import { getAllDiagnose } from "../../redux/diagnoseSlice";
 // import queryString from 'query-string';
 
 function Situation() {
@@ -15,6 +16,7 @@ function Situation() {
     dispatch(getAllSituation());
     dispatch(getAllDepartment());
     dispatch(getAllTreatment());
+    dispatch(getAllDiagnose());
   }, [dispatch]);
   const { listSituation: situation } = useSelector((state) => state.situation);
 

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 // import {URL} from './url'
 const URL = "http://sv-dhyd.herokuapp.com/api";
 export const userLocalStorage = JSON.parse(localStorage.getItem("user"))
@@ -124,7 +123,7 @@ export const authSlice = createSlice({
 
 export const logIn = createAsyncThunk("auth/login", async({user, navigate}) => {
         try {
-            const res = await axios.post(`${URL}/auth/login`, user)
+            const res = await axios.post(`${URL}/user/login`, user)
             if(res){
                 localStorage.setItem("user", JSON.stringify(res.data));
                 document.location.href = "/";
@@ -165,7 +164,7 @@ export const getAllUser = createAsyncThunk("auth/getAll", async (token) => {
 
 export const logOut = createAsyncThunk("auth/logOut", async ({ token, id }) => {
   try {
-    const res = await axios.post(`${URL}/auth/logout`, id, {
+    const res = await axios.post(`${URL}/user/logout`, id, {
       headers: {
         token: `Bearer ${token}`,
       },
