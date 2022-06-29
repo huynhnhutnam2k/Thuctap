@@ -122,9 +122,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const logIn = createAsyncThunk(
-    "auth/login",
-    async({user, navigate}) => {
+export const logIn = createAsyncThunk("auth/login", async({user, navigate}) => {
         try {
             const res = await axios.post(`${URL}/auth/login`, user)
             if(res){
@@ -139,9 +137,7 @@ export const logIn = createAsyncThunk(
     }
   ,
 );
-export const addUser = createAsyncThunk(
-  "auth/register",
-  async ({ token, user }) => {
+export const addUser = createAsyncThunk("auth/register", async ({ token, user }) => {
     try {
       const res = await axios.post(`${URL}/auth/register`, user, {
         headers: {
