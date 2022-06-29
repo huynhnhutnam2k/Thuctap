@@ -17,20 +17,6 @@ const Header = () => {
         <h5>
           <b>HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA</b>
         </h5>
-        {userInfo ? (
-          <div className="d-flex hi">
-            <p className="header-user">
-              <b>
-                Hi, <span>{userInfo.username}</span>
-              </b>
-            </p>
-            <Link className="logout-btn" to="/#" onClick={handleLogout}>
-              <li className="fa fa-sign-out"></li>
-            </Link>
-          </div>
-        ) : (
-          ""
-        )}
       </div>
 
       {/* <div className="input-group">
@@ -40,6 +26,26 @@ const Header = () => {
           </button>
         
         </div> */}
+
+      {userInfo ? (
+        <div className="hi">
+          <p className="header-user">
+            <b>Chào người dùng, </b>
+            <b className="loginuser">
+              {userInfo.email}
+              <Link
+                className="logout-btn-header"
+                to="/#"
+                onClick={handleLogout}
+              >
+                <li className="fa fa-sign-out"></li>
+              </Link>
+            </b>
+          </p>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

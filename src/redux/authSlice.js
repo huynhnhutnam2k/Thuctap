@@ -124,7 +124,7 @@ export const authSlice = createSlice({
 
 export const logIn = createAsyncThunk("auth/login", async({user, navigate}) => {
         try {
-            const res = await axios.post(`${URL}/auth/login`, user)
+            const res = await axios.post(`${URL}/user/login`, user)
             if(res){
                 localStorage.setItem("user", JSON.stringify(res.data));
                 document.location.href = "/";

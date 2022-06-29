@@ -95,7 +95,7 @@ const Login = () => {
           <div className="bannerlog col-sm-5">
             <img
               src="https://cdn.glitch.global/7b4743d8-a7e2-4d18-a87b-a1248d42b7cc/logo.png?v=1653215058970"
-              alt=""
+              alt="imggg"
             />
           </div>
         </div>
