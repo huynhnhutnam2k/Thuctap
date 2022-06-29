@@ -167,20 +167,27 @@ body {
 }
 
 .hi {
-  margin-left: 10px;
-  width: 150px;
+  display: flex;
+  width: 40%;
 }
-
+.header .info{
+  width: 50%;
+} 
 .header-user {
   font-family: "Helvetica Neue", Helvetica, Arial;
   margin: auto;
-  width: 100px;
   margin-right: 5px;
   font-size: 18px;
 }
 
-.header-user span {
+.loginuser{
   color: teal;
+}
+
+.logout-btn-header{
+  margin: auto;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 .info h5 {
@@ -229,10 +236,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 4px black;
   transition: transform 0.3s;
-}
-
-.col-lg-2 {
-  max-width: 15%;
 }
 
 /* hết header */
@@ -323,11 +326,11 @@ body {
   padding: 0px;
   background: var(--color-quest);
   border-radius: 10px;
-  transition: transform 0.2s;
+  transition: transform 0.4s;
 }
 
 .situation:hover {
-  transform: scale(0.985);
+  transform: scale(0.998);
   box-shadow: none;
   font-weight: 500;
 }
@@ -868,11 +871,10 @@ form a {
     text-align: center;
     justify-content: center;
     font-size: 14px;
-    margin: 0px;
+    margin: 0;
   }
 
   .hi {
-    margin-left: -5px;
     width: 100%;
     text-align: center;
     justify-content: center;
