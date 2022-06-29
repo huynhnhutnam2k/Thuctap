@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 // import {URL} from './url'
-const URL = "ihttp://sv-dhyd.herokuapp.com/api";
+const URL = "http://sv-dhyd.herokuapp.com/api";
 export const userLocalStorage = JSON.parse(localStorage.getItem("user"))
   ? JSON.parse(localStorage.getItem("user"))
   : null;
