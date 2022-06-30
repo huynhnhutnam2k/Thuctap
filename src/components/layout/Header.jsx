@@ -18,23 +18,6 @@ const Header = () => {
         <h5>
           <b>HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA</b>
         </h5>
-<<<<<<< HEAD
-        {userInfo ? (
-          <div className="d-flex hi">
-            <p className="header-user">
-              <b>
-                Chào ngươi dùng, <span>{userInfo.email}</span>
-              </b>
-            </p>
-            <Link className="logout-btn" to="/#" onClick={handleLogout}>
-              <li className="fa fa-sign-out"></li>
-            </Link>
-          </div>
-        ) : (
-          ""
-        )}
-=======
->>>>>>> 2bd7f169b6ffe53ac466ea72f025c034cb6ffe4c
       </div>
 
       {/* <div className="input-group">
