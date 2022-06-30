@@ -37,8 +37,8 @@ export default function Popup({ open, id, onClose }) {
   const [treatmentDisplay, setTreatmentDisplay] = useState(initTreatment);
   const [showDiagnoseBtn, setShowDiagnoseBtn] = useState(true);
   const [showTreatmentBtn, setHideTreatmentBtn] = useState(true);
-  const [shownote, setShownote] = useState(false);
-  const [hidenotebtn, setHidenotebtn] = useState(false);
+  const [showNote, setShowNote] = useState(false);
+  const [hideNoteBtn, setHideNoteBtn] = useState(false);
   const [returnStep, setReturnStep] = useState(1);
   const [diagnoseIsDisplay, setDiagnoseIsDisplay] = useState(false);
   const [treatmentIsDisplay, setTreatmentIsDisplay] = useState(false);
@@ -91,9 +91,10 @@ export default function Popup({ open, id, onClose }) {
   };
 
   const handleNote = () => {
-    setShownote(true);
-    setHidenotebtn(true);
+    setShowNote(true);
+    setHideNoteBtn(true);
   };
+
   const handleComplete = () => {
     axios.post(url_point, {
       userId: userInfo.id,
@@ -111,16 +112,16 @@ export default function Popup({ open, id, onClose }) {
       setTreatmentDisplay({});
       setHideTreatmentBtn(true);
       setTreatmentIsDisplay(false);
-      setShownote(false);
-      setHidenotebtn(false);
+      setShowNote(false);
+      setHideNoteBtn(false);
       setTreatmentIsClick(false);
       setMark(mark - 2.5);
     } else {
       setTreatmentDisplay({});
       setHideTreatmentBtn(true);
       setTreatmentIsDisplay(false);
-      setShownote(false);
-      setHidenotebtn(false);
+      setShowNote(false);
+      setHideNoteBtn(false);
       setTreatmentIsClick(false);
       setMark(mark - 2.5);
     }
@@ -167,6 +168,7 @@ export default function Popup({ open, id, onClose }) {
               ) : null
             )}
           </div>
+
           {/*display diagnose */}
           {diagnoseIsDisplay && (
             <>
@@ -219,13 +221,13 @@ export default function Popup({ open, id, onClose }) {
             </div>
           )}
           {treatmentIsClicked && (treatmentDisplay?.isTrue ? (
-            !hidenotebtn && (
+            !hideNoteBtn && (
               <button className="choice-btn" onClick={() => handleNote()}>
                 LƯU Ý
               </button>
             )
           ) : redo)}
-          {shownote ? (
+          {showNote ? (
             <>
               <div className="QUESTION">
                 <div className="HIGHLIGHT">Lưu ý</div>
@@ -239,13 +241,6 @@ export default function Popup({ open, id, onClose }) {
               </div>
             </>
           ) : null}
-          {/* <button
-            onClick={() =>
-              window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
-            }
-          >
-            top
-          </button> */}
         </>
       </div>
     </div>
