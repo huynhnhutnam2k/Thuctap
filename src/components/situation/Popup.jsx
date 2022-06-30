@@ -32,18 +32,17 @@ export default function Popup({ open, id, onClose }) {
 
   const { userInfo } = useSelector((state) => state.auth);
   const [situationDisplay, setSituationDisplay] = useState(initSituation);
-  const [mark, setMark] = useState(10);
   const [diagnoseDisplay, setDiagnoseDisplay] = useState(initDiagnose);
   const [treatmentDisplay, setTreatmentDisplay] = useState(initTreatment);
+  const [mark, setMark] = useState(10);
   const [showDiagnoseBtn, setShowDiagnoseBtn] = useState(true);
-  const [showTreatmentBtn, setHideTreatmentBtn] = useState(true);
-  const [showNote, setShowNote] = useState(false);
-  const [hideNoteBtn, setHideNoteBtn] = useState(false);
-  const [returnStep, setReturnStep] = useState(1);
+  const [showTreatmentBtn, setShowTreatmentBtn] = useState(true);
+  const [showNoteBtn, setShowNotebtn] = useState(true);
   const [diagnoseIsDisplay, setDiagnoseIsDisplay] = useState(false);
   const [treatmentIsDisplay, setTreatmentIsDisplay] = useState(false);
-  const [diagnoseIsClicked, setDiagNoseIsClick] = useState(false);
-  const [treatmentIsClicked, setTreatmentIsClick] = useState(false);
+  const [noteIsDisplay, setNoteIsDisplay] = useState(false);
+  const [returnStep, setReturnStep] = useState(1);
+
   const setSituation = (id) => {
     setSituationDisplay(
       situation.find((obj) => {
@@ -70,29 +69,30 @@ export default function Popup({ open, id, onClose }) {
     setSituation(id);
   }, [id]);
 
+
+
   const handleDiagnose = (id) => {
     setDiagnoseIsDisplay(true);
     setShowDiagnoseBtn(false);
     setDiagnose(id);
-    setDiagNoseIsClick(true);
-
   };
+
+
   const handleClose = () => {
     window.location.reload();
   };
 
   const handleTreatment = (id) => {
-    setHideTreatmentBtn(false);
+    setShowTreatmentBtn(false);
     setTreatment(id);
     setTreatmentIsDisplay(true);
-    console.log(returnStep);
     diagnoseDisplay?.isTrue && !treatmentDisplay?.isTrue && setReturnStep(2)
-    setTreatmentIsClick(true)
+
   };
 
   const handleNote = () => {
-    setShowNote(true);
-    setHideNoteBtn(true);
+    setNoteIsDisplay(true);
+    setShowNotebtn(true);
   };
 
   const handleComplete = () => {
@@ -108,21 +108,18 @@ export default function Popup({ open, id, onClose }) {
       setDiagnoseIsDisplay(false)
       setDiagnoseDisplay({});
       setShowDiagnoseBtn(true);
-      setDiagNoseIsClick(false)
       setTreatmentDisplay({});
-      setHideTreatmentBtn(true);
+      setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
-      setShowNote(false);
-      setHideNoteBtn(false);
-      setTreatmentIsClick(false);
+      setNoteIsDisplay(false);
+      setShowNotebtn(false);
       setMark(mark - 2.5);
     } else {
       setTreatmentDisplay({});
-      setHideTreatmentBtn(true);
+      setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
-      setShowNote(false);
-      setHideNoteBtn(false);
-      setTreatmentIsClick(false);
+      setNoteIsDisplay(false);
+      setShowNotebtn(false);
       setMark(mark - 2.5);
     }
   }
@@ -170,24 +167,22 @@ export default function Popup({ open, id, onClose }) {
           </div>
 
           {/*display diagnose */}
-          {diagnoseIsDisplay && (
-            <>
-              <div className="QUESTION">
-                <div className="HIGHLIGHT-CHOICED">
-                  <div>Lựa chọn của bạn: </div>
-                  <span className="namechoice">{diagnoseDisplay?.name}</span>
-                </div>
-                <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
-                {
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: diagnoseDisplay?.desc,
-                    }}
-                  />
-                }
+          {diagnoseIsDisplay &&
+            <><div className="QUESTION">
+              <div className="HIGHLIGHT-CHOICED">
+                <div>Lựa chọn của bạn: </div>
+                <span className="namechoice">{diagnoseDisplay?.name}</span>
               </div>
-              {/** choice treatment button */}
-              {diagnoseIsClicked && diagnoseDisplay?.treatment?.length > 0 ?
+              <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
+              {
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: diagnoseDisplay?.desc,
+                  }}
+                />
+              }
+            </div>
+              {diagnoseDisplay?.treatment?.length > 0 ?
                 <div className="choice-diagnose">
                   {diagnoseDisplay?.treatment?.map((id, index) =>
                     showTreatmentBtn && (
@@ -200,12 +195,12 @@ export default function Popup({ open, id, onClose }) {
                       </button>
                     )
                   )}
-                </div> : redo}
-            </>
-          )}
+                </div> : redo}</>
+
+          }
 
           {/*display treatment */}
-          {treatmentIsDisplay && (
+          {treatmentIsDisplay && <>
             <div className="QUESTION">
               <div className="HIGHLIGHT-CHOICED">
                 Lựa chọn của bạn:{" "}
@@ -219,20 +214,20 @@ export default function Popup({ open, id, onClose }) {
                 />{" "}
               </div>
             </div>
-          )}
-          {treatmentIsClicked && (treatmentDisplay?.isTrue ? (
-            !hideNoteBtn && (
-              <button className="choice-btn" onClick={() => handleNote()}>
-                LƯU Ý
-              </button>
-            )
-          ) : redo)}
-          {showNote ? (
+            {treatmentDisplay?.isTrue ? (
+              showNoteBtn && (
+                <button className="choice-btn" onClick={() => handleNote()}>
+                  LƯU Ý
+                </button>
+              )
+            ) : redo}
+          </>}
+          {noteIsDisplay ? (
             <>
-              <div className="QUESTION">
+              {treatmentDisplay?.note?.length > 0 && <div className="QUESTION">
                 <div className="HIGHLIGHT">Lưu ý</div>
                 {treatmentDisplay?.note}
-              </div>
+              </div>}
               <div className="success">
                 <div>Điều trị thành công !!!</div>
                 <button onClick={() => handleComplete()}>
