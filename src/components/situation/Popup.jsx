@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./popup.css";
 import "suneditor/dist/css/suneditor.min.css";
-import axios from "axios";
-import { useSelector } from "react-redux";
-const url_point = "http://sv-dhyd.herokuapp.com/api/situation/submit";
+import { useSelector, useDispatch } from "react-redux";
+import { addMark } from "../../redux/markSlice";
 export default function Popup({ open, id, onClose }) {
   const initSituation = {
     desc: "",
@@ -42,6 +41,7 @@ export default function Popup({ open, id, onClose }) {
   const [treatmentIsDisplay, setTreatmentIsDisplay] = useState(false);
   const [noteIsDisplay, setNoteIsDisplay] = useState(false);
   const [returnStep, setReturnStep] = useState(1);
+  const dispatch = useDispatch();
 
   const setSituation = (id) => {
     setSituationDisplay(
@@ -67,6 +67,7 @@ export default function Popup({ open, id, onClose }) {
 
   useEffect(() => {
     setSituation(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
 
@@ -87,39 +88,44 @@ export default function Popup({ open, id, onClose }) {
     setTreatment(id);
     setTreatmentIsDisplay(true);
     diagnoseDisplay?.isTrue && !treatmentDisplay?.isTrue && setReturnStep(2)
-
   };
 
   const handleNote = () => {
     setNoteIsDisplay(true);
-    setShowNotebtn(true);
+    setShowNotebtn(false);
   };
 
   const handleComplete = () => {
-    axios.post(url_point, {
-      userId: userInfo.id,
-      situation: id,
+    const body = {
+      userId: userInfo._id,
       mark: mark,
-    });
+      situationId: situationDisplay?._id
+    }
+    if (userInfo.token) {
+      console.log(userInfo)
+      const token = userInfo.token
+      dispatch(addMark({ body, token }))
+      //   console.log(originalPromiseResult)
+    }
     window.location.reload();
   };
   const reDoStep = (returnStep) => {
     if (returnStep === 1) {
       setDiagnoseIsDisplay(false)
-      setDiagnoseDisplay({});
+      setDiagnoseDisplay(initDiagnose);
       setShowDiagnoseBtn(true);
-      setTreatmentDisplay({});
+      setTreatmentDisplay(initTreatment);
       setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
-      setShowNotebtn(false);
+      setShowNotebtn(true);
       setMark(mark - 2.5);
     } else {
-      setTreatmentDisplay({});
+      setTreatmentDisplay(initTreatment);
       setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
-      setShowNotebtn(false);
+      setShowNotebtn(true);
       setMark(mark - 2.5);
     }
   }
@@ -131,9 +137,15 @@ export default function Popup({ open, id, onClose }) {
     </div>
   );
 
+  //scroll top
+  const myRef = useRef(null);
+  const scrollTop = () => myRef.current.scrollIntoView()
+
+
+
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
-      <div key="POPUP" className="POPUP_STYLE">
+      <div key="POPUP" ref={myRef} className="POPUP_STYLE">
         {/**closeBtn */}
         <button className="close-btn" onClick={() => handleClose()}>
           X
@@ -237,7 +249,10 @@ export default function Popup({ open, id, onClose }) {
             </>
           ) : null}
         </>
+        <button onClick={() => scrollTop()}>top</button>
       </div>
+
     </div>
+
   ) : null;
 }
