@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import "./popup.css";
 import "suneditor/dist/css/suneditor.min.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addMark } from "../../redux/markSlice";
+import { addMark, getAllMark } from "../../redux/markSlice";
+import { useNavigate } from "react-router-dom";
 export default function Popup({ open, id, onClose }) {
   const initSituation = {
     desc: "",
@@ -29,8 +30,15 @@ export default function Popup({ open, id, onClose }) {
   const { listDiagnose: diagnose } = useSelector((state) => state.diagnose);
   const { listTreatment: treatment } = useSelector((state) => state.treatment);
   const { listMark: listMark } = useSelector((state) => state.mark);
-
   const { userInfo } = useSelector((state) => state.auth);
+  const markValid = listMark?.filter(
+    (item) => item.situation._id == id && item.userId == userInfo?._id
+  );
+  // const test = listMark[0]?.situation?._id;
+  // const testId = listMark[0]?.userId;
+  // const user = userInfo?._id;
+  // console.log({ test, id, testId, user, markValid });
+  console.log(markValid);
   const [situationDisplay, setSituationDisplay] = useState(initSituation);
   const [diagnoseDisplay, setDiagnoseDisplay] = useState(initDiagnose);
   const [treatmentDisplay, setTreatmentDisplay] = useState(initTreatment);
@@ -44,6 +52,7 @@ export default function Popup({ open, id, onClose }) {
   const [noteIsDisplay, setNoteIsDisplay] = useState(false);
   const [returnStep, setReturnStep] = useState(1);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const setUserMark = (situationId) => {
     // eslint-disable-next-line array-callback-return
@@ -107,16 +116,19 @@ export default function Popup({ open, id, onClose }) {
 
   const handleComplete = () => {
     const body = {
-      userId: userInfo._id,
+      // userId: userInfo._id,
       mark: mark,
       situationId: situationDisplay?._id,
     };
     if (userInfo.token) {
       const token = userInfo.token;
-      dispatch(addMark({ body, token })).then(window.location.reload());
+      dispatch(addMark({ body, token }));
+      onClose();
+      // navigate("/");
       //   console.log(originalPromiseResult)
+      // console.log({ body, token });
+      // window.location.reload();
     }
-    //window.location.reload();
   };
   const reDoStep = (returnStep) => {
     if (returnStep === 1) {
@@ -145,7 +157,6 @@ export default function Popup({ open, id, onClose }) {
       <button onClick={() => reDoStep(returnStep)}>Chọn lại</button>
     </div>
   );
-
   //scroll top
   const myRef = useRef(null);
   const scrollTop = () => myRef.current.scrollIntoView();
@@ -159,10 +170,10 @@ export default function Popup({ open, id, onClose }) {
               <th>Lần làm</th>
               <th>Điểm</th>
             </tr>
-            {allMark?.map((mark, index) => (
+            {markValid?.map((mark, index) => (
               <tr>
                 <td>{index + 1}</td>
-                <td>{mark}</td>
+                <td>{mark.mark}</td>
               </tr>
             ))}
           </table>
