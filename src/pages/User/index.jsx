@@ -1,7 +1,5 @@
 import React from "react";
-import { logOut } from "../../redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Auth from "../../pages/Login/Login";
 import { useState, useEffect } from "react";
 import { getAllMark } from "../../redux/markSlice";
@@ -40,12 +38,7 @@ function User() {
   }, [listMark]);
 
   const { userInfo } = useSelector((state) => state.auth);
-  const handleLogout = () => {
-    if (userInfo.token) {
-      const { token, _id: id } = userInfo;
-      dispatch(logOut({ token, id }));
-    }
-  };
+
   const uniqueIds = [];
   const userSituation = userMark.filter((element) => {
     const isDuplicate = uniqueIds.includes(element.situation);
@@ -62,14 +55,13 @@ function User() {
         <table>
           <thead>
             <tr>
-              <th>Câu Hỏi</th>
-              <th>Số Điểm</th>
+              <th>Tình huống</th>
+              <th>Điểm số</th>
             </tr>
           </thead>
-          {userSituation?.map((mark, i) => (
-            <tbody key={i}>
-              <tr>
-                {/* <td></td> */}
+          <tbody>
+            {userSituation?.map((mark, i) => (
+              <tr key={i}>
                 <td>{mark.situation.name}</td>
                 <td>
                   <table>
@@ -89,8 +81,8 @@ function User() {
                   </table>
                 </td>
               </tr>
-            </tbody>
-          ))}
+            ))}
+          </tbody>
         </table>
       </div>
       {/* <div className="bannerlog">
