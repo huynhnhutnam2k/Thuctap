@@ -33,6 +33,7 @@ export const getAllMark = createAsyncThunk(
 
 
 
+
 export const markSlice = createSlice({
     name: "mark",
     initialState: {
@@ -45,7 +46,7 @@ export const markSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(getAllMark.pending, (state) => {
+          .addCase(getAllMark.pending, (state) => {
             state.pending = true;
           })
           .addCase(getAllMark.fulfilled, (state, action) => {

@@ -8,6 +8,7 @@ import { getAllSituation } from "../../redux/situationSlice";
 import { getAllDiagnose } from "../../redux/diagnoseSlice";
 import { getAllTreatment } from "../../redux/treatmentSlice";
 import { getAllMark } from "../../redux/markSlice";
+import { getAllDepartment } from "../../redux/departmentSlice";
 
 function SituationByCate() {
   const situationByCate = useParams();
@@ -16,6 +17,7 @@ function SituationByCate() {
     dispatch(getAllSituation());
     dispatch(getAllDiagnose());
     dispatch(getAllTreatment());
+    dispatch(getAllDepartment());
     dispatch(getAllMark())
   }, [dispatch]);
   const { listSituation: situation } = useSelector((state) => state.situation);
@@ -30,7 +32,6 @@ function SituationByCate() {
     setIsOpen(true);
     setSituationId(id);
   };
-  console.log(situation);
 
   return (
     <>

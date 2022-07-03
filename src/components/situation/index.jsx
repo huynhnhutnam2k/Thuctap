@@ -6,6 +6,7 @@ import { getAllSituation } from "../../redux/situationSlice";
 import { getAllDepartment } from "../../redux/departmentSlice";
 import { getAllTreatment } from "../../redux/treatmentSlice";
 import { getAllDiagnose } from "../../redux/diagnoseSlice";
+import { getAllMark } from "../../redux/markSlice";
 // import queryString from 'query-string';
 
 function Situation() {
@@ -17,6 +18,7 @@ function Situation() {
     dispatch(getAllDepartment());
     dispatch(getAllTreatment());
     dispatch(getAllDiagnose());
+    dispatch(getAllMark())
   }, [dispatch]);
   const { listSituation: situation } = useSelector((state) => state.situation);
 

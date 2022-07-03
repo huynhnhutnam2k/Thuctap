@@ -28,13 +28,14 @@ export default function Popup({ open, id, onClose }) {
   const { listSituation: situation } = useSelector((state) => state.situation);
   const { listDiagnose: diagnose } = useSelector((state) => state.diagnose);
   const { listTreatment: treatment } = useSelector((state) => state.treatment);
-  const { listMark: Marks } = useSelector((state) => state.mark)
+  const { listMark: listMark } = useSelector((state) => state.mark)
 
   const { userInfo } = useSelector((state) => state.auth);
   const [situationDisplay, setSituationDisplay] = useState(initSituation);
   const [diagnoseDisplay, setDiagnoseDisplay] = useState(initDiagnose);
   const [treatmentDisplay, setTreatmentDisplay] = useState(initTreatment);
   const [mark, setMark] = useState(10);
+  const [allMark, setAllMark] = useState([])
   const [showDiagnoseBtn, setShowDiagnoseBtn] = useState(true);
   const [showTreatmentBtn, setShowTreatmentBtn] = useState(true);
   const [showNoteBtn, setShowNotebtn] = useState(true);
@@ -43,6 +44,13 @@ export default function Popup({ open, id, onClose }) {
   const [noteIsDisplay, setNoteIsDisplay] = useState(false);
   const [returnStep, setReturnStep] = useState(1);
   const dispatch = useDispatch();
+
+  const setUserMark = (situationId) => {
+    // eslint-disable-next-line array-callback-return
+    allMark?.length === 0 && listMark?.map((mark) => {
+      mark.userId === userInfo?._id && mark?.situation === situationId && setAllMark(allMark => [...allMark, mark.mark])
+    })
+  }
 
   const setSituation = (id) => {
     setSituationDisplay(
@@ -66,19 +74,20 @@ export default function Popup({ open, id, onClose }) {
     );
   };
 
+
+
+
   useEffect(() => {
     setSituation(id);
+    setUserMark(id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-
-
 
   const handleDiagnose = (id) => {
     setDiagnoseIsDisplay(true);
     setShowDiagnoseBtn(false);
     setDiagnose(id);
   };
-
 
   const handleClose = () => {
     window.location.reload();
@@ -88,7 +97,7 @@ export default function Popup({ open, id, onClose }) {
     setShowTreatmentBtn(false);
     setTreatment(id);
     setTreatmentIsDisplay(true);
-    diagnoseDisplay?.isTrue && !treatmentDisplay?.isTrue && setReturnStep(2)
+    diagnoseDisplay?.isTrue && !treatmentDisplay?.isTrue && setReturnStep(2);
   };
 
   const handleNote = () => {
@@ -100,19 +109,18 @@ export default function Popup({ open, id, onClose }) {
     const body = {
       userId: userInfo._id,
       mark: mark,
-      situationId: situationDisplay?._id
-    }
+      situationId: situationDisplay?._id,
+    };
     if (userInfo.token) {
-      console.log(userInfo)
-      const token = userInfo.token
-      dispatch(addMark({ body, token }))
+      const token = userInfo.token;
+      dispatch(addMark({ body, token })).then(window.location.reload());
       //   console.log(originalPromiseResult)
     }
-    window.location.reload();
+    //window.location.reload();
   };
   const reDoStep = (returnStep) => {
     if (returnStep === 1) {
-      setDiagnoseIsDisplay(false)
+      setDiagnoseIsDisplay(false);
       setDiagnoseDisplay(initDiagnose);
       setShowDiagnoseBtn(true);
       setTreatmentDisplay(initTreatment);
@@ -129,10 +137,10 @@ export default function Popup({ open, id, onClose }) {
       setShowNotebtn(true);
       setMark(mark - 2.5);
     }
-  }
+  };
 
   const redo = (
-    <div div className="error" >
+    <div div className="error">
       <div>Hướng làm của bạn chưa đúng </div>
       <button onClick={() => reDoStep(returnStep)}>Chọn lại</button>
     </div>
@@ -140,10 +148,26 @@ export default function Popup({ open, id, onClose }) {
 
   //scroll top
   const myRef = useRef(null);
-  const scrollTop = () => myRef.current.scrollIntoView()
+  const scrollTop = () => myRef.current.scrollIntoView();
 
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
+      <div className="marks">
+        <div className="markstable">
+          <table>
+            <tr>
+              <th>Lần làm</th>
+              <th>Điểm</th>
+            </tr>
+            {allMark?.map((mark, index) => (
+              <tr >
+                <td>{index + 1}</td>
+                <td>{mark}</td>
+              </tr>))}
+          </table>
+        </div>
+      </div>
+
       <div key="POPUP" ref={myRef} className="POPUP_STYLE">
         {/**closeBtn */}
         <button className="close-btn" onClick={() => handleClose()}>
@@ -178,67 +202,76 @@ export default function Popup({ open, id, onClose }) {
           </div>
 
           {/*display diagnose */}
-          {diagnoseIsDisplay &&
-            <><div className="QUESTION">
-              <div className="HIGHLIGHT-CHOICED">
-                <div>Lựa chọn của bạn: </div>
-                <span className="namechoice">{diagnoseDisplay?.name}</span>
+          {diagnoseIsDisplay && (
+            <>
+              <div className="QUESTION">
+                <div className="HIGHLIGHT-CHOICED">
+                  <div>Lựa chọn của bạn: </div>
+                  <span className="namechoice">{diagnoseDisplay?.name}</span>
+                </div>
+                <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
+                {
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: diagnoseDisplay?.desc,
+                    }}
+                  />
+                }
               </div>
-              <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
-              {
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: diagnoseDisplay?.desc,
-                  }}
-                />
-              }
-            </div>
-              {diagnoseDisplay?.treatment?.length > 0 ?
+              {diagnoseDisplay?.treatment?.length > 0 ? (
                 <div className="choice-diagnose">
-                  {diagnoseDisplay?.treatment?.map((id, index) =>
-                    showTreatmentBtn && (
-                      <button
-                        className="choice-btn"
-                        key={index}
-                        onClick={() => handleTreatment(id._id)}
-                      >
-                        {id.name}
-                      </button>
-                    )
+                  {diagnoseDisplay?.treatment?.map(
+                    (id, index) =>
+                      showTreatmentBtn && (
+                        <button
+                          className="choice-btn"
+                          key={index}
+                          onClick={() => handleTreatment(id._id)}
+                        >
+                          {id.name}
+                        </button>
+                      )
                   )}
-                </div> : redo}</>
-
-          }
+                </div>
+              ) : (
+                redo
+              )}
+            </>
+          )}
 
           {/*display treatment */}
-          {treatmentIsDisplay && <>
-            <div className="QUESTION">
-              <div className="HIGHLIGHT-CHOICED">
-                Lựa chọn của bạn:{" "}
-                <span className="namechoice">{treatmentDisplay?.name}</span>
+          {treatmentIsDisplay && (
+            <>
+              <div className="QUESTION">
+                <div className="HIGHLIGHT-CHOICED">
+                  Lựa chọn của bạn:{" "}
+                  <span className="namechoice">{treatmentDisplay?.name}</span>
+                </div>
+                <div className="HIGHLIGHT">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: treatmentDisplay?.desc,
+                    }}
+                  />{" "}
+                </div>
               </div>
-              <div className="HIGHLIGHT">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: treatmentDisplay?.desc,
-                  }}
-                />{" "}
-              </div>
-            </div>
-            {treatmentDisplay?.isTrue ? (
-              showNoteBtn && (
-                <button className="choice-btn" onClick={() => handleNote()}>
-                  LƯU Ý
-                </button>
-              )
-            ) : redo}
-          </>}
+              {treatmentDisplay?.isTrue
+                ? showNoteBtn && (
+                  <button className="choice-btn" onClick={() => handleNote()}>
+                    LƯU Ý
+                  </button>
+                )
+                : redo}
+            </>
+          )}
           {noteIsDisplay ? (
             <>
-              {treatmentDisplay?.note?.length > 0 && <div className="QUESTION">
-                <div className="HIGHLIGHT">Lưu ý</div>
-                {treatmentDisplay?.note}
-              </div>}
+              {treatmentDisplay?.note?.length > 0 && (
+                <div className="QUESTION">
+                  <div className="HIGHLIGHT">Lưu ý</div>
+                  {treatmentDisplay?.note}
+                </div>
+              )}
               <div className="success">
                 <div>Điều trị thành công !!!</div>
                 <button onClick={() => handleComplete()}>
@@ -250,8 +283,6 @@ export default function Popup({ open, id, onClose }) {
         </>
         <button onClick={() => scrollTop()}>top</button>
       </div>
-
     </div>
-
   ) : null;
 }
