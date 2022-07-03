@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import { getAllSituation } from "../../redux/situationSlice";
 import { getAllDiagnose } from "../../redux/diagnoseSlice";
 import { getAllTreatment } from "../../redux/treatmentSlice";
+import { getAllMark } from "../../redux/markSlice";
 
 function SituationByCate() {
   const situationByCate = useParams();
@@ -15,6 +16,7 @@ function SituationByCate() {
     dispatch(getAllSituation());
     dispatch(getAllDiagnose());
     dispatch(getAllTreatment());
+    dispatch(getAllMark())
   }, [dispatch]);
   const { listSituation: situation } = useSelector((state) => state.situation);
   const close = () => {

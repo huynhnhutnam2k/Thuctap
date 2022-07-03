@@ -28,6 +28,7 @@ export default function Popup({ open, id, onClose }) {
   const { listSituation: situation } = useSelector((state) => state.situation);
   const { listDiagnose: diagnose } = useSelector((state) => state.diagnose);
   const { listTreatment: treatment } = useSelector((state) => state.treatment);
+  const { listMark: Marks } = useSelector((state) => state.mark)
 
   const { userInfo } = useSelector((state) => state.auth);
   const [situationDisplay, setSituationDisplay] = useState(initSituation);
@@ -140,8 +141,6 @@ export default function Popup({ open, id, onClose }) {
   //scroll top
   const myRef = useRef(null);
   const scrollTop = () => myRef.current.scrollIntoView()
-
-
 
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
