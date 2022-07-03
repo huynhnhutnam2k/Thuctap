@@ -11,7 +11,7 @@ const Header = () => {
       dispatch(logOut({ token, id }));
     }
   };
-  console.log(userInfo)
+  // console.log(userInfo)
   return (
     <div className="header" id="visible">
       <div className="info">

@@ -241,14 +241,15 @@ body {
 /* hết header */
 
 /* User */
-.account {
+.score {
   width: 100%;
-  padding: 50px 20px;
+  padding: 50px 10px;
   display: flex;
   justify-content: center;
   margin: auto;
   align-items: center;
   flex-wrap: wrap;
+  padding-left: 30px;
 }
 
 .user {
@@ -570,17 +571,6 @@ label{
     left: 25px;
     pointer-events: none;
     position: absolute;
-}
-.mid {
-  margin: auto;
-  display: flex;
-  width: 250px;
-}
-
-.bannerlog img {
-  height: 330px;
-  width: 350px;
-  box-shadow: 0 0px 5px black;
 }
 
 .row {
