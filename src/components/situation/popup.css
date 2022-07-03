@@ -203,6 +203,17 @@ figure img {
     border-radius: 20px;
 }
 
+button.btn-top {
+    width: 100%;
+    font-size: 30px;
+    border: none;
+    background: white;
+}
+
+button.btn-top:hover {
+    color: rgb(0, 204, 245);
+}
+
 .error button:hover {
     background: var(--color-bg);
     color: rgb(179, 214, 244);

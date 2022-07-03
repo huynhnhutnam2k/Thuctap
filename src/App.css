@@ -252,6 +252,10 @@ body {
   padding-left: 30px;
 }
 
+.score2 {
+  color: #063586;
+}
+
 .user {
   display: flex;
   justify-content: center;

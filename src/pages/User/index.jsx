@@ -69,7 +69,8 @@ function User() {
           {userSituation?.map((mark, i) => (
             <tbody key={i}>
               <tr>
-                <td>{mark.situation}</td>
+                {/* <td></td> */}
+                <td>{mark.situation.name}</td>
                 <td>
                   <table>
                     <tbody>
