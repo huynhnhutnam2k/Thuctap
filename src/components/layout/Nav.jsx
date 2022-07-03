@@ -18,10 +18,11 @@ function Nav() {
   }, []);
   const [current, setCurret] = useState("");
   return (
-    <div>
-      <div className="menu-container">
-        <nav className="navbar navbar-expand-sm navbar-light bg">
-          {/* <button
+    <>
+      <div className="nav-menu-container">
+        <div className="menu-container col-8 col-sm-8">
+          <nav className="navbar navbar-expand-sm navbar-light bg">
+            {/* <button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -29,38 +30,43 @@ function Nav() {
         >
           <span className="navbar-toggler-icon"></span>
         </button> */}
-          <div className="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul className="navbar-nav">
-              {department?.map((item) => (
-                <div className="submenu nav-item" key={item._id} id={item._id}>
-                  <li className="nav-item">
-                    <NavLink
-                      className={(navData) =>
-                        navData.isActive ? "nav-item active" : "nav-item"
-                      }
-                      to={`/department/${item._id}`}
-                    >
-                      <span>{item.name}</span>
-                    </NavLink>
-                  </li>
-                </div>
-              ))}
-            </ul>
-          </div>
-        </nav>
+            <div className="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul className="navbar-nav">
+                {department?.map((item) => (
+                  <div
+                    className="submenu nav-item"
+                    key={item._id}
+                    id={item._id}
+                  >
+                    <li className="nav-item">
+                      <NavLink
+                        className={(navData) =>
+                          navData.isActive ? "nav-item active" : "nav-item"
+                        }
+                        to={`/department/${item._id}`}
+                      >
+                        <span>{item.name}</span>
+                      </NavLink>
+                    </li>
+                  </div>
+                ))}
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div className="all col-3 col-sm-3">
+          <select name="sort" id="sort" onClick={routeChange} defaultValue={""}>
+            <option value="">-Chọn Khoa-</option>
+            {department?.map((item) => (
+              <option value={`/department/${item._id}`} key={item._id}>
+                {item.name}
+              </option>
+            ))}
+            <option value={`/#`}>Tất cả</option>
+          </select>
+        </div>
       </div>
-      <div className="all">
-        <select name="sort" id="sort" onClick={routeChange} defaultValue={""}>
-          <option value="">-Chọn Khoa-</option>
-          {department?.map((item) => (
-            <option value={`/department/${item._id}`} key={item._id}>
-              {item.name}
-            </option>
-          ))}
-          <option value={`/#`}>Tất cả</option>
-        </select>
-      </div>
-    </div>
+    </>
   );
 }
 

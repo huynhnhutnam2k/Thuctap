@@ -463,27 +463,27 @@ body {
 .tog {
   margin-bottom: 10px;
 }
+.nav-menu-container{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+}
+
+.menu-container {
+  display: flex;
+  max-width: 70%;
+  overflow-x: auto;
+  margin-left: 50px;
+}
 
 nav {
   width: 100%;
-  margin-left: 15px;
-  margin-top: 25px;
   font-size: 18px;
-  flex-wrap: wrap;
-  display: flex;
- 
 }
 .navbar .active{
   background: var(--color-bg);
   color: white;
 }
-.navbar {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 60%;
-  overflow-x: auto;
-}
-
 
 .navbar h5 {
   color: var(--color-text-header);
@@ -543,9 +543,9 @@ a.dropdown-item {
   color: black;
   font-weight: bold;
   padding: 2px;
-  margin-top: 5px;
-  position: relative;
+  left: 5px;
   margin-left: 20px;
+  position: relative;
 }
 
 /* hết menuu home */
@@ -862,8 +862,8 @@ form a {
     font-size: 15px;
   }
 
-  .all {
-    margin-left: 30%;
+  .menu-container{
+    display: none;
   }
 
   .header-user {
