@@ -7,26 +7,33 @@ import { getAllDepartment } from "../../redux/departmentSlice";
 import { getAllTreatment } from "../../redux/treatmentSlice";
 import { getAllDiagnose } from "../../redux/diagnoseSlice";
 import { getAllMark } from "../../redux/markSlice";
+import { useLayoutEffect } from "react";
 // import queryString from 'query-string';
 
 function Situation() {
   const [isOpen, setIsOpen] = useState(false);
   const [situationId, setSituationId] = useState("");
   const dispatch = useDispatch();
-  useEffect(() => {
+  const { listMark } = useSelector((state) => state.mark);
+  useLayoutEffect(() => {
     dispatch(getAllSituation());
     dispatch(getAllDepartment());
     dispatch(getAllTreatment());
     dispatch(getAllDiagnose());
-    dispatch(getAllMark())
-  }, [dispatch]);
-  const { listSituation: situation } = useSelector((state) => state.situation);
+    dispatch(getAllMark());
+    // console.log(`mount ${situationId}`);
 
+    // return () => {
+    //   console.log(`unmount ${situationId}`);
+    // };
+  }, [dispatch, situationId]);
+  const { listSituation: situation } = useSelector((state) => state.situation);
+  // console.log(listMark);
   const handleClick = (id) => {
     setIsOpen(true);
     setSituationId(id);
   };
-
+  // console.log(check);
   const close = () => {
     setIsOpen(false);
     setSituationId("");
