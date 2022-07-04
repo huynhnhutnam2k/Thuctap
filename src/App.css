@@ -224,6 +224,7 @@ body {
   margin-right: 15px;
   width: 100%;
   background: var(--color-bg2);
+  overflow-x: hidden;
 }
 
 .banner {

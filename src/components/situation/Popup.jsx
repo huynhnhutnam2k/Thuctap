@@ -4,7 +4,7 @@ import "suneditor/dist/css/suneditor.min.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addMark, getAllMark } from "../../redux/markSlice";
 import { useNavigate } from "react-router-dom";
-export default function Popup({ open, id, onClose }) {
+export default function Popup({ open, id }) {
   const initSituation = {
     desc: "",
     _id: "",
@@ -117,17 +117,12 @@ export default function Popup({ open, id, onClose }) {
   const handleComplete = () => {
     const body = {
       // userId: userInfo._id,
-      mark: mark,
+      marks: mark,
       situationId: situationDisplay?._id,
     };
     if (userInfo.token) {
       const token = userInfo.token;
-      dispatch(addMark({ body, token }));
-      onClose();
-      // navigate("/");
-      //   console.log(originalPromiseResult)
-      // console.log({ body, token });
-      // window.location.reload();
+      dispatch(addMark({ body, token })).then(window.location.reload());
     }
   };
   const reDoStep = (returnStep) => {
