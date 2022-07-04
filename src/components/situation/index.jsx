@@ -21,11 +21,7 @@ function Situation() {
     dispatch(getAllTreatment());
     dispatch(getAllDiagnose());
     dispatch(getAllMark());
-    // console.log(`mount ${situationId}`);
 
-    // return () => {
-    //   console.log(`unmount ${situationId}`);
-    // };
   }, [dispatch, situationId]);
   const { listSituation: situation } = useSelector((state) => state.situation);
   // console.log(listMark);
