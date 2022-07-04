@@ -51,12 +51,10 @@ function Situation() {
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8uRX4rai3Bv0Lb_B6XL0WCUbQ4i-QajaX8sgavBvkI7hSCC-5lBTAJBFKm7tX0AGzzlo&usqp=CAU"
             alt="img"
           />
-          <p>
+          <h6>
             <b>{item.name}</b>
-          </p>
-          <div className="desc">
-            <b>Mô tả:</b> {parse(item.desc)}
-          </div>
+          </h6>
+          <div className="desc">{parse(item.desc)}</div>
         </div>
       ))}
       {/* POPUP_QUESTION */}
