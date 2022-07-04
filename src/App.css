@@ -472,17 +472,18 @@ body {
 
 body::-webkit-scrollbar {
   width: 14px;               /* Chiều rộng vùng chứa scrollbar */
+  
 }
 body::-webkit-scrollbar-track {
   background: #ccc;        /* Màu nền ngoài của thanh scrollbar */
 }
 body::-webkit-scrollbar-thumb {
-  background-color: rgb(53, 134, 210);    /* Màu của thanh cuộn (scroll thumb) */
+  background-color: rgb(82, 162, 236);    /* Màu của thanh cuộn (scroll thumb) */
   border-radius: 5px;       /* Bo góc scroll thumb */
   border: 2px solid #ccc;  /* Không hỗ trợ padding, margin, transition nên dùng viền cùng màu nên để padding scroll thumb */
 }
 body::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(0, 121, 234); /* Hiệu ứng di chuột đổi màu*/
+    background-color: rgb(6, 92, 172); /* Hiệu ứng di chuột đổi màu*/
 }
 body { /*cho Firefox*/
     scrollbar-width: thin;          /* "auto" hoặc "thin" */
@@ -498,14 +499,15 @@ body { /*cho Firefox*/
   border-radius: 5px;   
   margin-left: 40px;
   margin-right: 10px;
+
 }
 .menu-container::-webkit-scrollbar-thumb {
-  background-color: rgb(53, 134, 210);    /* Màu của thanh cuộn (scroll thumb) */
+  background-color: rgb(82, 162, 236);    /* Màu của thanh cuộn (scroll thumb) */
   border-radius: 5px;       /* Bo góc scroll thumb */
   border: 2px solid #ccc;  /* Không hỗ trợ padding, margin, transition nên dùng viền cùng màu nên để padding scroll thumb */
 }
 .menu-container::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(0, 121, 234); /* Hiệu ứng di chuột đổi màu*/
+  background-color: rgb(6, 92, 172); /* Hiệu ứng di chuột đổi màu*/
 }
 .menu-container { /*cho Firefox*/
     scrollbar-width: thin;          /* "auto" hoặc "thin" */

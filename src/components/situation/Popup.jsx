@@ -174,18 +174,16 @@ export default function Popup({ open, id }) {
           <table>
             <tr>
               <th>Lần làm</th>
-              {allMark?.map((mark, index) => (
-                <tr>
-                  <td>{index + 1}</td>
-                </tr>
+              {markValid?.map((mark, index) => (
+                <td>{index + 1}</td>
               ))}
             </tr>
-            <th>Điểm</th>
-            {allMark?.map((mark, index) => (
-              <tr>
-                <td>{mark}</td>
-              </tr>
-            ))}
+            <tr>
+              <th>Điểm</th>
+              {markValid?.map((mark) => (
+                <td>{mark.marks}</td>
+              ))}
+            </tr>
           </table>
         </div>
       </div>
@@ -279,10 +277,10 @@ export default function Popup({ open, id }) {
               </div>
               {treatmentDisplay?.isTrue
                 ? showNoteBtn && (
-                  <button className="choice-btn" onClick={() => handleNote()}>
-                    LƯU Ý
-                  </button>
-                )
+                    <button className="choice-btn" onClick={() => handleNote()}>
+                      LƯU Ý
+                    </button>
+                  )
                 : redo}
             </>
           )}
