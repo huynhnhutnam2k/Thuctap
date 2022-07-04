@@ -116,11 +116,7 @@ export default function Popup({ open, id }) {
     };
     if (userInfo.token) {
       const token = userInfo.token;
-      dispatch(addMark({ body, token })).then(window.location.reload())
-      // navigate("/");
-      //   console.log(originalPromiseResult)
-      // console.log({ body, token });
-      // window.location.reload();
+      dispatch(addMark({ body, token })).then(window.location.reload());
     }
   };
   const reDoStep = (returnStep) => {
