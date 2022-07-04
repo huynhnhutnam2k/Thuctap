@@ -142,7 +142,7 @@ export default function Popup({ open, id }) {
 
   const redo = (
     <div div className="error">
-      <div>Hướng làm của bạn chưa đúng </div>
+      <div>Chẩn đoán của bạn không chính xác !!!</div>
       <button onClick={() => reDoStep(returnStep)}>Chọn lại</button>
     </div>
   );
@@ -229,7 +229,7 @@ export default function Popup({ open, id }) {
                   <div>Lựa chọn của bạn: </div>
                   <span className="namechoice">{diagnoseDisplay?.name}</span>
                 </div>
-                <div className="HIGHLIGHT">Chẩn Đoán sơ bộ </div>
+                <div className="HIGHLIGHT">Chẩn Đoán sơ bộ: </div>
                 {
                   <div
                     dangerouslySetInnerHTML={{
@@ -288,7 +288,7 @@ export default function Popup({ open, id }) {
             <>
               {treatmentDisplay?.note?.length > 0 && (
                 <div className="QUESTION">
-                  <div className="HIGHLIGHT">Lưu ý</div>
+                  <div className="HIGHLIGHT">Lưu ý:</div>
                   {treatmentDisplay?.note}
                 </div>
               )}
