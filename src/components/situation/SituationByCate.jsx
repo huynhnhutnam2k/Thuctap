@@ -18,7 +18,7 @@ function SituationByCate() {
     dispatch(getAllDiagnose());
     dispatch(getAllTreatment());
     dispatch(getAllDepartment());
-    dispatch(getAllMark())
+    dispatch(getAllMark());
   }, [dispatch]);
   const { listSituation: situation } = useSelector((state) => state.situation);
   const close = () => {
@@ -45,12 +45,10 @@ function SituationByCate() {
               onClick={() => handleClick(item._id)}
             >
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8uRX4rai3Bv0Lb_B6XL0WCUbQ4i-QajaX8sgavBvkI7hSCC-5lBTAJBFKm7tX0AGzzlo&usqp=CAU" />
-              <p>
+              <h6>
                 <b>{item.name}</b>
-              </p>
-              <div className="desc">
-                <b>Mô tả:</b> {parse(item.desc)}
-              </div>
+              </h6>
+              <div className="desc">{parse(item.desc)}</div>
             </div>
           ) : (
             ""
