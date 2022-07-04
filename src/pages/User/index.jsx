@@ -10,7 +10,6 @@ function User() {
 
 
   const getUserMark = () => {
-    // eslint-disable-next-line array-callback-return
     console.log(userMark?.length === 0)
     console.log(userMark)
     userMark.length === 0 &&
@@ -19,7 +18,7 @@ function User() {
           setUserMark((userMark) => [...userMark, mark]);
       });
   };
-  const getMarkperSituation = (situationId) => {
+  const getMarkPerSituation = (situationId) => {
     const marks = []
     // eslint-disable-next-line array-callback-return
     userMark?.map((mark) => {
@@ -43,6 +42,7 @@ function User() {
     getUserMark();
   }, [listMark]);
 
+  ///list Situation user do
   const uniqueIds = [];
   const userSituation = userMark.filter((element) => {
     const isDuplicate = uniqueIds.includes(element.situation._id);
@@ -77,7 +77,7 @@ function User() {
                         <th>Lần làm</th>
                         <th>Điểm</th>
                       </tr>
-                      {getMarkperSituation(mark.situation._id)?.map((mark, index) => (
+                      {getMarkPerSituation(mark.situation._id)?.map((mark, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>{mark}</td>
