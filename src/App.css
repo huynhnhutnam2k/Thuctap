@@ -5,12 +5,13 @@
   --color-primary: #ffff00;
   --color-bg2: #ffffff;
   --color-form: #3f96d5;
-  --color-quest: #a0c1ffe1;
+  --color-quest: #88d0f9e1;
   --wrapper-height: 87vh;
   --image-max-width: 300px;
   --image-margin: 3rem;
   --font-family: "HK Grotesk";
   --font-family-header: "HK Grotesk";
+  --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 * {
@@ -23,12 +24,12 @@
 
 /* Import fonts */
 @font-face {
-  font-family: HK Grotesk;
+  font-family: var(--bs-font-sans-serif);
   src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027") format("opentype");
 }
 
 @font-face {
-  font-family: HK Grotesk;
+  font-family: var(--bs-font-sans-serif);
   font-weight: bold;
   src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437") format("opentype");
 }
@@ -38,7 +39,7 @@ a {
 }
 
 body {
-  font-family: HK Grotesk;
+  font-family: var(--bs-font-sans-serif);
   background-color: var(--color-bg2);
 }
 
@@ -151,6 +152,7 @@ body {
 
 /* header*/
 .header {
+  font-family: var(--bs-font-sans-serif);
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -174,7 +176,7 @@ body {
   width: 50%;
 } 
 .header-user {
-  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-family: var(--bs-font-sans-serif);
   margin: auto;
   margin-right: 5px;
   font-size: 18px;
@@ -195,7 +197,7 @@ body {
   margin: 10px 30px;
   color: var(--color-text-header);
   font-weight: 900;
-  font-family: Verdana;
+  font-family: var(--bs-font-sans-serif);
   font-style: italic;
   font-size: 26px;
   text-shadow: 1px 1px 1px #000000;
@@ -320,7 +322,6 @@ body {
   flex-wrap: wrap;
   display: flex;
   margin: 50px 10px;
-  padding: 10px 50px;
 }
 
 .situation {
@@ -350,7 +351,7 @@ body {
 }
 
 .situation p {
-  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  font-family: var(--bs-font-sans-serif);
   font-size: 14px;
   margin: 0px 10px;
   display: -webkit-box;
@@ -525,7 +526,6 @@ body { /*cho Firefox*/
   display: flex;
   max-width: 65%;
   overflow-x: auto;
-  margin-left: 30px;
 }
 
 nav {
@@ -541,7 +541,7 @@ nav {
   color: var(--color-text-header);
   margin-right: 10px;
   text-shadow: 1px 1px 1px #000000;
-  font-family: Verdana;
+  font-family: var(--bs-font-sans-serif);
 }
 
 .submenu {
@@ -590,13 +590,13 @@ a.dropdown-item {
 }
 
 .all select {
+  max-width: fit-content;
   transition: transform 2s;
   text-decoration: none;
   color: black;
   font-weight: bold;
-  padding: 2px;
-  left: 5px;
-  margin-left: 20px;
+  padding: 3px;
+  margin-left: 30px;
   position: relative;
 }
 
@@ -672,7 +672,7 @@ label{
 }
 
 .title-log {
-  font-family: Verdana;
+  font-family: var(--bs-font-sans-serif);
   width: 100%;
   font-weight: bold;
   padding: auto;
@@ -685,7 +685,7 @@ label{
   font-size: 18px;
   box-shadow: 0 2px 2px rgb(71, 68, 68);
   padding-bottom: 7px;
-  font-family: Verdana;
+  font-family: var(--bs-font-sans-serif);
   width: 100%;
   font-weight: bold;
 }
@@ -734,7 +734,7 @@ form a {
   margin: 30px 30px;
   padding: 30px;
   font-weight: bold;
-  font-family: Verdana;
+  font-family: var(--bs-font-sans-serif);
   flex-wrap: wrap;
   display: flex;
   justify-content: center;

@@ -32,24 +32,27 @@ function Nav() {
         </button> */}
             <div className="collapse navbar-collapse" id="collapsibleNavbar">
               <ul className="navbar-nav">
-                {department?.map((item) => (
-                  <div
-                    className="submenu nav-item"
-                    key={item._id}
-                    id={item._id}
-                  >
-                    <li className="nav-item">
-                      <NavLink
-                        className={(navData) =>
-                          navData.isActive ? "nav-item active" : "nav-item"
-                        }
-                        to={`/department/${item._id}`}
+                {department?.map(
+                  (item) =>
+                    item.situation?.length > 0 && (
+                      <div
+                        className="submenu nav-item"
+                        key={item._id}
+                        id={item._id}
                       >
-                        <span>{item.name}</span>
-                      </NavLink>
-                    </li>
-                  </div>
-                ))}
+                        <li className="nav-item">
+                          <NavLink
+                            className={(navData) =>
+                              navData.isActive ? "nav-item active" : "nav-item"
+                            }
+                            to={`/department/${item._id}`}
+                          >
+                            <span>{item.name}</span>
+                          </NavLink>
+                        </li>
+                      </div>
+                    )
+                )}
               </ul>
             </div>
           </nav>
@@ -57,11 +60,14 @@ function Nav() {
         <div className="all col-3 col-sm-3">
           <select name="sort" id="sort" onClick={routeChange} defaultValue={""}>
             <option value="">-Chọn Khoa-</option>
-            {department?.map((item) => (
-              <option value={`/department/${item._id}`} key={item._id}>
-                {item.name}
-              </option>
-            ))}
+            {department?.map(
+              (item) =>
+                item.situation?.length > 0 && (
+                  <option value={`/department/${item._id}`} key={item._id}>
+                    {item.name}
+                  </option>
+                )
+            )}
             <option value={`/#`}>Tất cả</option>
           </select>
         </div>
