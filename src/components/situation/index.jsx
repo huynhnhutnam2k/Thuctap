@@ -58,7 +58,7 @@ function Situation() {
         {/* POPUP_QUESTION */}
         <Popup open={isOpen} id={situationId} onClose={close}></Popup>
       </div>
-      <Pagination />
+      {/* <Pagination /> */}
     </>
   );
 }

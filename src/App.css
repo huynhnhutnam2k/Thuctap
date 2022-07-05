@@ -617,7 +617,7 @@ a.dropdown-item {
   position: relative;
 }
 
-.navbar{
+.nav-menu-container .navbar{
   padding: 0 0 10px;
 }
 /* hết menuu home */

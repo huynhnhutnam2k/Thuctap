@@ -57,7 +57,7 @@ function SituationByCate() {
         )}
       </div>
       <Popup open={isOpen} id={situationId} onClose={close}></Popup>
-      <Pagination />
+      {/* <Pagination /> */}
     </>
   );
 }
