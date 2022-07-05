@@ -172,8 +172,8 @@ body {
   display: flex;
   width: 40%;
   align-items: baseline;
+  /* display: contents; */
   justify-content: flex-end;
-  display: contents;
 }
 
 .header .info{
