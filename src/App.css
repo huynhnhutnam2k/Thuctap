@@ -956,6 +956,7 @@ form a {
     width: 100%;
     text-align: center;
     justify-content: center;
+    display: flex;
   }
 
   .logout-btn {
