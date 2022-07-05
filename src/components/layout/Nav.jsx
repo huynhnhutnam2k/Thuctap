@@ -20,7 +20,7 @@ function Nav() {
   return (
     <>
       <div className="nav-menu-container">
-        <div className="menu-container col-8 col-sm-8">
+        <div className="menu-container">
           <nav className="navbar navbar-expand-sm navbar-light bg">
             {/* <button
           className="navbar-toggler"
@@ -57,7 +57,7 @@ function Nav() {
             </div>
           </nav>
         </div>
-        <div className="all col-3 col-sm-3">
+        <div className="all">
           <select name="sort" id="sort" onClick={routeChange} defaultValue={""}>
             <option value="">-Chọn Khoa-</option>
             {department?.map(

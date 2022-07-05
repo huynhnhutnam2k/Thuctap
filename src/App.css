@@ -5,7 +5,7 @@
   --color-primary: #ffff00;
   --color-bg2: #ffffff;
   --color-form: #3f96d5;
-  --color-quest: #88d0f9e1;
+  --color-quest: #01446ae1;
   --wrapper-height: 87vh;
   --image-max-width: 300px;
   --image-margin: 3rem;
@@ -59,7 +59,6 @@ body {
   width: 70px;
   background-color: var(--color-bg);
   height: 100%;
-  margin-right: 10px;
   transition: transform 1s;
   display: block;
   position: fixed;
@@ -160,18 +159,22 @@ body {
   padding-bottom: 15px;
   -moz-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.6);
   position: fixed;
   margin-top: 0px;
   top: 0px;
   z-index: 2;
   background: var(--color-bg2);
+  align-items: baseline;
 }
 
 .hi {
   display: flex;
   width: 40%;
+  align-items: baseline;
+  justify-content: flex-end;
 }
+
 .header .info{
   width: 50%;
 } 
@@ -180,6 +183,7 @@ body {
   margin: auto;
   margin-right: 5px;
   font-size: 18px;
+  display: contents;
 }
 
 .loginuser{
@@ -199,7 +203,7 @@ body {
   font-weight: 900;
   font-family: var(--bs-font-sans-serif);
   font-style: italic;
-  font-size: 26px;
+  font-size: 25px;
   text-shadow: 1px 1px 1px #000000;
 }
 
@@ -230,7 +234,10 @@ body {
 }
 
 .banner {
+  display: flex;
   margin-top: 35px;
+  justify-content: center;
+
 }
 
 .banner img {
@@ -318,20 +325,21 @@ body {
 /* tình huống */
 .question {
   width: 100%;
-  border-top: 2px solid grey;
   flex-wrap: wrap;
   display: flex;
-  margin: 50px 10px;
+  justify-content: flex-start;
+  margin: 50px auto;
+  margin-left: 6%;
 }
 
 .situation {
   overflow: hidden;
   box-shadow: 0px 2px 6px black;
   justify-content: center;
-  height: 285px;
+  height: 250px;
   margin: 15px 10px;
   padding: 0px;
-  background: var(--color-quest);
+  background: rgb(36, 109, 198);
   border-radius: 10px;
   transition: transform 0.4s;
 }
@@ -346,7 +354,7 @@ body {
   margin: auto;
   border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 55%;
+  height: 80%;
   margin-bottom: 10px;
 }
 
@@ -361,10 +369,12 @@ body {
 }
 
 .situation h6{
+  color: #ffffff;
   font-size: 16px;
   width: 100%;
   text-align: center;
   margin: 0px;
+  text-shadow: 0 1px 2px #1f2a00;
 }
 .desc p, .desc b {
   margin: 1px 10px;
@@ -377,6 +387,10 @@ body {
   overflow: hidden;
 }
 
+.col-lg-3{
+  max-width: 18%;
+  margin: 25px;
+}
 /* hết tình huống */
 
 /* Footer */
@@ -520,6 +534,9 @@ body { /*cho Firefox*/
   display: flex;
   flex-wrap: nowrap;
   align-items: baseline;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  border-bottom: 2px solid slategrey;
 }
 
 .menu-container {
@@ -600,6 +617,9 @@ a.dropdown-item {
   position: relative;
 }
 
+.navbar{
+  padding: 0 0 10px;
+}
 /* hết menuu home */
 
 /* Đăng nhập */
@@ -820,11 +840,11 @@ form a {
 @media screen and (max-width: 992px) {
 
   .sidebar-menu {
-    width: 50px;
+    width: 60px;
   }
 
   .header {
-    left: 50px;
+    left: 60px;
   }
 
   .input-group {
@@ -835,7 +855,6 @@ form a {
 
   .header-user {
     font-size: 16px;
-    margin-left: 30px;
   }
 
   .menuitem .fas {
@@ -862,7 +881,7 @@ form a {
   }
 
   .footer {
-    margin-left: 70px;
+    margin-left: 60px;
     text-align: center;
   }
 
@@ -871,11 +890,16 @@ form a {
   }
 
   .col-md-4 {
-    max-width: 29%;
+    max-width: 25%;
   }
 
   .question {
     padding: 10px 15px;
+  }
+
+  .col-lg-3{
+    margin: 15px;
+    height: 220px;
   }
 }
 
@@ -901,6 +925,8 @@ form a {
     }
     .question {
       padding: 10px;
+      margin-top: 15px;
+      margin-left: 8px;
     }
   .header {
     left: 0px;
@@ -936,7 +962,7 @@ form a {
   }
 
   .wrapper {
-    width: 94%;
+    width: 100%;
   }
   
   .document{
@@ -1068,11 +1094,11 @@ form a {
   }
 
   .col-6 {
-    max-width: 42%;
+    max-width: 40%;
   }
 
   .situation {
-    height: 220px;
+    height: 180px;
   }
 
   .situation p {
@@ -1083,7 +1109,9 @@ form a {
     margin-top: 5px;
   }
 }
-
+.situation h6{
+  font-size: smaller;
+}
 @media screen and (max-width: 290px) {
 
   .bannerlog img {
@@ -1101,6 +1129,10 @@ form a {
     margin-top: 100px;
   }
 
+  .header-user, .header-user .fa{
+    font-size: x-small;
+  }
+
   .footer {
     padding: 5px;
     margin-left: 0px;
@@ -1114,6 +1146,10 @@ form a {
 
   iframe {
     width: 250px;
+  }
+  .col-6{
+    height: 150px;
+    max-width: 38%;
   }
 }
 
