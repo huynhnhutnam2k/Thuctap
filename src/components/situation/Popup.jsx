@@ -53,7 +53,7 @@ export default function Popup({ open, id }) {
 
   const handleComplete = () => {
     const body = {
-      //userId: userInfo._id,
+      userId: userInfo._id,
       marks: mark,
       situationId: situation?._id,
     };

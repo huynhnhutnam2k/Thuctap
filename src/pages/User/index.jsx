@@ -10,10 +10,9 @@ function User() {
 
   const getMarkPerSituation = (situationId) => {
     const marksArr = []
-    listMark.filter(listMarks => listMarks.userId === userInfo?._id).map(marksPerSituation => { marksPerSituation?.situation._id === situationId && marksArr.push(marksArr.marks) })
+    listMark.filter(listMarks => listMarks.userId === userInfo?._id).map(marksPerSituation => { marksPerSituation?.situation?._id === situationId && marksArr.push(marksArr.marks) })
       // eslint-disable-next-line array-callback-return
       ;
-    console.log(marksArr)
     return marksArr;
   };
 
@@ -26,7 +25,10 @@ function User() {
 
 
   ///list Situation user do
-  const userSituation = [...new Set(listMark.map(item => item.Situation_id))]
+  const userSituation = [
+    ...new Map(listMark.map((item) => [item["situation"]?._id, item])).values()
+  ];
+  console.log("1", userSituation)
 
 
   return (
@@ -43,7 +45,7 @@ function User() {
           <tbody>
             {userSituation?.map((mark, i) => (
               <tr key={i}>
-                <td>{mark.situation.name}
+                <td>{mark.situation?.name}
                 </td>
                 <td>
                   <table>
@@ -52,7 +54,7 @@ function User() {
                         <th>Lần làm</th>
                         <th>Điểm</th>
                       </tr>
-                      {getMarkPerSituation(mark.situation._id)?.map((mark, index) => (
+                      {getMarkPerSituation(mark.situation?._id)?.map((mark, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>{mark}</td>
