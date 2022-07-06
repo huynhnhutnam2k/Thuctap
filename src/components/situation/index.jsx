@@ -50,7 +50,7 @@ function Situation() {
           <h6>
             <b>{item.name}</b>
           </h6>
-          <div className="desc">{parse(item.desc)}</div>
+          <div className="desc"></div>
         </div>
       ))}
       {/* POPUP_QUESTION */}

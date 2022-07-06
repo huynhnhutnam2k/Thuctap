@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getAllDepartment } from "../../redux/departmentSlice";
+import "./Style.scss"
 function Nav() {
+  const [selectedDepartment, setSelectedDepartment] = useState("")
   const dispatch = useDispatch();
   const { listDepartment: department } = useSelector(
     (state) => state.department
@@ -12,6 +14,8 @@ function Nav() {
   const routeChange = (e) => {
     let path = e.target.value;
     navigate(path);
+    setSelectedDepartment(path);
+
   };
   useEffect(() => {
     dispatch(getAllDepartment());
@@ -32,7 +36,7 @@ function Nav() {
         </button> */}
             <div className="collapse navbar-collapse" id="collapsibleNavbar">
               <ul className="navbar-nav">
-                {department?.map((item) => (
+                {department?.map((item) => item.situation?.length > 0 && (
                   <div
                     className="submenu nav-item"
                     key={item._id}
@@ -55,15 +59,16 @@ function Nav() {
           </nav>
         </div>
         <div className="all col-3 col-sm-3">
-          <select name="sort" id="sort" onClick={routeChange} defaultValue={""}>
-            <option value="">-Chọn Khoa-</option>
-            {department?.map((item) => (
+          <select name="sort" id="sort" onChange={routeChange} defaultValue={selectedDepartment}>
+
+            {department?.map((item) => item.situation?.length > 0 && (
               <option value={`/department/${item._id}`} key={item._id}>
                 {item.name}
               </option>
             ))}
             <option value={`/#`}>Tất cả</option>
           </select>
+
         </div>
       </div>
     </>

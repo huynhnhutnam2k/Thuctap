@@ -4,30 +4,17 @@ import Auth from "../../pages/Login/Login";
 import { useState, useEffect } from "react";
 import { getAllMark } from "../../redux/markSlice";
 function User() {
-  const [userMark, setUserMark] = useState([]);
   const { listMark } = useSelector((state) => state.mark);
   const { userInfo } = useSelector((state) => state.auth);
 
 
-  const getUserMark = () => {
-    console.log(userMark?.length === 0)
-    console.log(userMark)
-    userMark.length === 0 &&
-      listMark?.map((mark, i) => {
-        mark.userId === userInfo?._id &&
-          setUserMark((userMark) => [...userMark, mark]);
-      });
-  };
   const getMarkPerSituation = (situationId) => {
-    const marks = []
-    // eslint-disable-next-line array-callback-return
-    userMark?.map((mark) => {
-      mark?.situation._id === situationId && marks.push(mark.marks)
-      // setMarkPerSituation((markPerSituation) => [
-      //   ...markPerSituation, mark.mark,
-      // ]);
-    });
-    return marks
+    const marksArr = []
+    listMark.filter(listMarks => listMarks.userId === userInfo?._id).map(marksPerSituation => { marksPerSituation?.situation._id === situationId && marksArr.push(marksArr.marks) })
+      // eslint-disable-next-line array-callback-return
+      ;
+    console.log(marksArr)
+    return marksArr;
   };
 
 
@@ -38,20 +25,8 @@ function User() {
 
 
 
-  useEffect(() => {
-    getUserMark();
-  }, [listMark]);
-
   ///list Situation user do
-  const uniqueIds = [];
-  const userSituation = userMark.filter((element) => {
-    const isDuplicate = uniqueIds.includes(element.situation._id);
-    if (!isDuplicate) {
-      uniqueIds.push(element.situation._id);
-      return true;
-    }
-    return false;
-  });
+  const userSituation = [...new Set(listMark.map(item => item.Situation_id))]
 
 
   return (

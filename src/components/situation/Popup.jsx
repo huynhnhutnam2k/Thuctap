@@ -3,40 +3,21 @@ import "./popup.css";
 import "suneditor/dist/css/suneditor.min.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addMark } from "../../redux/markSlice";
+import { getADiagnose } from "../../redux/diagnoseSlice";
+import { getATreatment } from "../../redux/treatmentSlice";
+import { getASituation } from "../../redux/situationSlice";
 export default function Popup({ open, id }) {
-  const initSituation = {
-    desc: "",
-    _id: "",
-    diagnose: [],
-    name: "",
-  };
-  const initDiagnose = {
-    desc: "",
-    _id: "",
-    treatment: [],
-    name: "",
-    isTrue: false,
-  };
-  const initTreatment = {
-    _id: "",
-    desc: "",
-    note: "",
-    name: "",
-    isTrue: false,
-  };
 
-  const { listSituation: situation } = useSelector((state) => state.situation);
-  const { listDiagnose: diagnose } = useSelector((state) => state.diagnose);
-  const { listTreatment: treatment } = useSelector((state) => state.treatment);
+  const { situation } = useSelector((state) => state.situation);
+  const { diagnose } = useSelector((state) => state.diagnose);
+  const { treatment } = useSelector((state) => state.treatment);
   const { listMark } = useSelector((state) => state.mark);
   const { userInfo } = useSelector((state) => state.auth);
+
   const markValid = listMark?.filter(
-    (item) => item.situation._id === id && item.userId === userInfo?._id
+    (item) => item.situation?._id === id && item.userId === userInfo?._id
   );
 
-  const [situationDisplay, setSituationDisplay] = useState(initSituation);
-  const [diagnoseDisplay, setDiagnoseDisplay] = useState(initDiagnose);
-  const [treatmentDisplay, setTreatmentDisplay] = useState(initTreatment);
   const [mark, setMark] = useState(10);
   const [allMark, setAllMark] = useState([]);
   const [showDiagnoseBtn, setShowDiagnoseBtn] = useState(true);
@@ -51,6 +32,7 @@ export default function Popup({ open, id }) {
   const setUserMark = (situationId) => {
     // eslint-disable-next-line array-callback-return
     allMark?.length === 0 &&
+      // eslint-disable-next-line array-callback-return
       listMark?.map((mark) => {
         mark.userId === userInfo?._id &&
           mark?.situation === situationId &&
@@ -58,49 +40,24 @@ export default function Popup({ open, id }) {
       });
   };
 
-  const setSituation = (id) => {
-    setSituationDisplay(
-      situation.find((obj) => {
-        return obj._id === id;
-      })
-    );
-  };
-  const setDiagnose = (id) => {
-    setDiagnoseDisplay(
-      diagnose.find((obj) => {
-        return obj._id === id;
-      })
-    );
-  };
-  const setTreatment = (id) => {
-    setTreatmentDisplay(
-      treatment.find((obj) => {
-        return obj._id === id;
-      })
-    );
-  };
 
-  useEffect(() => {
-    setSituation(id);
-    setUserMark(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
 
-  const handleDiagnose = (id) => {
+  const handleDiagnose = async (id) => {
+    await dispatch(getADiagnose(id))
     setDiagnoseIsDisplay(true);
     setShowDiagnoseBtn(false);
-    setDiagnose(id);
   };
 
   const handleClose = () => {
     window.location.reload();
   };
 
-  const handleTreatment = (id) => {
+  const handleTreatment = async (id) => {
     setShowTreatmentBtn(false);
-    setTreatment(id);
     setTreatmentIsDisplay(true);
-    diagnoseDisplay?.isTrue && !treatmentDisplay?.isTrue && setReturnStep(2);
+    await dispatch(getATreatment(id))
+
+    diagnose?.isTrue && !treatment?.isTrue && setReturnStep(2);
   };
 
   const handleNote = () => {
@@ -112,7 +69,7 @@ export default function Popup({ open, id }) {
     const body = {
       // userId: userInfo._id,
       marks: mark,
-      situationId: situationDisplay?._id,
+      situationId: situation?._id,
     };
     if (userInfo.token) {
       const token = userInfo.token;
@@ -122,16 +79,13 @@ export default function Popup({ open, id }) {
   const reDoStep = (returnStep) => {
     if (returnStep === 1) {
       setDiagnoseIsDisplay(false);
-      setDiagnoseDisplay(initDiagnose);
       setShowDiagnoseBtn(true);
-      setTreatmentDisplay(initTreatment);
       setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
       setShowNotebtn(true);
       setMark(mark - 2.5);
     } else {
-      setTreatmentDisplay(initTreatment);
       setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
@@ -149,6 +103,12 @@ export default function Popup({ open, id }) {
   //scroll top
   const myRef = useRef(null);
   const scrollTop = () => myRef.current.scrollIntoView();
+
+  useEffect(() => {
+    dispatch(getASituation(id))
+  }, [id]);
+
+  console.log(diagnose)
 
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
@@ -198,17 +158,17 @@ export default function Popup({ open, id }) {
         {/*display situation*/}
         <>
           <div key="tinhuong" className="QUESTION">
-            <div className="HIGHLIGHT">{situationDisplay?.name}</div>
+            <div className="HIGHLIGHT">{situation?.name}</div>
             <div
               dangerouslySetInnerHTML={{
-                __html: situationDisplay?.desc,
+                __html: situation?.desc,
               }}
             />
           </div>
 
           {/** choice diagnose button */}
           <div className="choice-diagnose">
-            {situationDisplay?.diagnose?.map((id, index) =>
+            {situation?.diagnose?.map((id, index) =>
               showDiagnoseBtn ? (
                 <button
                   className="choice-btn"
@@ -227,20 +187,20 @@ export default function Popup({ open, id }) {
               <div className="QUESTION">
                 <div className="HIGHLIGHT-CHOICED">
                   <div>Lựa chọn của bạn: </div>
-                  <span className="namechoice">{diagnoseDisplay?.name}</span>
+                  <span className="namechoice">{diagnose?.name}</span>
                 </div>
                 <div className="HIGHLIGHT">Chẩn Đoán sơ bộ: </div>
                 {
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: diagnoseDisplay?.desc,
+                      __html: diagnose?.desc,
                     }}
                   />
                 }
               </div>
-              {diagnoseDisplay?.treatment?.length > 0 ? (
+              {diagnose?.treatment?.length > 0 ? (
                 <div className="choice-diagnose">
-                  {diagnoseDisplay?.treatment?.map(
+                  {diagnose?.treatment?.map(
                     (id, index) =>
                       showTreatmentBtn && (
                         <button
@@ -265,31 +225,31 @@ export default function Popup({ open, id }) {
               <div className="QUESTION">
                 <div className="HIGHLIGHT-CHOICED">
                   Lựa chọn của bạn:{" "}
-                  <span className="namechoice">{treatmentDisplay?.name}</span>
+                  <span className="namechoice">{treatment?.name}</span>
                 </div>
                 <div className="HIGHLIGHT">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: treatmentDisplay?.desc,
+                      __html: treatment?.desc,
                     }}
                   />{" "}
                 </div>
               </div>
-              {treatmentDisplay?.isTrue
+              {treatment?.isTrue
                 ? showNoteBtn && (
-                    <button className="choice-btn" onClick={() => handleNote()}>
-                      LƯU Ý
-                    </button>
-                  )
+                  <button className="choice-btn" onClick={() => handleNote()}>
+                    LƯU Ý
+                  </button>
+                )
                 : redo}
             </>
           )}
           {noteIsDisplay ? (
             <>
-              {treatmentDisplay?.note?.length > 0 && (
+              {treatment?.note?.length > 0 && (
                 <div className="QUESTION">
                   <div className="HIGHLIGHT">Lưu ý:</div>
-                  {treatmentDisplay?.note}
+                  {treatment?.note}
                 </div>
               )}
               <div className="success">

@@ -6,7 +6,13 @@ export const getAllSituation = createAsyncThunk(
   "situation/fetchAll",
   async () => {
     try {
-      const res = await axios.get(`${url}`);
+      const res = await axios.get(`${url}`,{
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "origin, x-requested-with, content-type",
+          "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
+        }});
       return res?.data;
     } catch (error) {
       console.log(error.response.data);
@@ -17,7 +23,12 @@ export const getASituation = createAsyncThunk(
   "situation/fetchOne",
   async (id) => {
     try {
-      const res = await axios.get(`${url}/${id}`);
+      const res = await axios.get(`${url}/${id}`,{
+        headers: {"Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "origin, x-requested-with, content-type",
+          "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
+        }});
       return res?.data;
     } catch (error) {
       console.log(error.response.data);

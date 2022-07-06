@@ -5,9 +5,6 @@ import React, { useEffect, useState } from "react";
 import Popup from "./Popup";
 import parse from "html-react-parser";
 import { getAllSituation } from "../../redux/situationSlice";
-import { getAllDiagnose } from "../../redux/diagnoseSlice";
-import { getAllTreatment } from "../../redux/treatmentSlice";
-import { getAllMark } from "../../redux/markSlice";
 import { getAllDepartment } from "../../redux/departmentSlice";
 
 function SituationByCate() {
@@ -15,10 +12,7 @@ function SituationByCate() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSituation());
-    dispatch(getAllDiagnose());
-    dispatch(getAllTreatment());
     dispatch(getAllDepartment());
-    dispatch(getAllMark());
   }, [dispatch]);
   const { listSituation: situation } = useSelector((state) => state.situation);
   const close = () => {
