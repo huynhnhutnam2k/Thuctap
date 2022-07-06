@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./popup.css";
 import "suneditor/dist/css/suneditor.min.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addMark } from "../../redux/markSlice";
+import { addMark, getAllMark } from "../../redux/markSlice";
 import { getADiagnose } from "../../redux/diagnoseSlice";
 import { getATreatment } from "../../redux/treatmentSlice";
 import { getASituation } from "../../redux/situationSlice";
@@ -51,7 +51,7 @@ export default function Popup({ open, id }) {
     setShowNotebtn(false);
   };
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     const body = {
       userId: userInfo._id,
       marks: mark,
@@ -59,9 +59,9 @@ export default function Popup({ open, id }) {
     };
     if (userInfo.token) {
       const token = userInfo.token;
-      dispatch(addMark({ body, token, }))
-      console.log(body)
-      //window.location.reload();
+      await dispatch(addMark({ body, token, }))
+      //console.log(body)
+      window.location.reload();
     }
   };
   const reDoStep = (returnStep) => {
@@ -94,6 +94,7 @@ export default function Popup({ open, id }) {
 
   useEffect(() => {
     dispatch(getASituation(id))
+    dispatch(getAllMark())
   }, [id]);
 
 

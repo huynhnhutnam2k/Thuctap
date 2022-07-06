@@ -22,10 +22,7 @@ function SituationByCate() {
     dispatch(getAllSituation());
     dispatch(getAllDepartment());
   }, [dispatch, listSituation?.length, page]);
-  const close = () => {
-    setIsOpen(false);
-    setSituationId("");
-  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [situationId, setSituationId] = useState("");
 
@@ -56,7 +53,7 @@ function SituationByCate() {
           )
         )}
       </div>
-      <Popup open={isOpen} id={situationId} onClose={close}></Popup>
+      <Popup open={isOpen} id={situationId}></Popup>
       <nav className="nav-pagination">
         <ul className="pagination">
           <li className={`page-item ${page === 1 ? "disabled" : ""} `}>

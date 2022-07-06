@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "../../pages/Login/Login";
 import { useEffect } from "react";
 import { getAllMark } from "../../redux/markSlice";
+import Popup from "../../components/situation/Popup";
 function User() {
   const { listMark } = useSelector((state) => state.mark);
   const { userInfo } = useSelector((state) => state.auth);
+  const [isOpen, setIsOpen] = useState(false)
+  const [situationId, setSituationId] = useState()
 
 
   const getMarkPerSituation = (situationId) => {
     const marksArr = []
-    listMark.filter(listMarks => listMarks.userId === userInfo?._id).map(marksPerSituation => { marksPerSituation?.situation?._id === situationId && marksArr.push(marksArr.marks) })
+    listMark.filter(listMarks => listMarks.userId === userInfo?._id).map(marksPerSituation => { marksPerSituation?.situation?._id === situationId && marksArr.push(marksPerSituation.marks) })
       // eslint-disable-next-line array-callback-return
       ;
+    console.log(marksArr)
     return marksArr;
+
   };
+  const PopupOnUser = (id) => {
+    setIsOpen(true)
+    setSituationId(id)
+  }
 
 
   const dispatch = useDispatch();
@@ -45,7 +54,8 @@ function User() {
           <tbody>
             {userSituation?.map((mark, i) => (
               <tr key={i}>
-                <td>{mark.situation?.name}
+                <td><div onClick={() => PopupOnUser(mark.situation._id)}>{mark.situation?.name}</div>
+                  <Popup open={isOpen} id={situationId}></Popup>
                 </td>
                 <td>
                   <table>
