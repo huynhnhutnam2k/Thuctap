@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getAllDepartment } from "../../redux/departmentSlice";
+import "./Style.scss"
 function Nav() {
   const dispatch = useDispatch();
   const { listDepartment: department } = useSelector(
@@ -12,11 +13,11 @@ function Nav() {
   const routeChange = (e) => {
     let path = e.target.value;
     navigate(path);
+
   };
   useEffect(() => {
     dispatch(getAllDepartment());
   }, []);
-  const [current, setCurret] = useState("");
   return (
     <>
       <div className="nav-menu-container">
@@ -82,6 +83,7 @@ function Nav() {
             )}
             <option value={`/#`}>Tất cả</option>
           </select>
+
         </div>
       </div>
     </>

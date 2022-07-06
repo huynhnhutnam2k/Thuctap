@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const url = "https://sv-dhyd.herokuapp.com/api/situation";
-
 export const situationSlice = createSlice({
   name: "situation",
   initialState: {

@@ -8,9 +8,12 @@ export const addMark = createAsyncThunk(
         try{
             const res = await axios.post("http://sv-dhyd.herokuapp.com/api/situation/submit", body, {
                 headers: {
-                    token: `Bearer ${token}`
-                }
-            })
+                    token: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "origin, x-requested-with, content-type",
+                    "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
+                }})
             return res.data
         }catch(error){  
             console.log(error.response.data)
@@ -22,7 +25,12 @@ export const getAllMark = createAsyncThunk(
     "mark/fetchAll",
     async () => {
       try {
-        const res = await axios.get(`${url}`);
+        const res = await axios.get(`${url}`,{
+          headers: {"Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "origin, x-requested-with, content-type",
+            "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
+          }});
         return res?.data;
       } catch (error) {
         console.log(error.response.data);
