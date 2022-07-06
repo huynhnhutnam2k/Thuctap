@@ -62,7 +62,7 @@ function SituationByCate() {
               to="#"
               onClick={() => dispatch(decrement())}
             >
-              <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+              <i className="fa fa-angle-double-left" aria-hidden="true"></i>
             </Link>
           </li>
           <li className="page-item active">
@@ -76,7 +76,7 @@ function SituationByCate() {
               to="#"
               onClick={() => dispatch(increment())}
             >
-              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+              <i className="fa fa-angle-double-right" aria-hidden="true"></i>
             </Link>
           </li>
         </ul>

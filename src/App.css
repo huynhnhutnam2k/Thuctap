@@ -269,7 +269,7 @@ a.page-link{
 }
 
 .banner img {
-  width: 93%;
+  width: 95%;
   margin: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px black;
@@ -925,7 +925,7 @@ form a {
 
   .col-lg-3{
     margin: 15px;
-    height: 220px;
+    height: 200px;
   }
 }
 
@@ -1073,8 +1073,11 @@ form a {
   }
 
   .banner img {
-    max-width: 95%;
-  }
+    width: 99%;
+    border-radius: 0px;
+    margin: 10px;
+}
+
 
   .content {
     margin-left: 0px;
@@ -1125,7 +1128,7 @@ form a {
   }
 
   .situation {
-    height: 200px;
+    height: 180px;
   }
 
   .situation p {
