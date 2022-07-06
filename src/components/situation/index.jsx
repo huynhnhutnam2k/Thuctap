@@ -21,9 +21,6 @@ function Situation() {
     dispatch(getAllSituation());
   }, [dispatch, situationId, listSituation?.length, page]);
 
-  // const { listSituation: situation } = useSelector((state) => state.situation);
-  // console.log(listMark);
-
   const handleClick = (id) => {
     setIsOpen(true);
     setSituationId(id);
