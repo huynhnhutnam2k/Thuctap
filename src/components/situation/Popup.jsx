@@ -19,7 +19,6 @@ export default function Popup({ open, id }) {
   );
 
   const [mark, setMark] = useState(10);
-  const [allMark, setAllMark] = useState([]);
   const [showDiagnoseBtn, setShowDiagnoseBtn] = useState(true);
   const [showTreatmentBtn, setShowTreatmentBtn] = useState(true);
   const [showNoteBtn, setShowNotebtn] = useState(true);
@@ -28,18 +27,6 @@ export default function Popup({ open, id }) {
   const [noteIsDisplay, setNoteIsDisplay] = useState(false);
   const [returnStep, setReturnStep] = useState(1);
   const dispatch = useDispatch();
-
-  const setUserMark = (situationId) => {
-    // eslint-disable-next-line array-callback-return
-    allMark?.length === 0 &&
-      // eslint-disable-next-line array-callback-return
-      listMark?.map((mark) => {
-        mark.userId === userInfo?._id &&
-          mark?.situation === situationId &&
-          setAllMark((allMark) => [...allMark, mark.mark]);
-      });
-  };
-
 
 
   const handleDiagnose = async (id) => {
@@ -53,10 +40,9 @@ export default function Popup({ open, id }) {
   };
 
   const handleTreatment = async (id) => {
+    await dispatch(getATreatment(id))
     setShowTreatmentBtn(false);
     setTreatmentIsDisplay(true);
-    await dispatch(getATreatment(id))
-
     diagnose?.isTrue && !treatment?.isTrue && setReturnStep(2);
   };
 
@@ -67,13 +53,15 @@ export default function Popup({ open, id }) {
 
   const handleComplete = () => {
     const body = {
-      // userId: userInfo._id,
+      //userId: userInfo._id,
       marks: mark,
       situationId: situation?._id,
     };
     if (userInfo.token) {
       const token = userInfo.token;
-      dispatch(addMark({ body, token })).then(window.location.reload());
+      dispatch(addMark({ body, token, }))
+      console.log(body)
+      //window.location.reload();
     }
   };
   const reDoStep = (returnStep) => {
@@ -108,22 +96,25 @@ export default function Popup({ open, id }) {
     dispatch(getASituation(id))
   }, [id]);
 
-  console.log(diagnose)
 
   return open ? (
     <div key="OVERLAY" className="OVERLAY">
       <div className="marks">
         <div className="markstable">
           <table>
-            <tr>
-              <th>Lần làm</th>
-              <th>Điểm</th>
-            </tr>
-            {markValid?.map((mark, index) => (
+            <thead>
               <tr>
-                <td>{index + 1}</td>
-                <td>{mark.marks}</td>
+                <th>Lần làm</th>
+                <th>Điểm</th>
               </tr>
+            </thead>
+            {markValid?.map((mark, index) => (
+              <tbody>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{mark.marks}</td>
+                </tr>
+              </tbody>
             ))}
           </table>
         </div>
@@ -132,18 +123,22 @@ export default function Popup({ open, id }) {
       <div className="marks2">
         <div className="markstable">
           <table>
-            <tr>
-              <th>Lần làm</th>
-              {markValid?.map((mark, index) => (
-                <td>{index + 1}</td>
-              ))}
-            </tr>
-            <tr>
-              <th>Điểm</th>
-              {markValid?.map((mark) => (
-                <td>{mark.marks}</td>
-              ))}
-            </tr>
+            <thead>
+              <tr>
+                <th>Lần làm</th>
+                {markValid?.map((mark, index) => (
+                  <td>{index + 1}</td>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Điểm</th>
+                {markValid?.map((mark) => (
+                  <td>{mark.marks}</td>
+                ))}
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

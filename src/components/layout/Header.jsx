@@ -31,7 +31,7 @@ const Header = () => {
       {userInfo ? (
         <div className="hi">
           <p className="header-user">
-            <b>Chào người dùng, </b>
+            <b>Chào người dùng &nbsp;</b>
             <b className="loginuser">
               {userInfo.email}
               <Link

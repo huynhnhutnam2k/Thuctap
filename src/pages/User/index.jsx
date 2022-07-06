@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "../../pages/Login/Login";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { getAllMark } from "../../redux/markSlice";
 function User() {
   const { listMark } = useSelector((state) => state.mark);

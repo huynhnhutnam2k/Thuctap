@@ -3,18 +3,25 @@ import Nav from "../layout/Nav";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Popup from "./Popup";
-import parse from "html-react-parser";
-import { getAllSituation } from "../../redux/situationSlice";
 import { getAllDepartment } from "../../redux/departmentSlice";
+import { Link } from "react-router-dom";
+import {
+  decrement,
+  getAllSituation,
+  getPage,
+  increment,
+} from "../../redux/situationSlice";
 
 function SituationByCate() {
   const situationByCate = useParams();
   const dispatch = useDispatch();
+  const { listSituation, page, maxPage } = useSelector(
+    (state) => state.situation
+  );
   useEffect(() => {
     dispatch(getAllSituation());
     dispatch(getAllDepartment());
-  }, [dispatch]);
-  const { listSituation: situation } = useSelector((state) => state.situation);
+  }, [dispatch, listSituation?.length, page]);
   const close = () => {
     setIsOpen(false);
     setSituationId("");
@@ -31,18 +38,18 @@ function SituationByCate() {
     <>
       <Nav />
       <div className="question col-12">
-        {situation?.map((item) =>
+        {listSituation?.map((item) =>
           item.departmentId?._id === situationByCate.id ? (
             <div
-              className="situation col-6 col-md-4 col-lg-2"
+              className="situation col-6 col-md-4 col-lg-3"
               key={item._id}
               onClick={() => handleClick(item._id)}
             >
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8uRX4rai3Bv0Lb_B6XL0WCUbQ4i-QajaX8sgavBvkI7hSCC-5lBTAJBFKm7tX0AGzzlo&usqp=CAU" />
+              <img src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png" alt="" />
               <h6>
                 <b>{item.name}</b>
               </h6>
-              <div className="desc">{parse(item.desc)}</div>
+              {/* <div className="desc">{parse(item.desc)}</div> */}
             </div>
           ) : (
             ""
@@ -50,6 +57,33 @@ function SituationByCate() {
         )}
       </div>
       <Popup open={isOpen} id={situationId} onClose={close}></Popup>
+      <nav className="nav-pagination">
+        <ul className="pagination">
+          <li className={`page-item ${page === 1 ? "disabled" : ""} `}>
+            <Link
+              className="page-link"
+              to="#"
+              onClick={() => dispatch(decrement())}
+            >
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+            </Link>
+          </li>
+          <li className="page-item active">
+            <Link className="page-link" to="#">
+              {page}
+            </Link>
+          </li>
+          <li className={`page-item ${page >= maxPage ? "disabled" : ""} `}>
+            <Link
+              className="page-link"
+              to="#"
+              onClick={() => dispatch(increment())}
+            >
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 }
