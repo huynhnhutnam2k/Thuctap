@@ -155,15 +155,19 @@ export default function Popup({ open, id }) {
       <div className="marks">
         <div className="markstable">
           <table>
-            <tr>
-              <th>Lần làm</th>
-              <th>Điểm</th>
-            </tr>
-            {markValid?.map((mark, index) => (
+            <thead>
               <tr>
-                <td>{index + 1}</td>
-                <td>{mark.marks}</td>
+                <th>Lần làm</th>
+                <th>Điểm</th>
               </tr>
+            </thead>
+            {markValid?.map((mark, index) => (
+              <tbody>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{mark.marks}</td>
+                </tr>
+              </tbody>
             ))}
           </table>
         </div>
@@ -172,18 +176,22 @@ export default function Popup({ open, id }) {
       <div className="marks2">
         <div className="markstable">
           <table>
-            <tr>
-              <th>Lần làm</th>
-              {markValid?.map((mark, index) => (
-                <td>{index + 1}</td>
-              ))}
-            </tr>
-            <tr>
-              <th>Điểm</th>
-              {markValid?.map((mark) => (
-                <td>{mark.marks}</td>
-              ))}
-            </tr>
+            <thead>
+              <tr>
+                <th>Lần làm</th>
+                {markValid?.map((mark, index) => (
+                  <td>{index + 1}</td>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Điểm</th>
+                {markValid?.map((mark) => (
+                  <td>{mark.marks}</td>
+                ))}
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
