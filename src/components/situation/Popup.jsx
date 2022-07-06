@@ -31,7 +31,7 @@ export default function Popup({ open, id }) {
   const { listMark } = useSelector((state) => state.mark);
   const { userInfo } = useSelector((state) => state.auth);
   const markValid = listMark?.filter(
-    (item) => item.situation._id === id && item.userId === userInfo?._id
+    (item) => item.situation?._id === id && item.userId === userInfo?._id
   );
 
   const [situationDisplay, setSituationDisplay] = useState(initSituation);

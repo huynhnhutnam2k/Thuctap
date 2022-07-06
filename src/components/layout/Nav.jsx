@@ -32,6 +32,18 @@ function Nav() {
         </button> */}
             <div className="collapse navbar-collapse" id="collapsibleNavbar">
               <ul className="navbar-nav">
+                <div className="submenu nav-item" key={1} id={1}>
+                  <li className="nav-item">
+                    <NavLink
+                      className={(navData) =>
+                        navData.isActive ? "nav-item active" : "nav-item"
+                      }
+                      to={`/`}
+                    >
+                      <span>Tất cả</span>
+                    </NavLink>
+                  </li>
+                </div>
                 {department?.map(
                   (item) =>
                     item.situation?.length > 0 && (
