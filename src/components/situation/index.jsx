@@ -2,30 +2,38 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Popup from "./Popup";
 import parse from "html-react-parser";
-import { getAllSituation } from "../../redux/situationSlice";
 import { getAllDepartment } from "../../redux/departmentSlice";
 import { getAllTreatment } from "../../redux/treatmentSlice";
 import { getAllDiagnose } from "../../redux/diagnoseSlice";
 import { getAllMark } from "../../redux/markSlice";
-import Pagination from "../pagination";
-
+import { Link, useNavigate } from "react-router-dom";
 import { useLayoutEffect } from "react";
-// import queryString from 'query-string';
+import {
+  decrement,
+  getAllSituation,
+  getPage,
+  increment,
+} from "../../redux/situationSlice";
 
 function Situation() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [situationId, setSituationId] = useState("bmm");
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [situationId, setSituationId] = useState("");
   const { listMark } = useSelector((state) => state.mark);
+  const { listSituation, page, maxPage } = useSelector(
+    (state) => state.situation
+  );
   useLayoutEffect(() => {
     dispatch(getAllSituation());
     dispatch(getAllDepartment());
     dispatch(getAllTreatment());
     dispatch(getAllDiagnose());
     dispatch(getAllMark());
-  }, [dispatch, situationId]);
-  const { listSituation: situation } = useSelector((state) => state.situation);
+  }, [dispatch, situationId, listSituation?.length, page]);
+
+  // const { listSituation: situation } = useSelector((state) => state.situation);
   // console.log(listMark);
+
   const handleClick = (id) => {
     setIsOpen(true);
     setSituationId(id);
@@ -38,7 +46,7 @@ function Situation() {
   return (
     <>
       <div className="question col-12">
-        {situation?.map((item) => (
+        {listSituation?.map((item) => (
           <div
             className="situation col-6 col-md-4 col-lg-3"
             value={item._id}
@@ -58,7 +66,33 @@ function Situation() {
         {/* POPUP_QUESTION */}
         <Popup open={isOpen} id={situationId} onClose={close}></Popup>
       </div>
-      {/* <Pagination /> */}
+      <nav className="nav-pagination">
+        <ul className="pagination">
+          <li className={`page-item ${page == 1 ? "disabled" : ""} `}>
+            <Link
+              className="page-link"
+              to="#"
+              onClick={() => dispatch(decrement())}
+            >
+              Trước
+            </Link>
+          </li>
+          <li className="page-item active">
+            <Link className="page-link" to="#">
+              {page}
+            </Link>
+          </li>
+          <li className={`page-item ${page >= maxPage ? "disabled" : ""} `}>
+            <Link
+              className="page-link"
+              to="#"
+              onClick={() => dispatch(increment())}
+            >
+              Tiếp
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 }

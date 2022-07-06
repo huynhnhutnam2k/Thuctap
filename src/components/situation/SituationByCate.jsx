@@ -4,24 +4,31 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Popup from "./Popup";
 import parse from "html-react-parser";
-import { getAllSituation } from "../../redux/situationSlice";
 import { getAllDiagnose } from "../../redux/diagnoseSlice";
 import { getAllTreatment } from "../../redux/treatmentSlice";
 import { getAllMark } from "../../redux/markSlice";
 import { getAllDepartment } from "../../redux/departmentSlice";
-import Pagination from "../pagination";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  decrement,
+  getAllSituation,
+  getPage,
+  increment,
+} from "../../redux/situationSlice";
 
 function SituationByCate() {
   const situationByCate = useParams();
   const dispatch = useDispatch();
+  const { listSituation, page, maxPage } = useSelector(
+    (state) => state.situation
+  );
   useEffect(() => {
     dispatch(getAllSituation());
     dispatch(getAllDiagnose());
     dispatch(getAllTreatment());
     dispatch(getAllDepartment());
     dispatch(getAllMark());
-  }, [dispatch]);
-  const { listSituation: situation } = useSelector((state) => state.situation);
+  }, [dispatch, listSituation?.length, page]);
   const close = () => {
     setIsOpen(false);
     setSituationId("");
@@ -38,7 +45,7 @@ function SituationByCate() {
     <>
       <Nav />
       <div className="question col-12">
-        {situation?.map((item) =>
+        {listSituation?.map((item) =>
           item.departmentId?._id === situationByCate.id ? (
             <div
               className="situation col-6 col-md-4 col-lg-3"
@@ -57,7 +64,33 @@ function SituationByCate() {
         )}
       </div>
       <Popup open={isOpen} id={situationId} onClose={close}></Popup>
-      {/* <Pagination /> */}
+      <nav className="nav-pagination">
+        <ul className="pagination">
+          <li className={`page-item ${page == 1 ? "disabled" : ""} `}>
+            <Link
+              className="page-link"
+              to="#"
+              onClick={() => dispatch(decrement())}
+            >
+              Trước
+            </Link>
+          </li>
+          <li className="page-item active">
+            <Link className="page-link" to="#">
+              {page}
+            </Link>
+          </li>
+          <li className={`page-item ${page >= maxPage ? "disabled" : ""} `}>
+            <Link
+              className="page-link"
+              to="#"
+              onClick={() => dispatch(increment())}
+            >
+              Tiếp
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 }

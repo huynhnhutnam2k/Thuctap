@@ -2,28 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const url = "https://sv-dhyd.herokuapp.com/api/situation";
-export const getAllSituation = createAsyncThunk(
-  "situation/fetchAll",
-  async () => {
-    try {
-      const res = await axios.get(`${url}`);
-      return res?.data;
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }
-);
-export const getASituation = createAsyncThunk(
-  "situation/fetchOne",
-  async (id) => {
-    try {
-      const res = await axios.get(`${url}/${id}`);
-      return res?.data;
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }
-);
+
 export const situationSlice = createSlice({
   name: "situation",
   initialState: {
@@ -32,15 +11,25 @@ export const situationSlice = createSlice({
     error: false,
     pending: false,
     msg: "",
+    page: 1,
+    maxPage: 1,
   },
-  reducers: {},
+  reducers: {
+    increment: (state) => {
+      state.page += 1;
+    },
+    decrement: (state) => {
+      state.page -= 1;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllSituation.pending, (state) => {
         state.pending = true;
       })
       .addCase(getAllSituation.fulfilled, (state, action) => {
-        state.listSituation = action.payload;
+        state.listSituation = action.payload.situation;
+        state.maxPage = action.payload.maxPage;
         state.pending = false;
       })
       .addCase(getAllSituation.rejected, (state) => {
@@ -61,4 +50,31 @@ export const situationSlice = createSlice({
   },
 });
 
+export const getAllSituation = createAsyncThunk(
+  "situation/fetchAll",
+  async (page = 1, { getState }) => {
+    try {
+      const {
+        situation: { page },
+      } = getState();
+      const res = await axios.get(`${url}/page/${page}`);
+      return res?.data;
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+);
+export const getASituation = createAsyncThunk(
+  "situation/fetchOne",
+  async (id) => {
+    try {
+      const res = await axios.get(`${url}/${id}`);
+      return res?.data;
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+);
+
+export const { increment, decrement } = situationSlice.actions;
 export default situationSlice.reducer;
