@@ -65,7 +65,13 @@ const Login = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.errors.email ? <p>{formik.errors.email}</p> : ""}
+              {formik.errors.email ? (
+                <p style={{ color: "red", fontWeight: "bold" }}>
+                  {formik.errors.email}
+                </p>
+              ) : (
+                ""
+              )}
               <Input
                 className="log"
                 name="password"
@@ -76,7 +82,13 @@ const Login = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.errors.password ? <p>{formik.errors.password}</p> : ""}
+              {formik.errors.password ? (
+                <p style={{ color: "red", fontWeight: "bold" }}>
+                  {formik.errors.password}
+                </p>
+              ) : (
+                ""
+              )}
               <button
                 name="dangnhap"
                 type="submit"
