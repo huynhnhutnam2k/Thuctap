@@ -11,9 +11,12 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // window.scrollTo(0, 300);
-  const pending = useSelector((state) => state.auth.login?.pending);
+  // const pending = useSelector((state) => state.auth.login?.pending);
   const error = useSelector((state) => state.auth.login?.error);
-  const msg = useSelector((state) => state.auth.login?.msg);
+  // const msg = useSelector((state) => state.auth.login?.msg);
+
+  const { loading: pending, msg } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -41,13 +44,12 @@ const Login = () => {
       <div className="account-page">
         <div className="row">
           <div className="form-container col-sm-5">
-            <div className="title-log">
-              <h5>Đăng nhập tài khoản</h5>
-            </div>
             {pending ? (
               <Loading />
             ) : (
-              error && <Message variant="alert-danger">{msg}</Message>
+              <div className="title-log">
+                <h5>Đăng nhập tài khoản</h5>
+              </div>
             )}
             <form
               action="#"
