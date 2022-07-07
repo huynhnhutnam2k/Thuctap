@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Popup from "./Popup";
-import parse from "html-react-parser";
-import { getAllDepartment } from "../../redux/departmentSlice";
-import { getAllTreatment } from "../../redux/treatmentSlice";
-import { getAllDiagnose } from "../../redux/diagnoseSlice";
-import { getAllMark } from "../../redux/markSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLayoutEffect } from "react";
 import {
   decrement,
@@ -15,12 +10,14 @@ import {
   getSituationByDepartment,
   increment,
 } from "../../redux/situationSlice";
+import { getAllTreatment } from "../../redux/treatmentSlice";
+import { getAllDiagnose } from "../../redux/diagnoseSlice";
+import { getAllMark } from "../../redux/markSlice";
 
 function Situation({ departId, setDepartId }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [situationId, setSituationId] = useState("");
-
   const { listMark } = useSelector((state) => state.mark);
   const { listSituation, page, maxPage } = useSelector(
     (state) => state.situation
@@ -32,14 +29,13 @@ function Situation({ departId, setDepartId }) {
     } else {
       dispatch(getSituationByDepartment(departId));
     }
-    dispatch(getAllDepartment());
+    // dispatch(getAllDepartment());
     dispatch(getAllTreatment());
     dispatch(getAllDiagnose());
     dispatch(getAllMark());
   }, [dispatch, situationId, listSituation?.length, page, departId]);
-
-  // const { listSituation: situation } = useSelector((state) => state.situation);
-  // console.log(listMark);
+  // dispatch(getAllSituation());
+  // }, [dispatch, situationId, listSituation?.length, page]);
 
   const handleClick = (id) => {
     setIsOpen(true);
@@ -75,13 +71,13 @@ function Situation({ departId, setDepartId }) {
       </div>
       <nav className="nav-pagination">
         <ul className="pagination">
-          <li className={`page-item ${page == 1 ? "disabled" : ""} `}>
+          <li className={`page-item ${page === 1 ? "disabled" : ""} `}>
             <Link
               className="page-link"
               to="#"
               onClick={() => dispatch(decrement())}
             >
-              Trước
+              <i className="fa fa-angle-double-left" aria-hidden="true"></i>
             </Link>
           </li>
           <li className="page-item active">
@@ -95,7 +91,7 @@ function Situation({ departId, setDepartId }) {
               to="#"
               onClick={() => dispatch(increment())}
             >
-              Tiếp
+              <i className="fa fa-angle-double-right" aria-hidden="true"></i>
             </Link>
           </li>
         </ul>

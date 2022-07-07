@@ -13,10 +13,8 @@ import Introduce from "./pages/Introduce";
 import User from "./pages/User";
 import Document from "./pages/Document";
 import NotFound from "./pages/Notfound";
-import SituationByCate from "./components/situation/SituationByCate";
 
 function App() {
-  
   return (
     <>
       <div className="App">
@@ -32,7 +30,6 @@ function App() {
                   <Route path="/Login" element={<Login />} />
                   <Route path="/Introduce" element={<Introduce />} />
                   <Route path="/Register" element={<Register />} />
-                  <Route path="/department/:id" element={<SituationByCate />} />
                   <Route path="/Situation" element={<ListQuestion />} />
                   <Route path="/User" element={<User />} />
                   <Route path="/Document" element={<Document />} />

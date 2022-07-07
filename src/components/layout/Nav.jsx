@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getAllDepartment } from "../../redux/departmentSlice";
+
+import "./Style.scss";
 function Nav({ departId, setDepartId }) {
-  // const { departId, setDepartId } = props;
-  // console.log(departId);
-  // console.log(departId, typeof setDepartId);
-  // console.log(departId);
   const dispatch = useDispatch();
   const { listDepartment: department } = useSelector(
     (state) => state.department
@@ -21,6 +19,7 @@ function Nav({ departId, setDepartId }) {
   useEffect(() => {
     dispatch(getAllDepartment());
   }, []);
+  const [active, setActive] = useState("");
   return (
     <>
       <div className="nav-menu-container">
@@ -36,6 +35,14 @@ function Nav({ departId, setDepartId }) {
         </button> */}
             <div className="collapse navbar-collapse" id="collapsibleNavbar">
               <ul className="navbar-nav">
+                <div className="submenu nav-item" key={1} id={1}>
+                  <li
+                    className={`nav-item ${departId === "" ? "active" : ""}`}
+                    onClick={() => setDepartId("")}
+                  >
+                    <span>Tất cả</span>
+                  </li>
+                </div>
                 {department?.map(
                   (item) =>
                     item.situation?.length > 0 && (
@@ -44,15 +51,24 @@ function Nav({ departId, setDepartId }) {
                         key={item._id}
                         id={item._id}
                       >
-                        <li className="nav-item">
-                          <NavLink
-                            className={(navData) =>
-                              navData.isActive ? "nav-item active" : "nav-item"
-                            }
-                            to={`/department/${item._id}`}
-                          >
-                            <span>{item.name}</span>
-                          </NavLink>
+                        <li
+                          className={`nav-item ${
+                            departId === item._id ? "active" : ""
+                          }`}
+                          onClick={() => setDepartId(item._id)}
+                        >
+                          {/* <NavLink
+                            className={`nav-item ${
+                              departId === item._id
+                            } ? " active" : ""`}
+                            // to={`/department/${item._id}`}
+                            to={"/#"}
+                            onClick={() => {
+                              setDepartId(item._id);
+                            }}
+                          > */}
+                          <span>{item.name}</span>
+                          {/* </NavLink> */}
                         </li>
                       </div>
                     )
@@ -69,15 +85,11 @@ function Nav({ departId, setDepartId }) {
           >
             <option value="">-Chọn Khoa-</option>
             {department?.map((item) => (
-              <option
-                value={item._id}
-                key={item._id}
-                // onClick={() => setDepartId(item._id)}
-              >
+              <option value={item._id} key={item._id}>
                 {item.name}
               </option>
             ))}
-            <option value={`/#`}>Tất cả</option>
+            <option value="">Tất cả</option>
           </select>
         </div>
       </div>

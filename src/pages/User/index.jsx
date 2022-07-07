@@ -1,34 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "../../pages/Login/Login";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { getAllMark } from "../../redux/markSlice";
+import Popup from "../../components/situation/Popup";
 function User() {
-  const [userMark, setUserMark] = useState([]);
   const { listMark } = useSelector((state) => state.mark);
   const { userInfo } = useSelector((state) => state.auth);
+  const [isOpen, setIsOpen] = useState(false)
+  const [situationId, setSituationId] = useState()
 
 
-  const getUserMark = () => {
-    console.log(userMark?.length === 0)
-    console.log(userMark)
-    userMark.length === 0 &&
-      listMark?.map((mark, i) => {
-        mark.userId === userInfo?._id &&
-          setUserMark((userMark) => [...userMark, mark]);
-      });
-  };
   const getMarkPerSituation = (situationId) => {
-    const marks = []
-    // eslint-disable-next-line array-callback-return
-    userMark?.map((mark) => {
-      mark?.situation._id === situationId && marks.push(mark.marks)
-      // setMarkPerSituation((markPerSituation) => [
-      //   ...markPerSituation, mark.mark,
-      // ]);
-    });
-    return marks
+    const marksArr = []
+    listMark.filter(listMarks => listMarks.userId === userInfo?._id).map(marksPerSituation => { marksPerSituation?.situation?._id === situationId && marksArr.push(marksPerSituation.marks) })
+      // eslint-disable-next-line array-callback-return
+      ;
+    console.log(marksArr)
+    return marksArr;
+
   };
+  const PopupOnUser = (id) => {
+    setIsOpen(true)
+    setSituationId(id)
+  }
 
 
   const dispatch = useDispatch();
@@ -38,20 +33,11 @@ function User() {
 
 
 
-  useEffect(() => {
-    getUserMark();
-  }, [listMark]);
-
   ///list Situation user do
-  const uniqueIds = [];
-  const userSituation = userMark.filter((element) => {
-    const isDuplicate = uniqueIds.includes(element.situation._id);
-    if (!isDuplicate) {
-      uniqueIds.push(element.situation._id);
-      return true;
-    }
-    return false;
-  });
+  const userSituation = [
+    ...new Map(listMark.map((item) => [item["situation"]?._id, item])).values()
+  ];
+  console.log("1", userSituation)
 
 
   return (
@@ -68,7 +54,8 @@ function User() {
           <tbody>
             {userSituation?.map((mark, i) => (
               <tr key={i}>
-                <td>{mark.situation.name}
+                <td><div onClick={() => PopupOnUser(mark.situation._id)}>{mark.situation?.name}</div>
+                  <Popup open={isOpen} id={situationId}></Popup>
                 </td>
                 <td>
                   <table>
@@ -77,7 +64,7 @@ function User() {
                         <th>Lần làm</th>
                         <th>Điểm</th>
                       </tr>
-                      {getMarkPerSituation(mark.situation._id)?.map((mark, index) => (
+                      {getMarkPerSituation(mark.situation?._id)?.map((mark, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>{mark}</td>
