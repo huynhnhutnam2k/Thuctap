@@ -12,24 +12,31 @@ import {
   decrement,
   getAllSituation,
   getPage,
+  getSituationByDepartment,
   increment,
 } from "../../redux/situationSlice";
 
-function Situation() {
+function Situation({ departId, setDepartId }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [situationId, setSituationId] = useState("");
+
   const { listMark } = useSelector((state) => state.mark);
   const { listSituation, page, maxPage } = useSelector(
     (state) => state.situation
   );
+  console.log(listSituation);
   useLayoutEffect(() => {
-    dispatch(getAllSituation());
+    if (departId === "") {
+      dispatch(getAllSituation());
+    } else {
+      dispatch(getSituationByDepartment(departId));
+    }
     dispatch(getAllDepartment());
     dispatch(getAllTreatment());
     dispatch(getAllDiagnose());
     dispatch(getAllMark());
-  }, [dispatch, situationId, listSituation?.length, page]);
+  }, [dispatch, situationId, listSituation?.length, page, departId]);
 
   // const { listSituation: situation } = useSelector((state) => state.situation);
   // console.log(listMark);

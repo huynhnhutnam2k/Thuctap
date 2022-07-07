@@ -46,6 +46,18 @@ export const situationSlice = createSlice({
       .addCase(getASituation.rejected, (state) => {
         state.pending = false;
         state.error = true;
+      })
+      .addCase(getSituationByDepartment.pending, (state) => {
+        state.pending = true;
+      })
+      .addCase(getSituationByDepartment.fulfilled, (state, action) => {
+        state.listSituation = action.payload.situation;
+        state.maxPage = action.payload.maxPage;
+        state.pending = false;
+      })
+      .addCase(getSituationByDepartment.rejected, (state) => {
+        state.pending = false;
+        state.error = true;
       });
   },
 });
@@ -75,6 +87,19 @@ export const getASituation = createAsyncThunk(
     }
   }
 );
-
+export const getSituationByDepartment = createAsyncThunk(
+  "situation/fetchByDepartment",
+  async (id, { getState }) => {
+    try {
+      const {
+        situation: { page },
+      } = getState();
+      const res = await axios.get(`${url}/department/${id}?page=${page}`);
+      return res?.data;
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+);
 export const { increment, decrement } = situationSlice.actions;
 export default situationSlice.reducer;

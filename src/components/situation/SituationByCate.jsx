@@ -13,17 +13,23 @@ import {
   decrement,
   getAllSituation,
   getPage,
+  getSituationByDepartment,
   increment,
 } from "../../redux/situationSlice";
 
-function SituationByCate() {
+function SituationByCate({ departId, setDepartId }) {
   const situationByCate = useParams();
   const dispatch = useDispatch();
   const { listSituation, page, maxPage } = useSelector(
     (state) => state.situation
   );
+  console.log(departId);
   useEffect(() => {
-    dispatch(getAllSituation());
+    if (departId === "") {
+      dispatch(getAllSituation());
+    } else {
+      dispatch(getSituationByDepartment);
+    }
     dispatch(getAllDiagnose());
     dispatch(getAllTreatment());
     dispatch(getAllDepartment());
