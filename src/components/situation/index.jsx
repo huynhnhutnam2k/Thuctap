@@ -93,7 +93,12 @@ function Situation({ departId, setDepartId }) {
           </>
         )}
         {/* POPUP_QUESTION */}
-        <Popup open={isOpen} id={situationId} onClose={close}></Popup>
+        <Popup
+          open={isOpen}
+          id={situationId}
+          onClose={close}
+          key={situationId}
+        ></Popup>
       </div>
       <nav className="nav-pagination">
         <ul className="pagination">

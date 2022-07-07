@@ -7,7 +7,6 @@ import { getADiagnose } from "../../redux/diagnoseSlice";
 import { getATreatment } from "../../redux/treatmentSlice";
 import { getASituation } from "../../redux/situationSlice";
 export default function Popup({ open, id }) {
-
   const { situation } = useSelector((state) => state.situation);
   const { diagnose } = useSelector((state) => state.diagnose);
   const { treatment } = useSelector((state) => state.treatment);
@@ -28,9 +27,8 @@ export default function Popup({ open, id }) {
   const [returnStep, setReturnStep] = useState(1);
   const dispatch = useDispatch();
 
-
   const handleDiagnose = async (id) => {
-    await dispatch(getADiagnose(id))
+    await dispatch(getADiagnose(id));
     setDiagnoseIsDisplay(true);
     setShowDiagnoseBtn(false);
   };
@@ -40,7 +38,7 @@ export default function Popup({ open, id }) {
   };
 
   const handleTreatment = async (id) => {
-    await dispatch(getATreatment(id))
+    await dispatch(getATreatment(id));
     setShowTreatmentBtn(false);
     setTreatmentIsDisplay(true);
     diagnose?.isTrue && !treatment?.isTrue && setReturnStep(2);
@@ -59,7 +57,7 @@ export default function Popup({ open, id }) {
     };
     if (userInfo.token) {
       const token = userInfo.token;
-      await dispatch(addMark({ body, token, }))
+      await dispatch(addMark({ body, token }));
       //console.log(body)
       window.location.reload();
     }
@@ -93,13 +91,12 @@ export default function Popup({ open, id }) {
   const scrollTop = () => myRef.current.scrollIntoView();
 
   useEffect(() => {
-    dispatch(getASituation(id))
-    dispatch(getAllMark())
+    dispatch(getASituation(id));
+    dispatch(getAllMark());
   }, [id]);
 
-
   return open ? (
-    <div key="OVERLAY" className="OVERLAY">
+    <div className="OVERLAY">
       <div className="marks">
         <div className="markstable">
           <table>
@@ -110,7 +107,7 @@ export default function Popup({ open, id }) {
               </tr>
             </thead>
             {markValid?.map((mark, index) => (
-              <tbody>
+              <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
                   <td>{mark.marks}</td>
@@ -128,15 +125,15 @@ export default function Popup({ open, id }) {
               <tr>
                 <th>Lần làm</th>
                 {markValid?.map((mark, index) => (
-                  <td>{index + 1}</td>
+                  <td key={index}>{index + 1}</td>
                 ))}
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th>Điểm</th>
-                {markValid?.map((mark) => (
-                  <td>{mark.marks}</td>
+                {markValid?.map((mark, index) => (
+                  <td key={index}>{mark.marks}</td>
                 ))}
               </tr>
             </tbody>
@@ -144,7 +141,7 @@ export default function Popup({ open, id }) {
         </div>
       </div>
 
-      <div key="POPUP" ref={myRef} className="POPUP_STYLE">
+      <div ref={myRef} className="POPUP_STYLE">
         {/**closeBtn */}
         <button className="close-btn" onClick={() => handleClose()}>
           X
@@ -153,7 +150,7 @@ export default function Popup({ open, id }) {
 
         {/*display situation*/}
         <>
-          <div key="tinhuong" className="QUESTION">
+          <div className="QUESTION">
             <div className="HIGHLIGHT">{situation?.name}</div>
             <div
               dangerouslySetInnerHTML={{
@@ -233,10 +230,10 @@ export default function Popup({ open, id }) {
               </div>
               {treatment?.isTrue
                 ? showNoteBtn && (
-                  <button className="choice-btn" onClick={() => handleNote()}>
-                    LƯU Ý
-                  </button>
-                )
+                    <button className="choice-btn" onClick={() => handleNote()}>
+                      LƯU Ý
+                    </button>
+                  )
                 : redo}
             </>
           )}
