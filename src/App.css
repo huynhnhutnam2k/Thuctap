@@ -299,6 +299,26 @@ a.page-link{
   justify-content: center;
 }
 
+.tablemarks{
+  overflow-x: auto;
+  max-width: 80%;
+}
+
+.scoreuser {
+  display: block;
+  width: 100%;
+  padding: 50px 10px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+}
+
+.scoreuser2 {
+  display: none;
+  
+}
+
 
 .user-item {
   text-decoration: none;
@@ -931,6 +951,21 @@ form a {
 }
 
 @media screen and (max-width: 576px) {
+
+.scoreuser{
+  display: none;
+}
+
+.scoreuser2{
+  display: block;
+  width: 100%;
+  padding: 50px 10px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+}
+
   .header .info {
     width: 100%;
   }
