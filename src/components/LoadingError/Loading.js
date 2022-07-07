@@ -2,7 +2,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex"  style={{ width: "100%", margin:"0 42%"}}>
       <div
         className="spinner-border text-success"
         role="status"

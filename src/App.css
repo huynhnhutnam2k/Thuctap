@@ -578,6 +578,7 @@ nav {
 .navbar .active{
   background: var(--color-bg);
   color: white;
+  border-radius: 30px;
 }
 
 .navbar h5 {

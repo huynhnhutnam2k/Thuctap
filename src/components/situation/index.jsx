@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Popup from "./Popup";
 import { Link } from "react-router-dom";
 import { useLayoutEffect } from "react";
+import Loading from "../LoadingError/Loading";
+
 import {
   decrement,
   getAllSituation,
@@ -19,7 +21,7 @@ function Situation({ departId, setDepartId }) {
   const [isOpen, setIsOpen] = useState(false);
   const [situationId, setSituationId] = useState("");
   const { listMark } = useSelector((state) => state.mark);
-  const { listSituation, page, maxPage } = useSelector(
+  const { pending, listSituation, page, maxPage } = useSelector(
     (state) => state.situation
   );
   console.log(listSituation);
@@ -49,23 +51,29 @@ function Situation({ departId, setDepartId }) {
   return (
     <>
       <div className="question col-12">
-        {listSituation?.map((item) => (
-          <div
-            className="situation col-6 col-md-4 col-lg-3"
-            value={item._id}
-            key={item._id}
-            onClick={() => handleClick(item._id)}
-          >
-            <img
-              src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png"
-              alt="img"
-            />
-            <h6>
-              <b>{item.name}</b>
-            </h6>
-            {/* <div className="desc">{parse(item.desc)}</div> */}
-          </div>
-        ))}
+        {pending ? (
+          <Loading />
+        ) : (
+          <>
+            {listSituation?.map((item) => (
+              <div
+                className="situation col-6 col-md-4 col-lg-3"
+                value={item._id}
+                key={item._id}
+                onClick={() => handleClick(item._id)}
+              >
+                <img
+                  src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png"
+                  alt="img"
+                />
+                <h6>
+                  <b>{item.name}</b>
+                </h6>
+                {/* <div className="desc">{parse(item.desc)}</div> */}
+              </div>
+            ))}
+          </>
+        )}
         {/* POPUP_QUESTION */}
         <Popup open={isOpen} id={situationId} onClose={close}></Popup>
       </div>

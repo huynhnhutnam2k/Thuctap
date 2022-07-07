@@ -57,18 +57,7 @@ function Nav({ departId, setDepartId }) {
                           }`}
                           onClick={() => setDepartId(item._id)}
                         >
-                          {/* <NavLink
-                            className={`nav-item ${
-                              departId === item._id
-                            } ? " active" : ""`}
-                            // to={`/department/${item._id}`}
-                            to={"/#"}
-                            onClick={() => {
-                              setDepartId(item._id);
-                            }}
-                          > */}
                           <span>{item.name}</span>
-                          {/* </NavLink> */}
                         </li>
                       </div>
                     )
@@ -84,11 +73,14 @@ function Nav({ departId, setDepartId }) {
             onChange={(e) => setDepartId(e.target.value)}
           >
             <option value="">-Chọn Khoa-</option>
-            {department?.map((item) => (
-              <option value={item._id} key={item._id}>
-                {item.name}
-              </option>
-            ))}
+            {department?.map(
+              (item) =>
+                item.situation?.length > 0 && (
+                  <option value={item._id} key={item._id}>
+                    {item.name}
+                  </option>
+                )
+            )}
             <option value="">Tất cả</option>
           </select>
         </div>
