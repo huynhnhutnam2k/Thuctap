@@ -24,7 +24,19 @@ function Situation({ departId, setDepartId }) {
   const { pending, listSituation, page, maxPage } = useSelector(
     (state) => state.situation
   );
-  console.log(listSituation);
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const checkSituationIsDone = (situationId, userId) => {
+    if (
+      listMark.filter(
+        (item) => item.situation?._id === situationId && item.userId === userId
+      )?.length > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   useLayoutEffect(() => {
     if (departId === "") {
       dispatch(getAllSituation());
@@ -62,12 +74,18 @@ function Situation({ departId, setDepartId }) {
                 key={item._id}
                 onClick={() => handleClick(item._id)}
               >
+                {checkSituationIsDone(item?._id, userInfo?._id) && (
+                  <i
+                    className="fa fa-check-square-o fa-lg"
+                    aria-hidden="true"
+                  ></i>
+                )}
                 <img
                   src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png"
                   alt="img"
                 />
-                <h6>
-                  <b>{item.name}</b>
+                <h6 className="situationname">
+                  <b>{item.name} </b>
                 </h6>
                 {/* <div className="desc">{parse(item.desc)}</div> */}
               </div>
