@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import {
   decrement,
   getAllSituation,
-  getAllSituationByPage,
   getPage,
   increment,
 } from "../../redux/situationSlice";
@@ -22,7 +21,6 @@ function SituationByCate() {
 
   useEffect(() => {
     dispatch(getAllSituation());
-    dispatch(getAllSituationByPage());
     dispatch(getAllDepartment());
   }, [dispatch, listSituation?.length, page]);
 

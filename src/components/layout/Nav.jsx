@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getAllDepartment } from "../../redux/departmentSlice";
-import { getAllSituationByPage } from "../../redux/situationSlice";
 import "./Style.scss";
 function Nav() {
   const dispatch = useDispatch();
-  const [departmentId, setDepartmentId] = useState("");
   const { listDepartment: department } = useSelector(
     (state) => state.department
   );
@@ -18,12 +16,8 @@ function Nav() {
   };
   useEffect(() => {
     dispatch(getAllDepartment());
-    dispatch(getAllSituationByPage());
-  }, [dispatch, departmentId]);
+  }, []);
 
-  const handleClick = (Did) => {
-    setDepartmentId(Did);
-  };
   return (
     <>
       <div className="nav-menu-container">
@@ -58,7 +52,6 @@ function Nav() {
                         className="submenu nav-item"
                         key={item._id}
                         id={item._id}
-                        onClick={() => handleClick(item._id)}
                       >
                         <li className="nav-item">
                           <NavLink

@@ -65,24 +65,6 @@ export const getAllSituation = createAsyncThunk(
   }
 );
 
-export const getAllSituationByPage = createAsyncThunk(
-  "situation/fetchAll",
-  async (page = 1, Did, { getState }) => {
-    try {
-      const {
-        situation: { page },
-      } = getState();
-      console.log(Did);
-      const res = await axios.get(`${url}/department/${Did}?/page=?${page}`);
-      console.log(res?.data);
-      return res?.data;
-
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }
-);
-
 export const getASituation = createAsyncThunk(
   "situation/fetchOne",
   async (id) => {
