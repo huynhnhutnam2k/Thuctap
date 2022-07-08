@@ -8,7 +8,7 @@ function User() {
   const { listMark } = useSelector((state) => state.mark);
   const { userInfo } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
-  const [situationId, setSituationId] = useState();
+  const [situationId, setSituationId] = useState("");
 
   const getMarkPerSituation = (situationId) => {
     const marksArr = [];
@@ -19,7 +19,6 @@ function User() {
           marksArr.push(marksPerSituation.marks);
       });
     // eslint-disable-next-line array-callback-return
-    console.log(marksArr);
     return marksArr;
   };
   const PopupOnUser = (id) => {
@@ -36,7 +35,6 @@ function User() {
   const userSituation = [
     ...new Map(listMark.map((item) => [item["situation"]?._id, item])).values(),
   ];
-  console.log("1", userSituation);
 
   return (
     <>
@@ -56,7 +54,7 @@ function User() {
                   <div onClick={() => PopupOnUser(mark.situation._id)}>
                     {mark.situation?.name}
                   </div>
-                  <Popup open={isOpen} id={situationId}></Popup>
+                  {isOpen && <Popup open={isOpen} id={situationId}></Popup>}
                 </td>
                 <td className="tablemarks">
                   <table>
