@@ -400,12 +400,19 @@ a.page-link{
 }
 
 .situation span{
+  font-style: italic;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
   font-size: 16px;
   width: 100%;
   text-align: center;
   margin: auto;
   display: flex;
   justify-content: center;
+}
+.situation span b{
+  color: rgb(0, 0, 0);
+  
 }
 
 .situation img {
@@ -455,9 +462,8 @@ a.page-link{
   position: absolute;
   right: 5px;
   top: 5px;
-  font-size: 24px;
+  font-size: 30px;
   color: rgb(95, 255, 2);
-  z-index: 100000;
 }
 /* hết tình huống */
 
@@ -524,7 +530,7 @@ a.page-link{
   font-size: 2.8rem;
   cursor: pointer;
   position: fixed;
-  z-index: 9999;
+  z-index: 9;
   color: #0861b9;
   bottom: 50px;
   right: 15px;

@@ -84,7 +84,10 @@ function Situation({ departId, setDepartId }) {
                 <h6 className="situationname">
                   <b>{item.name} </b>
                 </h6>
-                <span>Lượt làm: {item.times}</span>
+                <span>
+                  <b>Lượt làm: &nbsp;</b>
+                  {item.times}
+                </span>
               </div>
             ))}
           </>
