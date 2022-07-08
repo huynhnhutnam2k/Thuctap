@@ -58,7 +58,7 @@ export default function Popup({ open, id }) {
     if (userInfo.token) {
       const token = userInfo.token;
       await dispatch(addMark({ body, token }));
-      //console.log(body)
+      //console.log(body);
       window.location.reload();
     }
   };
@@ -70,15 +70,13 @@ export default function Popup({ open, id }) {
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
       setShowNotebtn(true);
-      if (mark > 0)
-        setMark(mark - 2.5)
+      if (mark > 0) setMark(mark - 2.5);
     } else {
       setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
       setShowNotebtn(true);
-      if (mark > 0)
-        setMark(mark - 2.5)
+      if (mark > 0) setMark(mark - 2.5);
     }
   };
 
@@ -232,10 +230,10 @@ export default function Popup({ open, id }) {
               </div>
               {treatment?.isTrue
                 ? showNoteBtn && (
-                  <button className="choice-btn" onClick={() => handleNote()}>
-                    LƯU Ý
-                  </button>
-                )
+                    <button className="choice-btn" onClick={() => handleNote()}>
+                      LƯU Ý
+                    </button>
+                  )
                 : redo}
             </>
           )}
