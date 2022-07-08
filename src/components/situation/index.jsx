@@ -84,10 +84,10 @@ function Situation({ departId, setDepartId }) {
                   src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png"
                   alt="img"
                 />
+                <div>So lan duoc lam: {item.times}</div>
                 <h6 className="situationname">
                   <b>{item.name} </b>
                 </h6>
-                {/* <div className="desc">{parse(item.desc)}</div> */}
               </div>
             ))}
           </>
