@@ -46,18 +46,18 @@ function Nav({ departId, setDepartId }) {
                 {department?.map(
                   (item) =>
                     item.situation?.length > 0 && (
-                      <div
-                        className="submenu nav-item"
-                        key={item._id}
-                        id={item._id}
-                      >
+                      <div className="submenu" key={item._id} id={item._id}>
+                        <b>{/* <i className="fa fa-circle"></i> */}|</b>
                         <li
                           className={`nav-item ${
                             departId === item._id ? "active" : ""
                           }`}
                           onClick={() => setDepartId(item._id)}
                         >
-                          <span>{item.name}</span>
+                          <span>
+                            &nbsp;
+                            {item.name}
+                          </span>
                         </li>
                       </div>
                     )

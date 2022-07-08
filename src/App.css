@@ -384,10 +384,10 @@ a.page-link{
   overflow: hidden;
   box-shadow: 0px 2px 6px black;
   justify-content: center;
-  height: 270px;
+  height: auto;
   margin: 15px 10px;
   padding: 0px;
-  background: rgb(36, 109, 198);
+  background: rgb(6, 92, 197);
   border-radius: 10px;
   transition: transform 0.4s;
   padding: 5px;
@@ -399,12 +399,19 @@ a.page-link{
   /* font-weight: 500; */
 }
 
-.situation img {
+.situation span{
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
   margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.situation img {
   border-radius: 10px 10px 0 0;
   width: 100%;
-  height: 85%;
-  margin-bottom: 10px;
+  margin: 10px auto;
 }
 
 .situation p {
@@ -427,6 +434,7 @@ a.page-link{
   justify-content: center;
   align-items: center;
 }
+
 .desc p, .desc b {
   margin: 1px 10px;
   font-size: 13px !important;
@@ -445,9 +453,11 @@ a.page-link{
 
 .fa-check-square-o{
   position: absolute;
-  right: 7px;
-  top: 12px;
-  color: rgb(107, 228, 107);
+  right: 5px;
+  top: 5px;
+  font-size: 24px;
+  color: rgb(95, 255, 2);
+  z-index: 100000;
 }
 /* hết tình huống */
 
@@ -584,7 +594,6 @@ body { /*cho Firefox*/
     scrollbar-color: rgb(53, 134, 210) #ccc;   /* scroll thumb and track */
 }
 
-
 .nav-menu-container{
   display: flex;
   flex-wrap: nowrap;
@@ -600,29 +609,37 @@ body { /*cho Firefox*/
   overflow-x: auto;
 }
 
+.menu-container b{
+  margin: 0 5px;
+}
+
 nav {
   width: 100%;
   font-size: 18px;
 }
+
 .navbar .active{
   background: var(--color-bg);
   color: white;
-  border-radius: 30px;
+  border-radius: 40px;
 }
 
 .navbar h5 {
   color: var(--color-text-header);
-  margin-right: 10px;
   text-shadow: 1px 1px 1px #000000;
   font-family: var(--bs-font-sans-serif);
 }
 
 .submenu {
+  margin: 0 10px;
   transition: transform 0.5s;
   text-decoration: none;
   color: black;
   font-weight: bold;
-  border-radius: 30px;
+  border-radius: 40px;
+  display: flex;
+  align-items: baseline;
+  margin: auto;
 }
 
 .nav-item span {
@@ -632,18 +649,13 @@ nav {
   width: max-content;
 }
 
-.submenu:hover {
-  transform: scale(0.98);
-}
-
-.submenu a {
-  transition: transform 0.5s;
+.nav-item span:hover {
+  background: var(--color-bg);
   text-decoration: none;
-  color: black;
-  font-weight: bold;
-  margin: 5px;
-  padding: 10px 5px;
-  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  border-radius: 40px;
+
 }
 
 a.dropdown-item {
@@ -652,14 +664,6 @@ a.dropdown-item {
   border-radius: 0px;
   margin: 0px;
   padding: 10px;
-}
-
-.submenu a:hover {
-  background: var(--color-bg);
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 30px;
 }
 
 .all select {
@@ -955,8 +959,11 @@ form a {
 
   .col-lg-3{
     margin: 15px;
-    height: 200px;
   }
+
+  /* .situation{
+    height: 250px;
+  } */
 }
 
 @media screen and (max-width: 576px) {
@@ -1172,10 +1179,6 @@ form a {
     max-width: 40%;
   }
 
-  .situation {
-    height: 180px;
-  }
-
   .situation p {
     font-size: 12px;
   }
@@ -1223,7 +1226,6 @@ form a {
     width: 250px;
   }
   .col-6{
-    height: 150px;
     max-width: 38%;
   }
 }

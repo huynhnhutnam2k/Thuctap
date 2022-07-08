@@ -75,19 +75,16 @@ function Situation({ departId, setDepartId }) {
                 onClick={() => handleClick(item._id)}
               >
                 {checkSituationIsDone(item?._id, userInfo?._id) && (
-                  <i
-                    className="fa fa-check-square-o fa-lg"
-                    aria-hidden="true"
-                  ></i>
+                  <i className="fa fa-check-square-o " aria-hidden="true"></i>
                 )}
                 <img
                   src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png"
                   alt="img"
-                />
-                <div>So lan duoc lam: {item.times}</div>
+                />{" "}
                 <h6 className="situationname">
                   <b>{item.name} </b>
                 </h6>
+                <span>Lượt làm: {item.times}</span>
               </div>
             ))}
           </>
