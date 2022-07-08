@@ -68,27 +68,29 @@ function Situation({ departId, setDepartId }) {
         ) : (
           <>
             {listSituation?.map((item) => (
-              <div
-                className="situation col-6 col-md-4 col-lg-3"
-                value={item._id}
-                key={item._id}
-                onClick={() => handleClick(item._id)}
-              >
-                {checkSituationIsDone(item?._id, userInfo?._id) && (
-                  <i
-                    className="fa fa-check-square-o fa-lg"
-                    aria-hidden="true"
-                  ></i>
-                )}
-                <img
-                  src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png"
-                  alt="img"
-                />
-                <h6 className="situationname">
-                  <b>{item.name} </b>
-                </h6>
-                {/* <div className="desc">{parse(item.desc)}</div> */}
-              </div>
+              <>
+                <div
+                  className="situation col-6 col-md-4 col-lg-3"
+                  value={item._id}
+                  key={item._id}
+                  onClick={() => handleClick(item._id)}
+                >
+                  {checkSituationIsDone(item?._id, userInfo?._id) && (
+                    <i
+                      className="fa fa-check-square-o fa-2x"
+                      aria-hidden="true"
+                    ></i>
+                  )}
+                  <img
+                    src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png"
+                    alt="img"
+                  />
+                  <h6 className="situationname">
+                    <b>{item.name} </b>
+                  </h6>
+                  {/* <div className="desc">{parse(item.desc)}</div> */}
+                </div>
+              </>
             ))}
           </>
         )}
