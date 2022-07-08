@@ -70,13 +70,15 @@ export default function Popup({ open, id }) {
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
       setShowNotebtn(true);
-      setMark(mark - 2.5);
+      if (mark > 0)
+        setMark(mark - 2.5)
     } else {
       setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
       setShowNotebtn(true);
-      setMark(mark - 2.5);
+      if (mark > 0)
+        setMark(mark - 2.5)
     }
   };
 
@@ -230,10 +232,10 @@ export default function Popup({ open, id }) {
               </div>
               {treatment?.isTrue
                 ? showNoteBtn && (
-                    <button className="choice-btn" onClick={() => handleNote()}>
-                      LƯU Ý
-                    </button>
-                  )
+                  <button className="choice-btn" onClick={() => handleNote()}>
+                    LƯU Ý
+                  </button>
+                )
                 : redo}
             </>
           )}
