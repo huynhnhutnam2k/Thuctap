@@ -68,6 +68,7 @@ function Situation({ departId, setDepartId }) {
         ) : (
           <>
             {listSituation?.map((item) => (
+<<<<<<< HEAD
               <>
                 <div
                   className="situation col-6 col-md-4 col-lg-3"
@@ -91,6 +92,29 @@ function Situation({ departId, setDepartId }) {
                   {/* <div className="desc">{parse(item.desc)}</div> */}
                 </div>
               </>
+=======
+              <div
+                className="situation col-6 col-md-4 col-lg-3"
+                value={item._id}
+                key={item._id}
+                onClick={() => handleClick(item._id)}
+              >
+                {checkSituationIsDone(item?._id, userInfo?._id) && (
+                  <i
+                    className="fa fa-check-square-o fa-lg"
+                    aria-hidden="true"
+                  ></i>
+                )}
+                <img
+                  src="https://caodangyduocsaigon.com/images/files/caodangyduocsaigon.com/bieu-tuong-nganh-y.png"
+                  alt="img"
+                />
+                <div>So lan duoc lam: {item.times}</div>
+                <h6 className="situationname">
+                  <b>{item.name} </b>
+                </h6>
+              </div>
+>>>>>>> 9fb429eaa4820a765dac17a7a252cc015bcc3a23
             ))}
           </>
         )}
