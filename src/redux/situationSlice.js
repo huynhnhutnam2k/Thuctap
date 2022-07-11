@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
-const url = "https://sv-dhyd.herokuapp.com/api/situation";
+import { URL } from "./url";
+console.log(URL)
+const url = `${URL}/situation`
 export const situationSlice = createSlice({
   name: "situation",
   initialState: {
