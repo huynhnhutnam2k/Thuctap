@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { URL } from "./url"
+const URL_API = `${URL}/`
 
 const userSlice = createSlice({
     name: "user",
     initialState: {
         users: {
-            allUser : null,
+            allUser: null,
             isPending: false,
             isError: false
         },
         deleteUser: {
-            isError :false,
-            isPending:  false
+            isError: false,
+            isPending: false
         },
-        updateUser:{
+        updateUser: {
             pending: false,
             error: null
         },
@@ -22,7 +24,7 @@ const userSlice = createSlice({
         },
         msg: ""
     },
-    reducers:{
+    reducers: {
         getUsersStart: (state) => {
             state.users.isPending = true
         },
@@ -31,26 +33,26 @@ const userSlice = createSlice({
             state.users.isError = false
             state.users.isPending = false
         },
-        getUsersFail: (state, action) =>{
+        getUsersFail: (state, action) => {
             state.msg = action.payload
             state.users.isError = true
         },
         deleteUserStart: (state) => {
             state.deleteUser.isPending = true
         },
-        deleteUserSuccess: (state,action) => {
+        deleteUserSuccess: (state, action) => {
             state.deleteUser.isPending = false
-            state.deleteUser.isError= false
+            state.deleteUser.isError = false
             state.msg = action.payload
         },
-        deleteUserFail: (state,action) => {
+        deleteUserFail: (state, action) => {
             state.deleteUser.isError = true
             state.msg = action.payload
         },
         updateUserStart: (state) => {
             state.updateUser.pending = true
         },
-        updateUserAccess : (state) => {
+        updateUserAccess: (state) => {
             state.updateUser.pending = false
             state.updateUser.error = false
         },

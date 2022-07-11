@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-// import {URL} from './url'
-const URL = "http://sv-dhyd.herokuapp.com/api";
+import { URL } from './url'
 export const userLocalStorage = JSON.parse(localStorage.getItem("user"))
   ? JSON.parse(localStorage.getItem("user"))
   : null;
@@ -121,36 +120,37 @@ export const authSlice = createSlice({
   },
 });
 
-export const logIn = createAsyncThunk("auth/login", async({user, navigate}) => {
-        try {
-            const res = await axios.post(`${URL}/user/login`, user)
-            if(res){
-                localStorage.setItem("user", JSON.stringify(res.data));
-                document.location.href = "/";
-                return res.data
-            }
-        } catch (error) {
-            console.log(error.response.data)
-            alert("Bạn đã nhập sai tài khoản hoặc mật khẩu")
-        }
+export const logIn = createAsyncThunk("auth/login", async ({ user, navigate }) => {
+  try {
+    const res = await axios.post(`${URL}/user/login`, user)
+    if (res) {
+      localStorage.setItem("user", JSON.stringify(res.data));
+      document.location.href = "/";
+      return res.data
     }
+  } catch (error) {
+    console.log(error.response.data)
+    alert("Bạn đã nhập sai tài khoản hoặc mật khẩu")
+  }
+}
   ,
 );
 export const addUser = createAsyncThunk("auth/register", async ({ token, user }) => {
-    try {
-      const res = await axios.post(`${URL}/auth/register`, user, {
-        headers: {
-          token: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "origin, x-requested-with, content-type",
-          "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
-        }});
-      return res?.data;
-    } catch (error) {
-      console.log(error.response.data);
-    }
+  try {
+    const res = await axios.post(`${URL}/auth/register`, user, {
+      headers: {
+        token: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "origin, x-requested-with, content-type",
+        "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
+      }
+    });
+    return res?.data;
+  } catch (error) {
+    console.log(error.response.data);
   }
+}
 );
 export const getAllUser = createAsyncThunk("auth/getAll", async (token) => {
   try {
@@ -160,9 +160,10 @@ export const getAllUser = createAsyncThunk("auth/getAll", async (token) => {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers":
-        "origin, x-requested-with, content-type",
+          "origin, x-requested-with, content-type",
         "Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
-      }});
+      }
+    });
     return data;
   } catch (error) {
     console.log(error.response.data);
