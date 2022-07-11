@@ -539,6 +539,7 @@ a.page-link{
   height: 35px;
   background: #063586;
   border-radius: 50%;
+  text-align: center;
 }
 
 #top-up .fa-angle-up{
