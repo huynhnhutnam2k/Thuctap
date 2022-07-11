@@ -33,7 +33,9 @@ function User() {
 
   ///list Situation user do
   const userSituation = [
-    ...new Map(listMark.map((item) => [item["situation"]?._id, item])).values(),
+    ...new Map(
+      listMark?.map((item) => [item["situation"]?._id, item])
+    ).values(),
   ];
 
   return (

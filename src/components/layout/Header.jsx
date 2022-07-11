@@ -39,7 +39,7 @@ const Header = () => {
                 to="/#"
                 onClick={handleLogout}
               >
-                <li className="fa fa-sign-out"></li>
+                <i className="fa fa-sign-out"></i>
               </Link>
             </b>
           </p>
