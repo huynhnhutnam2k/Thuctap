@@ -110,9 +110,9 @@ const Login = () => {
               >
                 Đăng nhập
               </button>
-              <div>
+              {/* <div>
                 <a href="/#">Quên mật khẩu?</a>
-              </div>
+              </div> */}
             </form>
           </div>
           <div className="mid col-sm-1">
