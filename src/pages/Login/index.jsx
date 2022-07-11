@@ -26,8 +26,8 @@ const Login = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email().required("Nhập Email"),
-      password: Yup.string().min(8, "").required("Nhập mật khẩu"),
+      email: Yup.string().email().required("Bạn chưa nhập Email"),
+      password: Yup.string().min(8, "").required("Bạn chưa nhập mật khẩu"),
     }),
 
     onSubmit: (values) => {
@@ -68,7 +68,13 @@ const Login = () => {
                 onBlur={formik.handleBlur}
               />
               {formik.errors.email ? (
-                <p style={{ color: "red", fontWeight: "bold" }}>
+                <p
+                  style={{
+                    color: "red",
+                    fontWeight: "bold",
+                    fontStyle: "italic",
+                  }}
+                >
                   {formik.errors.email}
                 </p>
               ) : (
@@ -85,7 +91,13 @@ const Login = () => {
                 onBlur={formik.handleBlur}
               />
               {formik.errors.password ? (
-                <p style={{ color: "red", fontWeight: "bold" }}>
+                <p
+                  style={{
+                    color: "red",
+                    fontWeight: "bold",
+                    fontStyle: "italic",
+                  }}
+                >
                   {formik.errors.password}
                 </p>
               ) : (
