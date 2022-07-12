@@ -33,7 +33,9 @@ function User() {
 
   ///list Situation user do
   const userSituation = [
-    ...new Map(listMark.map((item) => [item["situation"]?._id, item])).values(),
+    ...new Map(
+      listMark?.map((item) => [item["situation"]?._id, item])
+    ).values(),
   ];
 
   return (
@@ -63,7 +65,7 @@ function User() {
                         <td>Lần làm</td>
                         {getMarkPerSituation(mark.situation?._id)?.map(
                           (mark, index) => (
-                            <td>{index + 1}</td>
+                            <td key={index}>{index + 1}</td>
                           )
                         )}
                       </tr>
@@ -71,7 +73,7 @@ function User() {
                         <td>Điểm</td>
                         {getMarkPerSituation(mark.situation?._id)?.map(
                           (mark, index) => (
-                            <td>{mark}</td>
+                            <td key={index}>{mark}</td>
                           )
                         )}
                       </tr>
@@ -110,7 +112,7 @@ function User() {
                       </tr>
                       {getMarkPerSituation(mark.situation?._id)?.map(
                         (mark, index) => (
-                          <tr>
+                          <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{mark}</td>
                           </tr>

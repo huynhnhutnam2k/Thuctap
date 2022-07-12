@@ -59,10 +59,11 @@ tr {
     border-collapse: collapse;
     text-align: center;
     color: darkblue;
-
+    width: max-content;
 }
 
 table {
+    width: max-content;
     border-collapse: collapse;
     border: 1px solid darkblue;
   }

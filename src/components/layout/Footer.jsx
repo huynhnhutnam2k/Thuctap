@@ -35,7 +35,9 @@ function Footer() {
       </div>
 
       <div title="Về đầu trang" id="top-up">
-        <i className="fa fa-chevron-circle-up"></i>
+        <div className="div-up">
+          <i className="fa fa-angle-up"></i>
+        </div>
       </div>
       <div className="copy">
         <p>Bản quyền thuộc về: &copy; Trường đại học Y dược Cần Thơ </p>
