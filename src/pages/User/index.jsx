@@ -13,7 +13,7 @@ function User() {
   const getMarkPerSituation = (situationId) => {
     const marksArr = [];
     listMark
-      .filter((listMarks) => listMarks.userId === userInfo?._id)
+      .filter((listMarks) => listMarks.userId._id === userInfo?._id)
       .map((marksPerSituation) => {
         marksPerSituation?.situation?._id === situationId &&
           marksArr.push(marksPerSituation.marks);

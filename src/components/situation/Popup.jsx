@@ -25,8 +25,9 @@ export default function Popup({ open, id }) {
 
 
   const markValid = listMark?.filter(
-    (item) => item.situation?._id === id && item.userId === userInfo?._id
+    (item) => item.situation?._id === id && item.userId._id === userInfo?._id
   );
+  console.log(listMark)
 
   const [mark, setMark] = useState(10);
   const [showPreliminaryBtn, setShowPreliminaryBtn] = useState(true); 
