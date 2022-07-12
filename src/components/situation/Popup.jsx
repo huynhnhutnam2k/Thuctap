@@ -78,7 +78,7 @@ export default function Popup({ open, id }) {
       const token = userInfo.token;
       await dispatch(addMark({ body, token }));
       console.log(body);
-      //window.location.reload();
+      window.location.reload();
     }
   };
   const reDoStep = (returnStep) => {
