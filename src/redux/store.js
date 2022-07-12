@@ -6,6 +6,7 @@ import situationReducer from "./situationSlice";
 import diagnoseReducer from "./diagnoseSlice";
 import treatmentReducer from "./treatmentSlice";
 import markReducer from "./markSlice";
+import preliminaryReducer from './preliminarySlice'
 export default configureStore({
   reducer: {
     auth: authReducer,
@@ -14,6 +15,7 @@ export default configureStore({
     situation: situationReducer,
     diagnose: diagnoseReducer,
     treatment: treatmentReducer,
-    mark: markReducer
+    mark: markReducer,
+    pre: preliminaryReducer
   },
 });

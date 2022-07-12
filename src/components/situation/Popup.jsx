@@ -6,31 +6,50 @@ import { addMark, getAllMark } from "../../redux/markSlice";
 import { getADiagnose } from "../../redux/diagnoseSlice";
 import { getATreatment } from "../../redux/treatmentSlice";
 import { getASituation } from "../../redux/situationSlice";
+import { getPre } from "../../redux/preliminarySlice";
 export default function Popup({ open, id }) {
   const { situation } = useSelector((state) => state.situation);
   const { diagnose } = useSelector((state) => state.diagnose);
   const { treatment } = useSelector((state) => state.treatment);
   const { listMark } = useSelector((state) => state.mark);
   const { userInfo } = useSelector((state) => state.auth);
+  const {pre} = useSelector((state)=> state.pre)
+  
+  
+  useEffect(() => {    
+    pre?.isTrue && setReturnStep(2);
+    diagnose?.isTrue && setReturnStep(3);
+    treatment?.isTrue && setReturnStep(4);
+  }, [pre,diagnose,treatment])
+  
+
 
   const markValid = listMark?.filter(
     (item) => item.situation?._id === id && item.userId === userInfo?._id
   );
 
   const [mark, setMark] = useState(10);
+  const [showPreliminaryBtn, setShowPreliminaryBtn] = useState(true); 
   const [showDiagnoseBtn, setShowDiagnoseBtn] = useState(true);
   const [showTreatmentBtn, setShowTreatmentBtn] = useState(true);
   const [showNoteBtn, setShowNotebtn] = useState(true);
+  const [preliminaryIsDisplay, setPreliminaryIsDisplay] = useState(false)
   const [diagnoseIsDisplay, setDiagnoseIsDisplay] = useState(false);
   const [treatmentIsDisplay, setTreatmentIsDisplay] = useState(false);
   const [noteIsDisplay, setNoteIsDisplay] = useState(false);
   const [returnStep, setReturnStep] = useState(1);
   const dispatch = useDispatch();
+  const handlePreliminary= async(id) =>{
+    await dispatch(getPre(id))
+    setPreliminaryIsDisplay(true)
+    setShowPreliminaryBtn(false)
+  }
 
   const handleDiagnose = async (id) => {
     await dispatch(getADiagnose(id));
     setDiagnoseIsDisplay(true);
     setShowDiagnoseBtn(false);
+    
   };
 
   const handleClose = () => {
@@ -41,7 +60,6 @@ export default function Popup({ open, id }) {
     await dispatch(getATreatment(id));
     setShowTreatmentBtn(false);
     setTreatmentIsDisplay(true);
-    diagnose?.isTrue && !treatment?.isTrue && setReturnStep(2);
   };
 
   const handleNote = () => {
@@ -58,12 +76,14 @@ export default function Popup({ open, id }) {
     if (userInfo.token) {
       const token = userInfo.token;
       await dispatch(addMark({ body, token }));
-      //console.log(body);
-      window.location.reload();
+      console.log(body);
+      //window.location.reload();
     }
   };
   const reDoStep = (returnStep) => {
     if (returnStep === 1) {
+      setPreliminaryIsDisplay(false);
+      setShowPreliminaryBtn(true)
       setDiagnoseIsDisplay(false);
       setShowDiagnoseBtn(true);
       setShowTreatmentBtn(true);
@@ -71,13 +91,20 @@ export default function Popup({ open, id }) {
       setNoteIsDisplay(false);
       setShowNotebtn(true);
       if (mark > 0) setMark(mark - 2.5);
-    } else {
+    } else if(returnStep ===2){
+      setDiagnoseIsDisplay(false);
+      setShowDiagnoseBtn(true);
       setShowTreatmentBtn(true);
       setTreatmentIsDisplay(false);
       setNoteIsDisplay(false);
       setShowNotebtn(true);
       if (mark > 0) setMark(mark - 2.5);
     }
+    else {setShowTreatmentBtn(true);
+      setTreatmentIsDisplay(false);
+      setNoteIsDisplay(false);
+      setShowNotebtn(true);
+      if (mark > 0) setMark(mark - 2.5);}
   };
 
   const redo = (
@@ -95,6 +122,8 @@ export default function Popup({ open, id }) {
     dispatch(getAllMark());
   }, [id]);
 
+  
+console.log("return",returnStep)
   return open ? (
     <div className="OVERLAY">
       <div className="marks">
@@ -161,12 +190,12 @@ export default function Popup({ open, id }) {
 
           {/** choice diagnose button */}
           <div className="choice-diagnose">
-            {situation?.diagnose?.map((id, index) =>
-              showDiagnoseBtn ? (
+            {situation?.preliminaries?.map((id, index) =>
+              showPreliminaryBtn ? (
                 <button
                   className="choice-btn"
                   key={index}
-                  onClick={() => handleDiagnose(id._id)}
+                  onClick={() => handlePreliminary(id._id)}
                 >
                   {id?.name}
                 </button>
@@ -174,26 +203,57 @@ export default function Popup({ open, id }) {
             )}
           </div>
 
-          {/*display diagnose */}
-          {diagnoseIsDisplay && (
+          {/*display preliminary */}
+          {preliminaryIsDisplay && (
             <>
               <div className="QUESTION">
                 <div className="HIGHLIGHT-CHOICED">
                   <div>Lựa chọn của bạn: </div>
-                  <span className="namechoice">{diagnose?.name}</span>
+                  <span className="namechoice">{pre?.name}</span>
                 </div>
                 <div className="HIGHLIGHT">Chẩn Đoán sơ bộ: </div>
                 {
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: diagnose?.desc,
+                      __html: pre?.desc,
                     }}
                   />
                 }
               </div>
-              {diagnose?.treatment?.length > 0 ? (
+              {pre?.diagnoses?.length > 0 ? (
                 <div className="choice-diagnose">
-                  {diagnose?.treatment?.map(
+                  {pre?.diagnoses?.map(
+                    (id, index) =>
+                    showDiagnoseBtn && (
+                        <button
+                          className="choice-btn"
+                          key={index}
+                          onClick={() => handleDiagnose(id._id)}
+                        >
+                          {id.name}
+                        </button>
+                      )
+                  )}
+                </div>
+              ) : (
+                redo
+              )}
+            </>
+          )}
+
+           {/*display diagnose */}
+           {diagnoseIsDisplay && (
+            <>
+              <div className="QUESTION">
+                <div className="HIGHLIGHT-CHOICED">
+                  <div>Chẩn Đoán Cuối Cùng: </div>
+                  <span className="namechoice">{diagnose?.name}</span>
+                </div>
+                
+              </div>
+              {diagnose?.treatments?.length > 0 ? (
+                <div className="choice-diagnose">
+                  {diagnose?.treatments?.map(
                     (id, index) =>
                       showTreatmentBtn && (
                         <button
