@@ -25,11 +25,12 @@ function Situation({ departId, setDepartId }) {
     (state) => state.situation
   );
   const { userInfo } = useSelector((state) => state.auth);
+  console.log("list",listMark)
 
   const checkSituationIsDone = (situationId, userId) => {
     if (
       listMark.filter(
-        (item) => item.situation?._id === situationId && item.userId === userId
+        (item) => item.situation?._id === situationId && item.userId._id === userId
       )?.length > 0
     ) {
       return true;
