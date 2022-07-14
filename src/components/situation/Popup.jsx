@@ -123,8 +123,15 @@ export default function Popup({ open, id }) {
     dispatch(getAllMark());
   }, [id]);
 
+  const successBtn = <div className="success">
+  <div>Điều trị thành công !!!</div>
+  <button onClick={() => handleComplete()}>
+    Quay lại trang chủ
+  </button>
+</div>
+
   
-console.log("return",returnStep)
+console.log("return",treatment)
   return open ? (
     <div className="OVERLAY">
       <div className="marks">
@@ -187,8 +194,8 @@ console.log("return",returnStep)
                 __html: situation?.desc,
               }}
             />
+            {showPreliminaryBtn&&<b>Chọn chẩn đoán sơ bộ:</b>}
           </div>
-
           {/** choice diagnose button */}
           <div className="choice-diagnose">
             {situation?.preliminaries?.map((id, index) =>
@@ -209,17 +216,18 @@ console.log("return",returnStep)
             <>
               <div className="QUESTION">
                 <div className="HIGHLIGHT-CHOICED">
-                  <div>Lựa chọn của bạn: </div>
+                  <div>Chẩn đoán sơ bộ: </div>
                   <span className="namechoice">{pre?.name}</span>
                 </div>
-                <div className="HIGHLIGHT">Chẩn Đoán sơ bộ: </div>
+                <div className="HIGHLIGHT">Khám cận lâm sàng </div>
                 {
                   <div
                     dangerouslySetInnerHTML={{
                       __html: pre?.desc,
                     }}
                   />
-                }
+                }                
+              {showDiagnoseBtn&&<b>Chọn chẩn đoán xác định:</b>}
               </div>
               {pre?.diagnoses?.length > 0 ? (
                 <div className="choice-diagnose">
@@ -247,10 +255,10 @@ console.log("return",returnStep)
             <>
               <div className="QUESTION">
                 <div className="HIGHLIGHT-CHOICED">
-                  <div>Chẩn Đoán Cuối Cùng: </div>
-                  <span className="namechoice">{diagnose?.name}</span>
+                  <div>Chẩn đoán xác định: </div>
+                  <span className="namechoice">{diagnose?.name}</span>                  
                 </div>
-                
+                {showTreatmentBtn&&<b>Chọn cách điều trị:</b>}
               </div>
               {diagnose?.treatments?.length > 0 ? (
                 <div className="choice-diagnose">
@@ -279,7 +287,7 @@ console.log("return",returnStep)
               <div className="QUESTION">
                 <div className="HIGHLIGHT-CHOICED">
                   Lựa chọn của bạn:{" "}
-                  <span className="namechoice">{treatment?.name}</span>
+                  {/* <span className="namechoice">{treatment?.name}</span> */}
                 </div>
                 <div className="HIGHLIGHT">
                   <div
@@ -290,30 +298,21 @@ console.log("return",returnStep)
                 </div>
               </div>
               {treatment?.isTrue
-                ? showNoteBtn && (
+                ? (treatment?.note?.length > 0 ? (
+                  <>{showNoteBtn &&
                     <button className="choice-btn" onClick={() => handleNote()}>
                       LƯU Ý
-                    </button>
+                    </button>}
+                  {noteIsDisplay&&(<><div className="QUESTION">
+                  <div className="HIGHLIGHT">Lưu ý:</div>
+                  {treatment?.note}
+                  </div>{successBtn}</>)}
+                </>
+                  ) :successBtn
                   )
                 : redo}
             </>
           )}
-          {noteIsDisplay ? (
-            <>
-              {treatment?.note?.length > 0 && (
-                <div className="QUESTION">
-                  <div className="HIGHLIGHT">Lưu ý:</div>
-                  {treatment?.note}
-                </div>
-              )}
-              <div className="success">
-                <div>Điều trị thành công !!!</div>
-                <button onClick={() => handleComplete()}>
-                  Quay lại trang chủ
-                </button>
-              </div>
-            </>
-          ) : null}
         </>
         <button className="btn-top" onClick={() => scrollTop()}>
           <li className="fa fa-arrow-circle-o-up"></li>
